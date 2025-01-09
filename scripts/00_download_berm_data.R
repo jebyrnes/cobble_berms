@@ -85,7 +85,13 @@ write_csv(quads, "data/quads.csv")
 ###
 # Seine Data
 ###
+seine <- read_sheet("https://docs.google.com/spreadsheets/d/1g552Pl-xXLSsi5g-H22jOiRkE4x1T2I-tZuuus_bvZk/edit?gid=0#gid=0",
+                    sheet = "Data")
 
+seine <- seine |>
+  clean_names() |> 
+  clean_berm_file() |> 
+  update_spp_codes()
 
 
 ###
