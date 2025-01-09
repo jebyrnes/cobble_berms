@@ -71,13 +71,13 @@ write_csv(master_sp_list, "data/master_sp_list.csv")
 # Quad Data
 ###
 quads <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iENRJUrdz52BS-GOp260UR6Pnno/edit?gid=0#gid=0",
-                    sheet = "data",
-                    na = c("", "NA"))
+                    sheet = "data")
 
 quads <- quads |>
   clean_berm_file() |> 
   update_spp_codes()|>
   filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Trunk",
                         "Powder_Point_Bridge"))) #not yet a berm
 
 
@@ -101,6 +101,7 @@ seine <- seine |>
   clean_berm_file() |> 
   update_spp_codes() |>
   filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Trunk",
                         "Powder_Point_Bridge"))) #not yet a berm
 
 # write out
@@ -120,6 +121,7 @@ traps <- traps |>
            c("trap_name", "trap_number"),
            sep = "_") |>
   filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Trunk",
                         "Powder_Point_Bridge"))) #not yet a berm
 
 
@@ -148,6 +150,7 @@ brivs <- read_excel("data/briv_raw.xlsx",
                                  "UCRA",
                                  first_predator)) |>
   filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Trunk",
                         "Powder_Point_Bridge"))) #not yet a berm
 
 
