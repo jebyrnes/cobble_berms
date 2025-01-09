@@ -105,7 +105,7 @@ seine <- seine |>
                         "Powder_Point_Bridge"))) #not yet a berm
 
 # write out
-write_csv(quads, "data/seine.csv")
+write_csv(seine, "data/seine.csv")
 
 ###
 # Trap Data
@@ -126,7 +126,7 @@ traps <- traps |>
 
 
 # write out
-write_csv(quads, "data/traps.csv")
+write_csv(traps, "data/traps.csv")
 
 ###
 # BRIV Data
