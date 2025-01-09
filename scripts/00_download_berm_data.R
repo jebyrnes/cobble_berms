@@ -71,7 +71,8 @@ write_csv(master_sp_list, "data/master_sp_list.csv")
 # Quad Data
 ###
 quads <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iENRJUrdz52BS-GOp260UR6Pnno/edit?gid=0#gid=0",
-                    sheet = "data")
+                    sheet = "data",
+                    na = c("", "NA"))
 
 quads <- quads |>
   clean_berm_file() |> 
