@@ -94,7 +94,6 @@ seine <- read_sheet("https://docs.google.com/spreadsheets/d/1g552Pl-xXLSsi5g-H22
                     sheet = "Data")
 
 seine <- seine |>
-  clean_names() |> 
   clean_berm_file() |> 
   update_spp_codes()
 
@@ -109,7 +108,6 @@ traps <- read_sheet("https://docs.google.com/spreadsheets/d/1ox_JR305ZaYIgTVGWsV
                     sheet = "Data")
 
 traps <- traps |>
-  clean_names() |> 
   clean_berm_file() |> 
   update_spp_codes() |>
   separate(trap_name_number,
@@ -122,9 +120,26 @@ write_csv(quads, "data/traps.csv")
 ###
 # BRIV Data
 ###
+# drive_download("https://docs.google.com/spreadsheets/d/1Th0rDY5iQckVB4O9QrHg2y0xfj-e-3mz/edit?usp=sharing&ouid=105030083689633832675&rtpof=true&sd=true",
+#                "data/briv_raw.xlsx")
 
-brivs <- read_sheet("https://docs.google.com/spreadsheets/d/1Th0rDY5iQckVB4O9QrHg2y0xfj-e-3mz/edit?gid=1022311473#gid=1022311473",
-                    sheet = "SLL_BRUV_BRIV_Data")
+brivs <- read_excel("data/briv_raw.xlsx",
+                    sheet = "SLL_BRUV_BRIV_Data") |>
+  remove_empty("cols") |>
+  clean_names() |>
+  select(-c(bruv_or_briv,
+            depth_ft, 
+            tidal_cycle,
+            bait)) |>
+  separate_wider_regex(cols = site,
+                       patterns = 
+                         c(site = ".*", "_", 
+                           treatment = ".*")) |>
+  mutate(first_predator = ifelse(first_predator == "CRNK",
+                                 "UCRA",
+                                 first_predator))
+
+write_csv(brivs, "data/brivs.csv")
 
 ###
 # FARM Data
