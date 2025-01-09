@@ -45,6 +45,11 @@ snail_plot <- ggplot(snail_dat,
        y = "Littorina per\n0.25 sq m",
        color = "") 
 
+# write out snail figure
+ggsave("figures/snail_plot.jpg", 
+       snail_plot,
+       dpi = 600)
+
 # what's the distribution of snails?
 ggplot(snail_dat, 
        aes(x = snails)) +
