@@ -85,6 +85,7 @@ write_csv(quads, "data/quads.csv")
 ###
 # Seine Data
 ###
+
 seine <- read_sheet("https://docs.google.com/spreadsheets/d/1g552Pl-xXLSsi5g-H22jOiRkE4x1T2I-tZuuus_bvZk/edit?gid=0#gid=0",
                     sheet = "Data")
 
@@ -93,10 +94,23 @@ seine <- seine |>
   clean_berm_file() |> 
   update_spp_codes()
 
+# write out
+write_csv(quads, "data/seine.csv")
 
 ###
 # Trap Data
 ###
+
+traps <- read_sheet("https://docs.google.com/spreadsheets/d/1ox_JR305ZaYIgTVGWsVf4pn01OXQ5F7EJbdWPZvxVyk/edit?gid=0#gid=0",
+                    sheet = "Data")
+
+traps <- traps |>
+  clean_names() |> 
+  clean_berm_file() |> 
+  update_spp_codes()
+
+# write out
+write_csv(quads, "data/traps.csv")
 
 ###
 # BRIV Data
