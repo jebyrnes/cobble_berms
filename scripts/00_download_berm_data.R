@@ -70,20 +70,9 @@ quads <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iEN
                     sheet = "data")
 
 quads <- quads |>
-  clean_berm_file()
+  clean_berm_file() |> 
+  update_spp_codes()
 
-# Update spp codes
-
-quads <- quads|> 
-  filter(!(species_code %in% c("DIAT", # dont consistently assess diatoms or micro orgs
-                               "MCRO", # see above
-                               "UES"))) |>  # don't need unknown egg sack
-  left_join(y = sp_replace_codes, 
-            by = join_by(species_code == old_codes)) |> 
-  mutate(species_code = ifelse(test = !is.na(updated_codes), 
-                               yes = updated_codes, 
-                               no = species_code)) |> 
-  select(-updated_codes)
 
 # check
 visdat::vis_dat(quads)
