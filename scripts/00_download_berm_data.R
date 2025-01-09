@@ -44,7 +44,11 @@ update_spp_codes <- function(dat) {
       mutate(species_code = ifelse(test = !is.na(updated_codes), 
                                    yes = updated_codes, 
                                    no = species_code)) |> 
-      select(-updated_codes)
+      select(-c(updated_codes,
+             notes.y,
+             notes.x,
+             old_name,
+             updated_name))
 }
 
 ###
@@ -107,7 +111,10 @@ traps <- read_sheet("https://docs.google.com/spreadsheets/d/1ox_JR305ZaYIgTVGWsV
 traps <- traps |>
   clean_names() |> 
   clean_berm_file() |> 
-  update_spp_codes()
+  update_spp_codes() |>
+  separate(trap_name_number,
+           c("trap_name", "trap_number"),
+           sep = "_")
 
 # write out
 write_csv(quads, "data/traps.csv")
