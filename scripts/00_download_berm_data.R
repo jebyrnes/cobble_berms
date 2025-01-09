@@ -28,7 +28,7 @@ quads <- quads |>
 visdat::vis_dat(quads)
 skimr::skim(quads)
 
-
+write_csv(quads, "data/quads.csv")
 
 ###
 # Seine Data
