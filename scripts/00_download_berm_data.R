@@ -75,7 +75,10 @@ quads <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iEN
 
 quads <- quads |>
   clean_berm_file() |> 
-  update_spp_codes()
+  update_spp_codes()|>
+  filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Powder_Point_Bridge"))) #not yet a berm
+
 
 
 # check
@@ -95,7 +98,9 @@ seine <- read_sheet("https://docs.google.com/spreadsheets/d/1g552Pl-xXLSsi5g-H22
 
 seine <- seine |>
   clean_berm_file() |> 
-  update_spp_codes()
+  update_spp_codes() |>
+  filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Powder_Point_Bridge"))) #not yet a berm
 
 # write out
 write_csv(quads, "data/seine.csv")
@@ -112,7 +117,10 @@ traps <- traps |>
   update_spp_codes() |>
   separate(trap_name_number,
            c("trap_name", "trap_number"),
-           sep = "_")
+           sep = "_") |>
+  filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Powder_Point_Bridge"))) #not yet a berm
+
 
 # write out
 write_csv(quads, "data/traps.csv")
@@ -137,7 +145,10 @@ brivs <- read_excel("data/briv_raw.xlsx",
                            treatment = ".*")) |>
   mutate(first_predator = ifelse(first_predator == "CRNK",
                                  "UCRA",
-                                 first_predator))
+                                 first_predator)) |>
+  filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Powder_Point_Bridge"))) #not yet a berm
+
 
 write_csv(brivs, "data/brivs.csv")
 
