@@ -144,3 +144,11 @@ write_csv(brivs, "data/brivs.csv")
 ###
 # FARM Data
 ###
+
+farms <- read_sheet("https://docs.google.com/spreadsheets/d/11H5kCxaMysnp7sXp_dN-k1DT-MCO58loKfJrMLUGeh4/edit?gid=0#gid=0",
+                    sheet = "Data") |>
+  clean_berm_file() |> 
+  update_spp_codes()
+
+write_csv(farms, "data/farms.csv")
+
