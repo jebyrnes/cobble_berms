@@ -7,7 +7,11 @@
 # and doing some light data cleaning
 pacman::p_load(googlesheets4,
                readr,
-               dplyr)
+               dplyr,
+               janitor)
+
+# authorize
+gs4_auth()
 
 ###
 # Species lists
@@ -16,6 +20,15 @@ pacman::p_load(googlesheets4,
 ###
 # Quad Data
 ###
+quads <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iENRJUrdz52BS-GOp260UR6Pnno/edit?gid=0#gid=0",
+                    sheet = "data")
+quads <- quads |>
+  remove_empty("cols")
+
+visdat::vis_dat(quads)
+skimr::skim(quads)
+
+
 
 ###
 # Seine Data
