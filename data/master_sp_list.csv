@@ -1,0 +1,294 @@
+kingdom,phylum,class,order,family,genus,species,aphia_id,classification_description,code,functional_group,common_name
+-,-,-,-,-,-,-,-,No species/none present,NOSP,NA,NA
+-,-,-,-,-,-,-,-,Unknown fleshy algal crust,UFAC,NA,NA
+-,-,-,-,-,-,-,-,Unknown algae,UNAL,NA,NA
+Animalia,-,-,-,-,-,-,-,unidentified worm,UNWO,NA,NA
+Animalia,Annelida,Polychaeta,-,-,-,-,883,Unknown polychaete,UNPO,NA,NA
+Animalia,Annelida,Polychaeta,Phyllodocida,Polynoidae,Harmothoe,imbricata,130769,Harmothoe imbricata,HAIM,NA,Fifteen-scaled worm
+Animalia,Annelida,Polychaeta,Phyllodocida,Polynoidae,Lepidonotus,-,129496,Lepidonotus sp.,LESP,NA,NA
+Animalia,Annelida,Polychaeta,Sabellida,Sabellidae,Sabella,-,129549,Sabella sp.,SABW,NA,Sabellid worm
+Animalia,Annelida,Polychaeta,Sabellida,Serpulidae,Hydroides,dianthus,131000,Hydroides dianthus,HYDI,NA,Serpulid
+Animalia,Arthropoda,Malacostraca,Amphipoda,-,-,-,1135,Amphipod tube mat,AMTM,NA,NA
+Animalia,Arthropoda,Malacostraca,Amphipoda,-,-,-,1135,Unknown gammarid amphipod,UGAA,NA,NA
+Animalia,Arthropoda,Malacostraca,Amphipoda,Caprellidae,-,-,101361,Caprellid (skeleton) shrimp,CASH,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,-,-,-,1130,Unknown crab,UCRA,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Cancridae,Cancer,borealis,158056,Cancer borealis,CABO,NA,Jonah Crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Cancridae,Cancer,irroratus,158057,Cancer irroratus,CAIR,NA,Atlantic Rock Crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Cancridae,Cancer,-,106876,Cancer sp.,CASP,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Carcinidae,Carcinus,maenas,107381,Carcinus maenas,CAMA,NA,Green Crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Epialtidae,Libnia,dubia,107335,Libinia dubia,LIDU,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Epialtidae,Libnia,emarginata,158426,Libinia emarginata,LIEM,NA,Portly Spider Crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Epialtidae,Libnia,-,106906,Libinia spp.,LIBS,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Hippidae,Emerita,talpoida,158393,Emerita talpoida,EMTA,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Nephropidae,Homarus,americanus,156134,Homarus americanus,HOAM,NA,American lobster
+Animalia,Arthropoda,Malacostraca,Decapoda,Oregoniidae,Hyas,coarctatus,107323,Hyas coarctatus,HYCO,NA,Arctic Lyre or Toad Crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Ovalipidae,Ovalipes,ocellatus,158434,Ovalipes ocellatus,OVOC,NA,LadyCrab
+Animalia,Arthropoda,Malacostraca,Decapoda,Paguridae,Pagurus,longicarpus,158403,Pagurus longicarpus,PALO,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Paguridae,Pagurus,-,106854,Pagurus sp.,PASP,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Panopeidae,Dyspanopeus,sayi,107412,Dyspanopeus sayi,DYSI,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Panopeidae,Eurypanopeus,depressus,158416,Eurypanopeus depressus,EUDE,NA,Flat mud crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Panopeidae,Hexapanopeus,angustifrons,158424,Hexapanopeus angustifrons,HEAN,NA,Smooth mud crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Panopeidae,Panopeus,herbstii,158436,Panopeus herbstii,PAHE,NA,Mud Crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Penaeidae,-,-,106727,Penaeid shrimp,FPEN,NA,NA
+Animalia,Arthropoda,Malacostraca,Decapoda,Portunidae,Callinectes,sapidus,107379,Callinectes sapidus,CASA,NA,Blue Crab
+Animalia,Arthropoda,Malacostraca,Decapoda,Varunidae,Hemigrapsus,sanguineus,158417,Hemigrapsus sanguineus,HESA,NA,NA
+Animalia,Arthropoda,Merostomata,Xiphosurida,Limulidae,Limulus,polyphemus,150514,Limulus polyphemus,LIPO,NA,Horseshoe crab
+Animalia,Arthropoda,Thecostraca,Balanomorpha,Balanidae,Semibalanus,balanoides,106210,Semibalanus balanoides,SEBA,NA,acorn barnacles
+Animalia,Arthropoda,Thecostraca,Balanomorpha,Chthamalidae,Chthamalus,fragilis,157793,Cthamalus fragilis,CTHA,NA,NA
+Animalia,Bryozoa,-,-,-,-,-,146142,Unidentified Arborescent Bryozoans,UBAR,NA,NA
+Animalia,Bryozoa,-,-,-,-,-,146142,Unidentified encrusting bryozoan,UBEN,NA,NA
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Bitectiporidae,Schizomavella,auriculata,862786,Schizomavella auriculata,SCAU,NA,single horn bryzoan
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Bugulidae,Bugula,neritina,111158,Bugula neritina,BUNE,NA,NA
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Bugulidae,Bugula,-,110839,Bugula sp.,BUSP,NA,NA
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Bugulidae,Crisularia,turrita,834044,Crisularia turrita,CRTU,NA,spiral tufted bryozoan
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Bugulidae,Dendrobeania,murrayana,111174,Dendrobeania murrayana,DEMU,NA,fan bryozoan
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Candidae,Caberea,ellisii,111230,Caberea ellisii,CAEL,NA,NA
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Candidae,Tricellaria,inopinata,111254,Tricellaria inopinata,TRIN,NA,NA
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Electridae,Electra,pilosa,111355,Electra pilosa,ELPI,NA,hairy sea mat
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Membraniporidae,Membranipora,membranacea,111411,Membranipora membranacea,MEMA,NA,sea lace
+Animalia,Bryozoa,Gymnolaemata,Cheilostomatida,Schizoporellidae,Schizoporella,unicornis,111538,Schizoporella unicornis,SCUN,NA,single horn bryzoan
+Animalia,Bryozoa,Gymnolaemata,Ctenostomatida,Vesiculariidae,Amathia,-,111022,Amathia spp. (gracilis or imbricata),AMSP,NA,NA
+Animalia,Bryozoa,Stenolaemata,Cyclostomatida,Crisiidae,Crisia,eburnea,111696,Crisia eburnea,CREB,NA,tufted ivory corraline
+Animalia,Bryozoa,Stenolaemata,Cyclostomatida,Lichenoporidae,Patinella,verrucaria,146845,Patinella verrucaria,PAVE,NA,NA
+Animalia,Chordata,Ascidiacea,-,-,-,-,1839,Unknown Ascidian Colonial,UASC,NA,NA
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Didemnidae,Didemnum,albidum,103560,Didemnum albidum,DIAL,NA,northern white crust
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Didemnidae,Didemnum,candidum,146902,Didemnum candidum,DICA,NA,NA
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Didemnidae,Didemnum,vexillum,250126,Didemnum vexillum,DIVE,NA,tunicate
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Didemnidae,Diplosoma,listerianum,103579,Diplosoma listerianum,DIPL,NA,colonial tunicate
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Polyclinidae,Aplidium,constellatum,251553,Aplidium constellatum,APCO,NA,NA
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Polyclinidae,Aplidium,pallidum,103658,Aplidium pallidum,APPA,NA,NA
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Polyclinidae,Aplidium,pellucidum,236662,Aplidium pellucidum,APPE,NA,NA
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Polyclinidae,Aplidium,-,103471,Aplidium spp.,APSP,NA,NA
+Animalia,Chordata,Ascidiacea,Aplousobranchia,Polyclinidae,Aplidium,stellatum,251739,Aplidium stellatum,APST,NA,NA
+Animalia,Chordata,Ascidiacea,Phlebobranchia,Ascidiidae,Ascidia,callosa,103700,Ascidia callosa,ASCA,NA,NA
+Animalia,Chordata,Ascidiacea,Phlebobranchia,Ascidiidae,Ascidia,prunum,103714,Ascidia prunum,ASPR,NA,NA
+Animalia,Chordata,Ascidiacea,Phlebobranchia,Ascidiidae,Ascidia,-,103483,Ascidia spp,ASSP,NA,NA
+Animalia,Chordata,Ascidiacea,Phlebobranchia,Ascidiidae,Ascidiella,aspersa,103718,Ascidiella aspersa,ASAS,NA,NA
+Animalia,Chordata,Ascidiacea,Phlebobranchia,Cionidae,Ciona,intestinalis,103732,Ciona intesinalis,CIIN,NA,Sea Vase
+Animalia,Chordata,Ascidiacea,Phlebobranchia,Cionidae,Ciona,savignyi,250292,Ciona savignyi,CISA,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Bostrichobranchus,pilularis,157861,Bostrichobranchus pilularis,BOPI,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Molgula,arenata,158505,Molgula arenata,MOAR,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Molgula,citrina,103775,Molgula citrina,MOCI,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Molgula,complanata,103776,Molgula complanata,MOCO,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Molgula,manhattensis,103788,Molgula manhattensis,MOMA,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Molgula,provisionalis,103796,Molgula provisionalia,MOPR,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Molgula,retortiformis,103796,Molgula retortiformis,MORE,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Molgula,siphonalis,103802,Molgula siphonalis,MOSI,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Molgulidae,Molgula,-,103509,Molgula spp.,MOSP,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Pyuridae,Boltenia,echinata,103814,Boltenia echinata,BOEC,NA,stalked tunicate
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Pyuridae,Boltenia,ovifera,103815,Boltenia ovifera,BOOV,NA,stalked sea peach
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Pyuridae,Halocynthia,pyriformis,103828,Halocynthia pyriformis,HAPY,NA,sea peach
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Styelidae,Botrylloides,diegensis,252278,Botrylloides diegensis,BODI,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Styelidae,Botrylloides,violaceus,148715,Botrylloides violaceus,BOVI,NA,orange sheath tunicate
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Styelidae,Botryllus,schlosseri,103862,Botryllus schlosseri,BOSC,NA,golden star tunicate
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Styelidae,Dendrodoa,carnea,103881,Dendrodoa carnea,DECA,NA,northern white crust
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Styelidae,Styela,canopus,103926,Styela canopus,STCA,NA,NA
+Animalia,Chordata,Ascidiacea,Stolidobranchia,Styelidae,Styela,clava,103929,Styela clava,STCL,NA,club tunicate
+Animalia,Chordata,Elasmobranchii,Rajiformes,-,-,-,10216,Order Rajiformes,ORAJ,NA,NA
+Animalia,Chordata,Elasmobranchii,Rajiformes,Rajidae,Leucoraja,erinaceus,1577339,Leucoraja erinaceus,LEER,NA,Little Skate
+Animalia,Chordata,Elasmobranchii,Rajiformes,Rajidae,Leucoraja,ocellata,158553,Leucoraja ocellata,LEOC,NA,Winter Skate
+Animalia,Chordata,Elasmobranchii,Squaliformes,Squalidae,Squalus,acanthias,105923,Squalus acanthias,SQAC,NA,Spiny Dogfish
+Animalia,Chordata,Teleostei,-,-,-,-,293496,unidentified teleost fish,UFIS,NA,NA
+Animalia,Chordata,Teleostei,Anguilliformes,Anguillidae,Anguilla,rostrata,158562,Anguilla rostrata,ANRO,NA,american eel
+Animalia,Chordata,Teleostei,Atheriniformes,Atherinopsidae,Menidia,-,159225,Menidia sp.,MESP,NA,silversides
+Animalia,Chordata,Teleostei,Clupeiformes,Alosidae,Alosa,-,125715,Alosa spp.,ALSP,NA,shad
+Animalia,Chordata,Teleostei,Cyprinodontiformes,Fundulidae,Fundulus,confluentus,159294,Fundulus confluentus,FUCO,NA,Marsh killifish
+Animalia,Chordata,Teleostei,Cyprinodontiformes,Fundulidae,Fundulus,heteroclitus,159306,Fundulus heteroclitus,FUHE,NA,mummichog
+Animalia,Chordata,Teleostei,Cyprinodontiformes,Fundulidae,Fundulus,majalis,159308,Fundulus majalis,FUMA,NA,striped killifish
+Animalia,Chordata,Teleostei,Cyprinodontiformes,Fundulidae,Fundulus,-,159292,Fundulus sp.,FUNS,NA,killifish
+Animalia,Chordata,Teleostei,Eupercaria,Labridae,Tautoga,onitis,158830,Tautoga onitis,TAON,NA,Tautog or Blackfish
+Animalia,Chordata,Teleostei,Eupercaria,Labridae,Tautogolabrus,adspersus,159785,Tautogolabrus adspersus,TAAD,NA,Cunner
+Animalia,Chordata,Teleostei,Eupercaria_(incertae sedis),Moronidae,Morone,saxatilis,151179,Morone saxatilis,MOSA,NA,Striped Bass
+Animalia,Chordata,Teleostei,Eupercaris_(incertae sedis),Sparidae,Stenotomus,chrysops,159811,Stenotomus chrysops,STCH,NA,Scup/porgy
+Animalia,Chordata,Teleostei,Gadiformes,Gadidae,Gadus,morhua,126436,Gadus morhua,GAMO,NA,Atlantic cod
+Animalia,Chordata,Teleostei,Gadiformes,Gadidae,Melanogrammus,aeglefinus,126437,Melanogrammus aeglefinus,MEAE,NA,haddock
+Animalia,Chordata,Teleostei,Gadiformes,Gadidae,Pollachius,virens,126441,Pollachius virens,POVI,NA,Pollock
+Animalia,Chordata,Teleostei,Gadiformes,Merlucciidae,Merluccius,bilinearis,158962,Merluccius bilinearis,MEBI,NA,silver hake/whiting
+Animalia,Chordata,Teleostei,Gadiformes,Phycidae,Urophycis,regia,158991,Urophycis regia,URRE,NA,Spotted Hake
+Animalia,Chordata,Teleostei,Perciformes,Anarhichadidae,Anarhichas,lupus,126758,Anarhichas lupus,ANLU,NA,wolffish
+Animalia,Chordata,Teleostei,Perciformes,Cottidae,Myoxocephalus,aenaeus,159519,Myoxocephalus aenaeus,MYAE,NA,Grubby sculpin
+Animalia,Chordata,Teleostei,Perciformes,Cottidae,Myoxocephalus,octodecemspinosus,159520,Myoxocephalus octodecemspinosus,MYOC,NA,Long horned sculpin
+Animalia,Chordata,Teleostei,Perciformes,Cottidae,Myoxocephalus,scorpius,127203,Myoxocephalus scorpius,MYSC,NA,Short horned sculpin
+Animalia,Chordata,Teleostei,Perciformes,Cottidae,Myoxocephalus,-,126152,Myoxocephalus sp.,MYSP,NA,Sculpin
+Animalia,Chordata,Teleostei,Perciformes,Cyclopteridae,Cyclopterus,lumpus,127214,Cyclopterus lumpus,CYLU,NA,lumpfish
+Animalia,Chordata,Teleostei,Perciformes,Cyclopteridae,Eumicrotremus,spinosus,127217,Eumicrotremus spinosus,EUSP,NA,spiny lumpsucker
+Animalia,Chordata,Teleostei,Perciformes,Hemitripteridae,Hemitripterus,americanus,159518,Hemitripterus americanus,HEAM,NA,Sea raven
+Animalia,Chordata,Teleostei,Perciformes,Pholidae,Pholis,gunnellus,126996,Pholis gunnellus,PHGU,NA,Rock gunnel
+Animalia,Chordata,Teleostei,Perciformes,Sebastidae,Sebastes,fasciatus,127252,Sebastes fasciatus,SEFA,NA,acadian redfish
+Animalia,Chordata,Teleostei,Perciformes,Serranidae,Centropristis,striata,159348,Centropristis striata,CEST,NA,black sea bass
+Animalia,Chordata,Teleostei,Perciformes,Stichaeidae,Lumpenus,lampretaeformis,154675,Lumpenus lampretaeformis,LULA,NA,Snake Blenny
+Animalia,Chordata,Teleostei,Perciformes,Stichaeidae,Stichaeus,punctatus,159819,Stichaeus punctatus,STPU,NA,Artic shanny
+Animalia,Chordata,Teleostei,Perciformes,Stichaeidae,Ulvaria,subbifurcata,159821,Ulvaria subbifurcata,ULSU,NA,Shanny
+Animalia,Chordata,Teleostei,Perciformes,Triglidae,Prionotus,carolinus,159571,Prionotus carolinus,PRCA,NA,northern sea robin
+Animalia,Chordata,Teleostei,Perciformes,Zoarcidae,Zoarces,americanus,159267,Zoarces americanus,ZOAM,NA,ocean pout/congo eel
+Animalia,Chordata,Teleostei,Pleuronectiformes,-,-,-,10331,Flatfish,OPLE,NA,NA
+Animalia,Chordata,Teleostei,Pleuronectiformes,Paralichthyidae,Etropus,microstomus,158801,Etropus microstomus,ETMI,NA,Smallmouth flounder
+Animalia,Chordata,Teleostei,Pleuronectiformes,Paralichthyidae,Hippoglossina,oblonga,158833,Hippoglossina oblonga,PAOB,NA,fourspot flounder
+Animalia,Chordata,Teleostei,Pleuronectiformes,Paralichthyidae,Paralichthys,dentatus,158826,Paralichthys dentatus,PADE,NA,Summer Flounder
+Animalia,Chordata,Teleostei,Pleuronectiformes,Pleuronectidae,Limanda,ferruginea,158879,Limanda ferruginea,LIFE,NA,Yellow tailed flounder
+Animalia,Chordata,Teleostei,Pleuronectiformes,Pleuronectidae,Pseudopleuronectes,americanus,158885,Pseudopleuronectes americanus,PSAM,NA,Winter flounder
+Animalia,Chordata,Teleostei,Pleuronectiformes,Scophthalmidae,Scophthalmus,aquosus,158907,Scophthalmus aquosus,SCAQ,NA,windowpane flounder
+Animalia,Chordata,Teleostei,Scombriformes,Pomatomidae,Pomatomus,saltatrix,151482,Pomatomus saltatrix,POSA,NA,Bluefish
+Animalia,Chordata,Teleostei,Syngnathiformes,Syngnathidae,Syngnathus,fuscus,159451,Syngnathus fuscus,SYFU,NA,northern pipefish
+Animalia,Chordata,Teleostei,Tetradontiformes,Tetradontidae,Sphoeroides,maculatus,158934,Sphoeroides maculatus,SPMA,NA,Northern Puffer
+Animalia,Cnidaria,-,-,-,-,-,1267,"Unknown Cnidarian sessile (incl anenomenes, hydroids, corals, and similar)",UCNS,NA,NA
+Animalia,Cnidaria,Anthozoa,Scleractinia,Astrangiidae,Astrangia,poculata,157967,Astrangia poculata,ASPO,NA,NA
+Animalia,Cnidaria,Hexacorallia,Actiniaria,Actiniidae,Urticina,felina,100834,Urticina felina,URFE,NA,Northern Red Anemone
+Animalia,Cnidaria,Hexacorallia,Actiniaria,Diadumenidae,Diadumene,lineata,395099,Diadumene lineata,DILI,NA,orange stripped green anemone
+Animalia,Cnidaria,Hexacorallia,Actiniaria,Edwardsiidae,Edwardsiella,lineata,283549,Fagesia lineata,EDLI,NA,tiny white anemone
+Animalia,Cnidaria,Hexacorallia,Actiniaria,Metridiidae,Metridium,senile,100982,Metridium senile,MESE,NA,Clonal Plumose Anemone
+Animalia,Cnidaria,Hexacorallia,Ceriantharia,Synarachnacidae,Synarachnactis,lloydii,1674631,Synarachnactis lloydi,SYLL,NA,Northern cerianthid
+Animalia,Cnidaria,Hydrozoa,Anthoathecata,Tubulariidae,Ectopleura,-,117254,Ectopleura sp.,ECSP,NA,pink hearted hydroid
+Animalia,Cnidaria,Hydrozoa,Leptothecata,Campanulariidae,Obelia,-,117034,Obelia spp.,OBSP,NA,thread hydroids
+Animalia,Cnidaria,Hydrozoa,Leptothecata,Sertulariidae,Abietinaria,abietina,117870,Abietinaria abietina,ABAB,NA,sea fir
+Animalia,Cnidaria,Hydrozoa,Leptothecata,Sertulariidae,Sertularia,-,117234,Sertularia sp.,SESP,NA,sea fir
+Animalia,Cnidaria,Octocorallia,Malacalcyonacea,Alcyoniidae,Gersemia,rubiformis,156103,Gersemia rubiformis,GERU,NA,sea strawberry
+Animalia,Cnidaria,Octocorallia,Malacalcyonacea,Alcyoniidae,Alcyonium,digitatum,125333,Alcyonium digitatum,ALDI,NA,Dead man's fingers
+Animalia,Cnidaria,Staurozoa,Stauromedusae,Haliclystidae,Haliclystus,-,135275,Haliclystus spp.,HASP,NA,Stalked Jelly
+Animalia,Ctenophora,Tentaculata,Cydippida,Cydippidae,Pleurobrachia,pileus,106386,Pleurobrachia pileus,PLPI,NA,NA
+Animalia,Ctenophora,Tentaculata,Lobata,Bolinopsidae,Mnemiopsis,leidyi,106401,Mnemiopsis leidyi,MNLE,NA,lobate comb jelly
+Animalia,Echinodermata,Asteroidea,Forcipulatida,Asteriidae,Asterias,forbesi,158489,Asterias forbesi,ASFO,NA,Forbes Star
+Animalia,Echinodermata,Asteroidea,Forcipulatida,Asteriidae,Asterias,rubens,123776,Asterias rubens,ASRU,NA,Common Star
+Animalia,Echinodermata,Asteroidea,Spinulosida,Echinasteridae,Henricia,sanguinolenta,123974,Henricia sanguinolenta,HESG,NA,Blood Star
+Animalia,Echinodermata,Asteroidea,Valvatida,Solasteridae,Crossaster,papposus,124154,Crossaster papposus,CRPA,NA,Spiny Sun Star
+Animalia,Echinodermata,Asteroidea,Valvatida,Solasteridae,Solaster,endeca,124160,Solaster endeca,SOEN,NA,Smooth Sun Star
+Animalia,Echinodermata,Echinoidea,Arbacioida,Arbaciidae,Arbacia,punctulata,158058,Arbacia punctulata,ARPL,NA,Purple Sea Urchin
+Animalia,Echinodermata,Echinoidea,Camarodonta,Strongylocentrotidae,Strongylocentrotus,droebachiensis,124321,Strongylocentrotus droebachiensis,STDR,NA,Green Sea Urchin
+Animalia,Echinodermata,Echinoidea,Echinolampadacea,Echinarachniidae,Echinarachnius,parma,158062,Echinarachnius parma,ECPA,NA,common sand dollar
+Animalia,Echinodermata,Holothuroidea,Dendrochirotida,Cucumariidae,Cucumaria,frondosa,124612,Cucumaria frondosa,CUFR,NA,orange footed cucumber
+Animalia,Echinodermata,Holothuroidea,Dendrochirotida,Psolidae,Psolus,fabricii,124703,Psolus fabricii,PSFA,NA,scarlet cucumber
+Animalia,Echinodermata,Ophiuroidea,Amphilepidida,Ophiopholidae,Ophiopholis,aculeata,125125,Ophiopholis aculeata,OPAC,NA,daisy brittlestar
+Animalia,Echinodermata,Ophiuroidea,Amphilepidida,Ophiopholidae,Ophiopholis,-,123622,Ophiopholis sp.,OPHI,NA,NA
+Animalia,Mollusca,Bivalvia,Adapedonta,Hiatellidae,Hiatella,arctica,140103,Hiatella arctica,HIAR,NA,NA
+Animalia,Mollusca,Bivalvia,Myida,Myidae,Mya,arenaria,140430,Mya arenaria,MYAR,NA,"Soft-shelled clam, steamer"
+Animalia,Mollusca,Bivalvia,Mytilida,Mytilidae,Geukensia,demissa,156859,Geukensia demissa,GEDE,NA,NA
+Animalia,Mollusca,Bivalvia,Mytilida,Mytilidae,Modiolus,modiolus,140467,Modiolus modiolus,MOMO,NA,Northern Horse Mussel
+Animalia,Mollusca,Bivalvia,Mytilida,Mytilidae,Mytilus,edulis,140480,Mytilus edulis,MYED,NA,Blue Mussel
+Animalia,Mollusca,Bivalvia,Ostreida,Ostreidae,Crassostrea,virginica,140657,Crassostrea virginica,CRVI,NA,Native/eastern Oyster
+Animalia,Mollusca,Bivalvia,Ostreida,Ostreidae,Ostrea,edulis,138298,Ostrea edulis,OSED,NA,European flat Oyster
+Animalia,Mollusca,Bivalvia,Pectinida,Anomiidae,Anomia,-,137650,Anomia sp.,ANSP,NA,jingle shell
+Animalia,Mollusca,Bivalvia,Pectinida,Anomiidae,Anomia,simplex,156737,Anomia simplex,ANSI,NA,NA
+Animalia,Mollusca,Bivalvia,Pectinida,Anomiidae,Heteranomia,squamula,138749,Heteranomia squamula,HESQ,NA,NA
+Animalia,Mollusca,Bivalvia,Pectinida,Pectinidae,Placopecten,magellanicus,156972,Placopecten magellanicus,PLMA,NA,Atlantic Sea Scallop
+Animalia,Mollusca,Bivalvia,Venerida,Mactridae,Spisula,solidissima,156996,Spisula solidissima,SPSO,NA,Atlantic surf clam
+Animalia,Mollusca,Bivalvia,Venerida,Veneridae,Mercenaria,mercenaria,141919,Mercenaria mercenaria,MERM,NA,Quahog
+Animalia,Mollusca,Cephalopoda,Octopoda,Octopodidae,Octopus,-,138268,Octopus sp.,OCTO,NA,octopods
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Calyptraeidae,Crepidula,fornicata,138963,Crepidula fornicata,CRFO,NA,Slipper Snail
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Calyptraeidae,Crepidula,plana,160230,Crepidula plana,CRPL,NA,Eastern white slippersnail
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Calyptraeidae,Crepidula,-,137722,Crepidula spp.,CRSP,NA,NA
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Littorinidae,Lacuna,vincta,140170,Lacuna vincta,LAVI,NA,NA
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Littorinidae,Littorina,littorea,140262,Littorina littorea,LILI,NA,Periwinkle Snail
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Littorinidae,Littorina,obtusata,140263,Littorina obtusata,LIOB,NA,NA
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Littorinidae,Littorina,saxatilis,140264,Littorina saxatilis,LISA,NA,NA
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Naticidae,Euspira,heros,160315,Euspira heros,EUHE,NA,Moon Snail
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Naticidae,Neverita,duplicata,160407,Neverita duplicatus,NEDU,NA,Southern Moon snail
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Vermetidae,Thylacodes,-,598651,Thylacodes spp.,THSP,NA,NA
+Animalia,Mollusca,Gastropoda,Neogastropoda,Buccinidae,Buccinum,undatum,138878,Buccinum undatum,BUUN,NA,Wavy Whelk
+Animalia,Mollusca,Gastropoda,Neogastropoda,Buccinidae,Neptunea,decemcostata,491164,Neptunea decemcostata,NEDE,NA,10-ring Whelk
+Animalia,Mollusca,Gastropoda,Neogastropoda,Busyconidae,Busycon,carica,160185,Busycon carica,BUCR,NA,Knobbed Whelk
+Animalia,Mollusca,Gastropoda,Neogastropoda,Busyconidae,Busycotypus,canaliculatus,160192,Busycotypus canaliculatus,BUCA,NA,Channeled Whelk
+Animalia,Mollusca,Gastropoda,Neogastropoda,Muricidae,Nucella,lapillus,140403,Nucella lapillus,NULA,NA,Dog whelk
+Animalia,Mollusca,Gastropoda,Neogastropoda,Muricidae,Urosalpinx,cinerea,140429,Urosalpinx cinerea,URCI,NA,NA
+Animalia,Mollusca,Gastropoda,Neogastropoda,Nassariidae,Ilyanassa,obsoleta,467490,Ilyanassa obsoleta,ILOB,NA,eastern mudsnail
+Animalia,Mollusca,Gastropoda,Patellogastropoda,Lottiidae,Testudinalia,testudinalis,234208,Testudinalia testudinalis,TETE,NA,Plate Limpet
+Animalia,Mollusca,Gastropoda,Trochida,Calliostomatidae,Calliostoma,occidentale,141765,Calliostoma occidentale,CAOC,NA,Stripped Whelk
+Animalia,Mollusca,Polyplacophora,Chitonida,Ischnochitonidae,Stenosemus,albus,147773,Stenosemus albus,STAL,NA,White Chiton
+Animalia,Mollusca,Polyplacophora,Chitonida,Tonicellidae,Boreochiton,ruber,386411,Boreochiton ruber,BORU,NA,Red Chition
+Animalia,Porifera,-,-,-,-,-,558,Unknown Poriferan,UNPR,NA,NA
+Animalia,Porifera,Calcarea,Leucosolenida,Leucosoleniidae,Leucosolenia,-,131715,Leucosolenia sp.,LEUC,NA,NA
+Animalia,Porifera,Calcarea,Leucosolenida,Syconidae,Sycon,-,131723,Sycon spp.,SYSP,NA,NA
+Animalia,Porifera,Demospongiae,Chondrillida,Halisarcidae,Halisarca,dujardinii,132736,Halisarca dujardini,HADU,NA,NA
+Animalia,Porifera,Demospongiae,Clionaida,Clionaidae,Cliona,-,132026,Cliona sp.,CLSP,NA,NA
+Animalia,Porifera,Demospongiae,Haplosclerida,Chalinidae,Haliclona,oculata,132833,Haliclona oculata,HAOC,NA,Finger Sponge
+Animalia,Porifera,Demospongiae,Poecilosclerida,Hymedesmiidae,Hymedesmia,-,131950,Hymedesmia sp.,HYSP,NA,NA
+Animalia,Porifera,Demospongiae,Poecilosclerida,Isodictyidae,Isodictya,palmata,133247,Isodictya palmata,ISPA,NA,Palmate Sponge
+Animalia,Porifera,Demospongiae,Poecilosclerida,Microcionidae,Clathria,prolifera,167563,Clathria prolifera,CLPR,NA,Red Beard Sponge
+Animalia,Porifera,Demospongiae,Suberitida,Halichondriidae,Halichondria,panicea,165853,Halichondria panicea,HAPA,NA,Breadcrumb Sponge
+Chordata,Ascidiacea,-,-,-,-,-,1839,Unknown Ascidian Solitary,UASS,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,-,-,-,-,830,Unknown Brown Blade,UBBL,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,-,-,-,-,830,Unknown Brown Crust,UBCR,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,-,-,-,-,830,Unknown Brown Tube or Hollow,UBTH,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,-,-,-,-,830,Unknown Brown Filamentous,UBFI,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,-,-,-,-,830,Unknown Brown Compressed Branching,UBCB,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,-,-,-,-,830,Unknown Brown Algae,UBAL,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Chordales,Chordaceae,Chorda,filum,145722,Chorda filum,CHFI,NA,Cord Weed
+Chromista,Ochrophyta,Phaeophyceae,Desmarestiales,Arthrocladiaceae,Arthrocladia,villosa,145306,Arthrocladia villosa,ARVI,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Desmarestiales,Desmarestiaceae,Desmarestia,aculeata,145307,Desmarestia aculeata,DEAC,NA,Sour or Stink Weed
+Chromista,Ochrophyta,Phaeophyceae,Desmarestiales,Desmarestiaceae,Desmarestia,viridis,145310,Desmarestia viridis,DEVI,NA,Sour or Stink Weed
+Chromista,Ochrophyta,Phaeophyceae,Ectocarpales,Chordariaceae,Leathesia,marina,494940,Leathesia marina,LEMA,NA,sea cauliflower
+Chromista,Ochrophyta,Phaeophyceae,Ectocarpales,Ectocarpaceae,Ectocarpus,-,144099,Ectocarpus sp.,ECTO,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Ectocarpales,Scytosiphonaceae,Colpomenia,peregrina,145856,Colpomenia peregrina,COPE,NA,Sea Potato
+Chromista,Ochrophyta,Phaeophyceae,Ectocarpales,Scytosiphonaceae,Scytosiphon,lomentaria,145869,Scytosiphon lomentaria,SCLO,NA,beanweed
+Chromista,Ochrophyta,Phaeophyceae,Fucales,Fucaceae,Ascophyllum,nodosum,145541,Ascophyllum nodosum,ASNO,NA,knotted wrack
+Chromista,Ochrophyta,Phaeophyceae,Fucales,Fucaceae,Fucus,-,144129,Fucus sp.,FUCU,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Fucales,Fucaceae,Fucus,distichus,145544,Fucus distichus,FUDI,NA,rockweed
+Chromista,Ochrophyta,Phaeophyceae,Fucales,Fucaceae,Fucus,spiralis,145547,Fucus spiralis,FUSP,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Fucales,Fucaceae,Fucus,vesiculosus,145548,Fucus vesiculosus,FUVE,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Fucales,Sargassaceae,Sargassum,natans,145560,Sargassum natans,SANA,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Laminariales,Agaraceae,Agarum,clathratum,157207,Agarum clathratum,AGCL,NA,Shotgun Kelp
+Chromista,Ochrophyta,Phaeophyceae,Laminariales,Alariaceae,Alaria,esculenta,145716,Alaria esculenta,ALES,NA,Winged Kelp
+Chromista,Ochrophyta,Phaeophyceae,Laminariales,Laminariaceae,Laminaria,digitata,145724,Laminaria digitata,LADI,NA,Fingered Kelp
+Chromista,Ochrophyta,Phaeophyceae,Laminariales,Laminariaceae,Saccharina,latissima,234483,Saccharina latissima,SALA,NA,Sugar Kelp
+Chromista,Ochrophyta,Phaeophyceae,Ralfsiales,Pseudoralfsiaceae,Pseudoralfsia,verrucosa,1771402,Pseudoralfsia verrucosa,PSVE,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Ralfsiales,Ralfsiaceae,Ralfsia,-,143985,Ralfsia sp.,RASP,NA,NA
+Chromista,Ochrophyta,Phaeophyceae,Tilopteridales,Halosiphonaceae,Halosiphon,tomentosus,145723,Halosiphon tomentosus,HATO,NA,Hairy Shoelace
+Chromista,Ochrophyta,Phaeophyceae,Tilopteridales,Phyllariaceae,Saccorhiza,dermatodea,145734,Saccorhiza dermatodea,SADE,NA,NA
+Fungi,Ascomycota,Eurotiomycetes,Verrucariales,Verrucariaceae,Verrucaria,-,147701,"Verrucaria sp. (black, high water mark)",VERR,NA,NA
+Fungi,Ascomycota,Lecanoromycetes,Teloschistales,Teloschistaceae,Caloplaca,verruculifera,718753,Caloplaca verruculifera,CAVE,NA,NA
+Fungi,Ascomycota,Lecanoromycetes,Teloschistales,Teloschistaceae,Xanthoria,-,147708,Xanthoria spp.,XASP,NA,NA
+Plantae,Chlorophyta,Ulvophyceae,Bryopsidales,Codiaceae,Codium,fragile,145086,Codium fragile,COFR,NA,Green fleece
+Plantae,Chlorophyta,Ulvophyceae,Bryopsidales,Bryopsidaceae,Bryopsis,plumosa,144457,Bryopsis plumosa,BRPL,NA,NA
+Plantae,Chlorophyta,Ulvophyceae,Cladophorales,Cladophoraceae,Chaetomorpha,linum,145027,"Chaetomorpha linum (filament., unbranched)",CHLI,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Ahnfeltiales,Ahnfeltiaceae,Ahnfeltia,plicata,144422,Ahnfeltia plicata,AHPL,NA,Landlady's wig
+Plantae,Rhodophyta,Florideophyceae,Bonnemaisoniales,Bonnemaisoniaceae,Bonnemaisonia,hamifera,144442,Bonnemaisonia hamifera,BOHA,NA,hooked weed
+Plantae,Rhodophyta,Florideophyceae,Ceramiales,Ceramiaceae,Ceramium,-,143834,Ceramium spp.,CESP,NA,Banded weed
+Plantae,Rhodophyta,Florideophyceae,Ceramiales,Delesseriaceae,Dasysiphonia,japonica,836896,Dasysiphonia japonica,DAJA,NA,japan red algae
+Plantae,Rhodophyta,Florideophyceae,Ceramiales,Delesseriaceae,Grinnellia,americana,371057,Grinnellia americana,GRAM,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Ceramiales,Wrangeliaceae,Spermothamnion,repens,144702,Spermothamnion repens,SPRE,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Gigartinales,Cystocloniaceae,Cystoclonium,purpureum,145615,Cystoclonium purpureum,CYPU,NA,Purple claw weed
+Plantae,Rhodophyta,Florideophyceae,Gigartinales,Dumontiaceae,Dumontia,contorta,145228,Dumontia contorta,DUCO,NA,tubular weed
+Plantae,Rhodophyta,Florideophyceae,Gigartinales,Kallymeniaceae,Euthora,cristata,373772,Euthora cristata,EUCR,NA,delicate northern sea fan
+Plantae,Rhodophyta,Florideophyceae,Gigartinales,Phyllophoraceae,Coccotylus,truncatus,145654,Coccotylus truncatus,COTR,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Gracilariales,Gracilariaceae,Gracilaria,tikvahiae,157364,Gracilaria tikvahiae,GRTI,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Gracilariales,Gracilariaceae,Gracilaria,-,144188,Gracilaria spp.,GRSP,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Rhodymeniales,Champiaceae,Champia,parvula,145804,Champia parvula,CHPA,NA,NA
+Plantae,Tracheophyta,Magnoliopsida,Poales,Poaceae,Spartina,alterniflora,234072,Spartina alterniflora,SPAL,NA,smooth cordgrass
+Plantae,Tracheophyta,Magnoliopsida,Solanales,Convolvulaceae,Calystegia,sepium,426081,Calystegia sepium,CASE,NA,hedge bindweed
+Plantae,Chlorophyta,-,-,-,-,-,801,Unknown Green Blade,UGBL,NA,NA
+Plantae,Chlorophyta,-,-,-,-,-,801,Unknown Green Crust,UGCR,NA,NA
+Plantae,Chlorophyta,-,-,-,-,-,801,Unknown Green Tube or Hollow,UGTH,NA,NA
+Plantae,Chlorophyta,-,-,-,-,-,801,Unknown Green Filamentous,UGFI,NA,NA
+Plantae,Chlorophyta,-,-,-,-,-,801,Unknown Green Compressed Branching,UGCB,NA,NA
+Plantae,Chlorophyta,-,-,-,-,-,801,Unknown Green Algae,UGAL,NA,NA
+Plantae,Rhodophyta,-,-,-,-,-,852,Unknown Red Blade,URBL,NA,NA
+Plantae,Rhodophyta,-,-,-,-,-,852,Unknown Red Crust,URCR,NA,NA
+Plantae,Rhodophyta,-,-,-,-,-,852,Unknown Red Tube or Hollow,URTH,NA,NA
+Plantae,Rhodophyta,-,-,-,-,-,852,Unknown Red Filamentous,URFI,NA,NA
+Plantae,Rhodophyta,-,-,-,-,-,852,Unknown Red Compressed Branching,URCB,NA,NA
+Plantae,Rhodophyta,-,-,-,-,-,852,Unknown Red Algae,URAL,NA,NA
+Plantae,Rhodophyta,Bangiophyceae,Bangiales,Bangiaceae,Porphyra,-,143808,Porphyra spp.,POSP,NA,NA
+Plantae,Rhodophyta,Florideophyceae,-,-,-,-,368670,Crustose Coralline Algae,NGCA,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Ceramiales,Delesseriaceae,Phycodrys,rubens,144773,Phycodrys rubens,PHRU,NA,sea oak
+Plantae,Rhodophyta,Florideophyceae,Ceramiales,Rhodomelaceae,Polysiphonia,-,143853,Polysiphonia sp.,POLS,NA,lobster horns
+Plantae,Rhodophyta,Florideophyceae,Ceramiales,Rhodomelaceae,Vertebrata,lanosa,475211,Vertebrata lanosa,VELA,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Ceramiales,Wrangeliaceae,Ptilota,serrata,144687,Ptilota serrata,PTSE,NA,northern sea fern
+Plantae,Rhodophyta,Florideophyceae,Corallinales,Corallinaceae,Corallina,officinalis,145108,Corallina officinalis,COOF,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Corallinales,Lithophyllaceae,Titanoderma,-,144027,Titanoderma spp.,TISP,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Corallinales,Lithophyllaceae,Lithophyllum,orbiculatum,145157,Lithophyllum orbiculatum,LISP,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Corallinales,Mesophyllumaceae,Leptophyllum,foecundum,145134,Leptophyllum foecundum,LEFO,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Corallinales,Mesophyllumaceae,Leptophyllum,laeve,145135,Leptophyllum laeve,LELA,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Corallinales,Mesophyllumaceae,Clathromorphum,compactum,145105,Clathromorphum compactum,CLCO,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Corallinales,Mesophyllumaceae,Clathromorphum,circumscriptum,145104,Clathromorphum circumscriptum,CLCI,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Gigartinales,Gigartinaceae,Chondrus,crispus,145625,Chondrus crispus,CHCR,NA,Irish moss
+Plantae,Rhodophyta,Florideophyceae,Gigartinales,Phyllophoraceae,Mastocarpus,stellatus,145650,Mastocarpus stellatus,MAST,NA,false irish moss
+Plantae,Rhodophyta,Florideophyceae,Gigartinales,Polyidaceae,Polyides,rotunda,145668,Polyides rotunda,PORO,NA,goat tang
+Plantae,Rhodophyta,Florideophyceae,Halymeniales,Grateloupiaceae,Grateloupia,turuturu,295880,Grateloupia turuturu,GRTU,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Hapalidiales,Hapalidiaceae,Boreolithothamnion,glaciale,145170,Boreolithothamnion glaciale,BOGL,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Hapalidiales,Hapalidiaceae,Melobesia,membranacea,145182,Melobesia membranacea,MEME,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Hapalidiales,Hapalidiaceae,Phymatolithon,lenormandii,145202,Phymatolithon lenormandii,PHLE,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Hapalidiales,Hapalidiaceae,Phymatolithon,lamii,145201,Phymatolithon lamii,PHLS,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Hapalidiales,Hapalidiaceae,Phymatolithon,laevigatum,145200,Phymatolithon laevigatum,PHLV,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Hapalidiales,Hapalidiaceae,Phymatolithon,rugulosum,157333,Phymatolithon rugulosum,PHRG,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Hildenbrandiales,Hildenbrandiaceae,Hildenbrandia,rubra,145712,Hildenbrandia rubra,HIRU,NA,NA
+Plantae,Rhodophyta,Florideophyceae,Palmariales,Palmariaceae,Palmaria,palmata,145771,Palmaria palmata,PAPA,NA,Dulse
+Plantae,Tracheophyta,Magnoliopsida,Alismatales,Zosteraceae,Zostera,marina,495077,Zostera marina,ZOMA,NA,marine eelgrass

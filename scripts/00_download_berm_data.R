@@ -34,17 +34,34 @@ clean_berm_file <- function(dat) {
   
 }
 
+update_spp_codes <- function(dat) {
+  dat |> 
+      filter(!(species_code %in% c("DIAT", # dont consistently assess diatoms or micro orgs
+                                   "MCRO", # see above
+                                   "UES"))) |>  # don't need unknown egg sack
+      left_join(y = sp_replace_codes, 
+                by = join_by(species_code == old_codes)) |> 
+      mutate(species_code = ifelse(test = !is.na(updated_codes), 
+                                   yes = updated_codes, 
+                                   no = species_code)) |> 
+      select(-updated_codes)
+}
+
 ###
 # Species lists
 ###
-drive_download("https://docs.google.com/spreadsheets/d/1xHQB7VxzH33HgSl9hZfqV9YAtrns48Rq/edit?usp=sharing&ouid=105030083689633832675&rtpof=true&sd=true",
-                                 path = "data/species_list.xlsx")
+#drive_download("https://docs.google.com/spreadsheets/d/1xHQB7VxzH33HgSl9hZfqV9YAtrns48Rq/edit?usp=sharing&ouid=105030083689633832675&rtpof=true&sd=true",
+#                                 path = "data/species_list.xlsx")
 
 master_sp_list <- read_excel("data/species_list.xlsx",
-                             sheet = "Master_Species_List")
+                             sheet = "Master_Species_List") |> 
+  clean_names()
 
 sp_replace_codes <- read_excel("data/species_list.xlsx",
-                               sheet = "Replaced_Codes")
+                               sheet = "Replaced_Codes") |> 
+  clean_names()
+
+write_csv(master_sp_list, "data/master_sp_list.csv")
 
 ###
 # Quad Data
@@ -55,13 +72,25 @@ quads <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iEN
 quads <- quads |>
   clean_berm_file()
 
+# Update spp codes
+
+quads <- quads|> 
+  filter(!(species_code %in% c("DIAT", # dont consistently assess diatoms or micro orgs
+                               "MCRO", # see above
+                               "UES"))) |>  # don't need unknown egg sack
+  left_join(y = sp_replace_codes, 
+            by = join_by(species_code == old_codes)) |> 
+  mutate(species_code = ifelse(test = !is.na(updated_codes), 
+                               yes = updated_codes, 
+                               no = species_code)) |> 
+  select(-updated_codes)
+
 # check
 visdat::vis_dat(quads)
 skimr::skim(quads)
 
 # write out
 write_csv(quads, "data/quads.csv")
-
 
 
 ###
