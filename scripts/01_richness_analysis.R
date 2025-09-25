@@ -7,21 +7,33 @@ source("scripts/helpers.R")
 
 ## load libraries
 
+snail_dat <- read_csv("data/quads.csv") |>
+  filter(measurement_type == "Count") |>
+  filter(species_code == "LILI") |>
+  group_by(site, treatment, quadrat, height) |>
+  summarize(snails = sum(measurement, na.rm = TRUE)) |>
+  ungroup() |> fix_data_for_plots()
 
-## bind all datasets together
-richness_dat <- rbind(quads |> 
+## load data then bind them together
+quad_dat <- read_csv("data/quads.csv")
+seine_dat <- read_csv("data/seine.csv")
+trap_dat <- read_csv("data/traps.csv")
+farm_dat <- read_csv("data/farms.csv")
+briv_dat <- read_csv("data/brivs.csv")
+
+richness_dat <- rbind(quad_dat |> 
                         group_by(site, treatment) |> 
                         reframe(species_code = unique(species_code)), 
-                      seine |> 
+                      seine_dat |> 
                         group_by(site, treatment) |> 
                         reframe(species_code = unique(species_code)),
-                      traps |> 
+                      trap_dat |> 
                         group_by(site, treatment) |> 
                         reframe(species_code = unique(species_code)),
-                      brivs |> 
+                      briv_dat |> 
                         group_by(site, treatment) |> 
                         reframe(species_code = unique(first_predator)),
-                      brivs |> 
+                      briv_dat |> 
                         group_by(site, treatment) |> 
                         reframe(species_code = unique(bait_consumer))
 )
