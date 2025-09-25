@@ -7,12 +7,7 @@ source("scripts/helpers.R")
 
 ## load libraries
 
-snail_dat <- read_csv("data/quads.csv") |>
-  filter(measurement_type == "Count") |>
-  filter(species_code == "LILI") |>
-  group_by(site, treatment, quadrat, height) |>
-  summarize(snails = sum(measurement, na.rm = TRUE)) |>
-  ungroup() |> fix_data_for_plots()
+
 
 ## load data then bind them together
 quad_dat <- read_csv("data/quads.csv")
@@ -38,13 +33,19 @@ richness_dat <- rbind(quad_dat |>
                         reframe(species_code = unique(bait_consumer))
 )
 
-## Calculate Richness
+## Write a function that references the MSL, checks if a given site-treatment 
+## has a lower order (i.e. more specific) spp entry, if yes then drop the
+## higher order code and dont count it in richness, if no then keep and count
+
+
+## Calculate Richness by site-treatment
 richness_dat <- richness_dat |>
-  unique() |>
   group_by(site, treatment) |>
+  unique() |> 
   reframe(richness = n())
 
-## Visualize
+## Initial Viz
+
 ggplot(data = richness_dat,
        mapping = aes(x = treatment,
                      y = richness,
@@ -53,3 +54,5 @@ ggplot(data = richness_dat,
   ylab("Species Richness") +
   xlab("Treatment") +
   scale_fill_manual(values = c("Berm" = "#af8dc3", "Control" = "#7fbf7b"))
+
+
