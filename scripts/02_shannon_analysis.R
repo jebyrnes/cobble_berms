@@ -7,6 +7,13 @@
 source("scripts/helpers.R")
 
 
+## Planning
+#' Process all the below into this new rproject(its unedited since I was working w/o git)
+#' Give it essentially the same treatment as the quads (i.e. dont double count lower levels)
+#' Calc div by taxonomic levels
+#' Analyze the same as richness, essentially ttest
+
+
 # Sum across squares
 div_qp_dat <- quads |> 
   group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
