@@ -52,23 +52,33 @@ richness_dat <- left_join(richness_dat,
 ## higher order code and dont count it in richness, if no then keep and count, 
 ## function should spit out a summarised df with richness counts by level
 
-## Calculate various richnesses
 
-kingdom_richness_dat <- richness_dat |> 
-  group_by(site, treatment) |>
-  select(site, treatment, kingdom) |> 
-  unique() |> 
-  reframe(kingdom_r = n())
-# Additional group is from VERR
 
-# phylum level richness
-phylum_richness_dat <- richness_dat |> 
-  select(site, treatment, phylum) |> 
-  group_by(site, treatment) |>
-  unique() |> 
-  reframe(richness = n())
+## Calculate Richness by taxonomic level
 
-richness_bylevel_dat <- 
+# Write a function to compute richness for a given taxonomic level
+compute_richness <- function(df, level) {
+  level_sym <- sym(level)
+  
+  df |> 
+    distinct(site, treatment, !!level_sym) |> 
+    count(site, treatment, name = paste0(level, "_richness"))
+}
+
+# List of taxonomic levels to include
+tax_levels <- c("kingdom", "phylum", "class", "order", "family", "genus", "species")
+
+# Compute richness for each level
+richness_list <- lapply(tax_levels, function(level) {
+  compute_richness(richness_dat, level)
+})
+
+# Reduce the list of data frames into one by joining on site and treatment
+richness_summary <- Reduce(function(x, y) full_join(x, y, by = c("site", "treatment")), richness_list)
+
+# Rearrange
+richness_summary <- richness_summary |> arrange(site, treatment)
+
 
 
 ### These lower levels need to keep or drop higher levels with no finer level assigned based on whether there is already one (see above notes on a function) 
