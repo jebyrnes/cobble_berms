@@ -7,7 +7,7 @@ source("scripts/helpers.R")
 
 ## load libraries
 library(tidyverse)
-
+library(broom)
 
 ## load data, bind them together, and add taxonomic data
 quad_dat <- read_csv("data/quads.csv")
@@ -51,12 +51,14 @@ richness_dat <- left_join(richness_dat,
 ## has a lower order (i.e. more specific) spp entry, if yes then drop the
 ## higher order code and dont count it in richness, if no then keep and count, 
 ## function should spit out a summarised df with richness counts by level
+## Also, species level richness should include the genus in case we have any spp with the same epithet but different genera
+## Maybe easiest to do by changing species to genera_species
 
 
 
 ## Calculate Richness by taxonomic level
 
-# Write a function to compute richness for a given taxonomic level
+# Write function to compute richness for a given taxonomic level
 compute_richness <- function(df, level) {
   level_sym <- sym(level)
   
@@ -73,31 +75,39 @@ richness_list <- lapply(tax_levels, function(level) {
   compute_richness(richness_dat, level)
 })
 
-# Reduce the list of data frames into one by joining on site and treatment
-richness_summary <- Reduce(function(x, y) full_join(x, y, by = c("site", "treatment")), richness_list)
+# Reduce the list of df into one
+richness_summary <- Reduce(function(x, y) 
+  full_join(x, y, by = c("site", "treatment")), richness_list)
 
 # Rearrange
-richness_summary <- richness_summary |> arrange(site, treatment)
+richness_summary <- richness_summary |> 
+  arrange(site, treatment)
 
+# Convert wide format to long format for plotting
+richness_long <- richness_summary |> 
+  pivot_longer(
+    cols = ends_with("_richness"),
+    names_to = "taxonomic_level",
+    values_to = "richness"
+  ) |>
+  mutate(
+    taxonomic_level = gsub("_richness", "", taxonomic_level), 
+    taxonomic_level = factor(taxonomic_level, 
+                             levels = c("kingdom", "phylum", "class", "order", 
+                                        "family", "genus", "species")) 
+  )
 
-
-### These lower levels need to keep or drop higher levels with no finer level assigned based on whether there is already one (see above notes on a function) 
-# class level richness
-# order level richness
-# family level richness
-# genus level richness
-# species level richness
-
-
-
-## Initial Viz
-richness_plot <- ggplot(data = richness_dat,
-       mapping = aes(x = treatment,
-                     y = richness,
-                     fill = treatment)) +
-  geom_boxplot(show.legend = FALSE) +
-  ylab("Species Richness") +
-  xlab("Treatment") +
+# Create boxplots
+richness_plot <- ggplot(richness_long, mapping = 
+         aes(x = treatment, 
+             y = richness, 
+             fill = treatment)) +
+  geom_boxplot() +
+  facet_wrap(~ taxonomic_level, scales = "free_y") +
+  labs(title = "Taxonomic Richness by Treatment",
+       x = "Treatment",
+       y = "Species Richness",
+       fill = "Treatment") +
   scale_fill_manual(values = c("Berm" = "#af8dc3", "Control" = "#7fbf7b"))
 
 # write out richness figure
@@ -107,9 +117,29 @@ ggsave("figures/richness_plot.jpg",
 
 ## Analysis of Richness
 
+# Pivot longer
+richness_summary_modified <- pivot_longer(data = richness_summary,
+             cols = ends_with("_richness"),
+             names_to = "level") |> 
+  pivot_wider(names_from = "treatment")
 
-## The plan
-# sumarise and calculate richness by site and taxonomic level 
-# (should be one df w/ header:site, phy rich, cl rich, etc
+# Helper function that safely runs t.test and returns NA on error
+safe_t_test <- function(x, y) {
+  tryCatch(
+    t.test(x, y, paired = TRUE),
+    error = function(e) NULL
+  )
+}
 
-## Then ttest to determine if the richnesses are different by treatment and at what levels
+# Run paired t-tests by level
+richness_ttest <- richness_summary_modified |> 
+  group_by(level) |> 
+  summarise(
+    t_test = list(safe_t_test(Berm, Control)),
+    .groups = "drop"
+  ) |> 
+  # Remove levels where t-test failed (returned NULL)
+  filter(!sapply(t_test, is.null)) |> 
+  mutate(results = map(t_test, tidy)) |> 
+  unnest(results) |> 
+  select(level, estimate, statistic, p.value, conf.low, conf.high)
