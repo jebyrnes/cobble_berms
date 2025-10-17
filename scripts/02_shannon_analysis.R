@@ -141,3 +141,10 @@ shannon_plot <- shannon_count_plot + shannon_cover_plot +
 ggsave("figures/shannon_plot.jpg", 
        shannon_plot,
        dpi = 600)
+
+# Get model stats
+
+summary(percent_diversity_hurdle_mod)
+summary(percent_diversity_mod)
+summary(count_diversity_hurdle_mod)
+summary(count_diversity_mod)
