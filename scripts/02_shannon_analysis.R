@@ -12,7 +12,7 @@ library(broom)
 library(vegan)
 library(patchwork)
 
-## load data, bind them together, and add taxonomic data
+## load data
 quad_dat <- read_csv("data/quads.csv")
 
 ## Planning
