@@ -46,15 +46,48 @@ count_dat <- quad_dat |>
 phaeo_dat <- percent_dat |> 
   filter(species_code %in% c("ASNO", "FUCU", "FUSP", "FUVE", "FUDI")) |> 
   group_by(site, treatment, height) |> 
-  summarise(phaeo_pc = sum(sum))
+  summarise(total_percent = sum(sum))
+# Basically only Bayside berm mid and high have any amount of brown macrophytes.
 
 ##
 # Red Macrophytes
 # Analysis of change in CHCR, MAST
 ##
 
-phaeo_dat <- percent_dat |> 
+rhodo_dat <- percent_dat |> 
   filter(species_code %in% c("CHCR", "MAST")) |> 
   group_by(site, treatment, height) |> 
-  summarise(phaeo_pc = sum(sum))
+  summarise(total_percent = sum(sum))
 
+# Only found in low zone at bay berm, and cough berm and control. Essentially the same
+
+##
+# Sessile Inverts
+# Analysis of change in SEBA, MYED
+##
+
+invert_dat <- percent_dat |> 
+  filter(species_code %in% c("SEBA", "MYED")) |> 
+  group_by(site, treatment, height, species_code) |> 
+  summarise(total_percent = sum(sum))
+
+seba_plot <- ggplot(percent_dat |> filter(species_code == "SEBA"),
+                    mapping = 
+                          aes(x = treatment, 
+                              y = sum, 
+                              fill = treatment)) +
+  facet_grid(rows = vars(height), cols = vars(site)) +
+  geom_point(alpha = .6, position = "jitter") +
+  geom_boxplot(alpha = .6)
+
+# Stats
+percent_dat |> 
+  filter(species_code == "SEBA") |>
+  pivot_wider(names_from = treatment)
+  t.test(x, y, paired = TRUE)
+
+## Results - no difference in SEBA btw sites. Better at bayside, worse at coughlin, 
+## the same at duxbury, and non at powderpoint.
+
+# Analysis
+# Take code from above, but dont combine through the quads. Then do a t-test comparing sites
