@@ -23,7 +23,7 @@ library(patchwork)
 quad_dat <- read_csv("data/quads.csv")
 
 # Sum across squares for percent data
-percent_diversity <- quad_dat |> 
+percent_dat <- quad_dat |> 
   filter(measurement_type != "Count") |> 
   group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
@@ -31,9 +31,30 @@ percent_diversity <- quad_dat |>
   ungroup()
 
 # Sum across squares for count data
-count_diversity <- quad_dat |> 
+count_dat <- quad_dat |> 
   filter(measurement_type == "Count") |> 
   group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
   filter(species_code != "NOSP") |> 
   ungroup()
+
+##
+# Brown Macrophytes
+# Analysis of change in ASNO, FUCU, FUSP, FUDI, FUVE
+##
+
+phaeo_dat <- percent_dat |> 
+  filter(species_code %in% c("ASNO", "FUCU", "FUSP", "FUVE", "FUDI")) |> 
+  group_by(site, treatment, height) |> 
+  summarise(phaeo_pc = sum(sum))
+
+##
+# Red Macrophytes
+# Analysis of change in CHCR, MAST
+##
+
+phaeo_dat <- percent_dat |> 
+  filter(species_code %in% c("CHCR", "MAST")) |> 
+  group_by(site, treatment, height) |> 
+  summarise(phaeo_pc = sum(sum))
+

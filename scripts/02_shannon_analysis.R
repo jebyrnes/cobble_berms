@@ -23,7 +23,7 @@ quad_dat <- read_csv("data/quads.csv")
 
 
 # Sum across squares for percent data
-percent_diversity <- quad_dat |> 
+percent_dat <- quad_dat |> 
   filter(measurement_type != "Count") |> 
   group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
@@ -31,7 +31,7 @@ percent_diversity <- quad_dat |>
   ungroup()
 
 # Sum across squares for count data
-count_diversity <- quad_dat |> 
+count_dat <- quad_dat |> 
   filter(measurement_type == "Count") |> 
   group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
@@ -39,12 +39,12 @@ count_diversity <- quad_dat |>
   ungroup()
 
 # Pivot data for use in vegan::diversity() 
-percent_diversity <- percent_diversity |> 
+percent_dat <- percent_dat |> 
   pivot_wider(names_from = "species_code",
               values_from = "sum",
               values_fill = 0)
 
-count_diversity <- count_diversity |> 
+count_dat <- count_dat |> 
   pivot_wider(names_from = "species_code",
               values_from = "sum",
               values_fill = 0)
@@ -52,32 +52,32 @@ count_diversity <- count_diversity |>
 # Calc Diversity Indicies
 
 # Shannon and InvSimpson
-percent_diversity <- percent_diversity |> 
-  mutate(shannon = diversity(percent_diversity[,-c(1:5)], index = "shannon")) |> 
-  mutate(invsimpson = diversity(percent_diversity[,-c(1:5)], index = "invsimpson"))
+percent_dat <- percent_dat |> 
+  mutate(shannon = diversity(percent_dat[,-c(1:5)], index = "shannon")) |> 
+  mutate(invsimpson = diversity(percent_dat[,-c(1:5)], index = "invsimpson"))
 
-count_diversity <- count_diversity |> 
-  mutate(shannon = diversity(count_diversity[,-c(1:5)], index = "shannon")) |> 
-  mutate(invsimpson = diversity(count_diversity[,-c(1:5)], index = "invsimpson"))
+count_dat <- count_dat |> 
+  mutate(shannon = diversity(count_dat[,-c(1:5)], index = "shannon")) |> 
+  mutate(invsimpson = diversity(count_dat[,-c(1:5)], index = "invsimpson"))
 
 # Hurdle Mod Analysis
 
 # Odds of being over 0
-percent_diversity_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site,
+percent_dat_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site,
                              family = binomial(link = "logit"),
-                             data = percent_diversity)
+                             data = percent_dat)
 
-count_diversity_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site,
+count_dat_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site,
                              family = binomial(link = "logit"),
-                             data = count_diversity)
+                             data = count_dat)
 
 # Model for those over 0
-percent_diversity_mod <- lm(sqrt(shannon) ~ treatment + height + site,
-                     data = percent_diversity |> 
+percent_dat_mod <- lm(sqrt(shannon) ~ treatment + height + site,
+                     data = percent_dat |> 
                        filter(shannon > 0))
 
-count_diversity_mod <- lm(sqrt(shannon) ~ treatment + height + site,
-                     data = count_diversity |> 
+count_dat_mod <- lm(sqrt(shannon) ~ treatment + height + site,
+                     data = count_dat |> 
                        filter(shannon > 0))
 
 # viz
@@ -87,7 +87,7 @@ count_diversity_mod <- lm(sqrt(shannon) ~ treatment + height + site,
 jitter_width <- 0.1
 jitter_positions <- position_dodge(width = jitter_width)
 
-count_em <- tidy(emmeans(count_diversity_mod, ~height + treatment)) |> 
+count_em <- tidy(emmeans(count_dat_mod, ~height + treatment)) |> 
   mutate(shannon = estimate^2,
          lower.CL = ((estimate - std.error)^2),
          upper.CL = ((estimate + std.error)^2))
@@ -111,7 +111,7 @@ shannon_count_plot <- ggplot(count_em,
 
 ## by percent cover
 
-percent_em <- tidy(emmeans(percent_diversity_mod, ~height + treatment)) |> 
+percent_em <- tidy(emmeans(percent_dat_mod, ~height + treatment)) |> 
   mutate(shannon = estimate^2,
          lower.CL = ((estimate - std.error)^2),
          upper.CL = ((estimate + std.error)^2))
@@ -144,7 +144,7 @@ ggsave("figures/shannon_plot.jpg",
 
 # Get model stats
 
-summary(percent_diversity_hurdle_mod)
-summary(percent_diversity_mod)
-summary(count_diversity_hurdle_mod)
-summary(count_diversity_mod)
+summary(percent_dat_hurdle_mod)
+summary(percent_dat_mod)
+summary(count_dat_hurdle_mod)
+summary(count_dat_mod)
