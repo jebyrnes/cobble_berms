@@ -85,6 +85,7 @@ quads_s23 <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss
                     na = c("", "NA"))
 
 quads_s23 <- quads_s23 |>
+  mutate(season = "summer_23") |>
   clean_berm_file() |> 
   update_spp_codes()|>
   filter(!c(site %in% c("Thompson_Island", #bad install
@@ -97,6 +98,7 @@ quads_f23 <- read_sheet("https://docs.google.com/spreadsheets/d/182VCWn9GilEg4az
                         na = c("", "NA"))
 
 quads_f23 <- quads_f23 |>
+  mutate(season = "fall_23") |>
   clean_berm_file() |> 
   update_spp_codes()|>
   filter(!c(site %in% c("Thompson_Island", #bad install
@@ -109,6 +111,7 @@ quads_s24 <- read_sheet("https://docs.google.com/spreadsheets/d/1kTPiddF99S1HdPH
                         na = c("", "NA"))
 
 quads_s24 <- quads_s24 |>
+  mutate(season = "summer_24") |> 
   clean_berm_file2() |> 
   update_spp_codes()|>
   filter(!c(site %in% c("Thompson_Island", #bad install
@@ -121,6 +124,7 @@ quads_s25 <- read_sheet("https://docs.google.com/spreadsheets/d/1Xf5Vn37xUHWXqCx
                         na = c("", "NA"))
 
 quads_s25 <- quads_s25 |>
+  mutate(season = "summer_25") |>
   clean_berm_file2() |> 
   update_spp_codes()|>
   filter(!c(site %in% c("Thompson_Island", #bad install
@@ -146,7 +150,7 @@ write_csv(quads_s23, "data/quads_s23.csv")
 write_csv(quads_f23, "data/quads_f23.csv")
 write_csv(quads_s24, "data/quads_s24.csv")
 write_csv(quads_s25, "data/quads_s25.csv")
-
+getwd()
 ###
 # Seine Data
 ###
