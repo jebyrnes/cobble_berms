@@ -17,7 +17,7 @@ pacman::p_load(dplyr,
 
 ## load the data and filter to Littorina littorea
 ## then sum for each quad
-snail_dat <- read_csv("data/quads.csv") |>
+snail_dat <- read_csv("data/quads_s23.csv") |>
   filter(measurement_type == "Count") |>
   filter(species_code == "LILI") |>
   group_by(site, treatment, quadrat, height) |>
