@@ -132,9 +132,20 @@ quads_s25 <- quads_s25 |>
 visdat::vis_dat(quads_s23)
 skimr::skim(quads_s23)
 
+visdat::vis_dat(quads_f23)
+skimr::skim(quads_f23)
+
+visdat::vis_dat(quads_s24)
+skimr::skim(quads_s24)
+
+visdat::vis_dat(quads_s25)
+skimr::skim(quads_s25)
+
 # write out
 write_csv(quads_s23, "data/quads_s23.csv")
-
+write_csv(quads_f23, "data/quads_f23.csv")
+write_csv(quads_s24, "data/quads_s24.csv")
+write_csv(quads_s25, "data/quads_s25.csv")
 
 ###
 # Seine Data

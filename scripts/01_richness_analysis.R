@@ -10,7 +10,10 @@ library(tidyverse)
 library(broom)
 
 ## load data, bind them together, and add taxonomic data
-quad_dat <- read_csv("data/quads.csv")
+quad_s23_dat <- read_csv("data/quads_s23.csv")
+quad_f23_dat <- read_csv("data/quads_f23.csv")
+quad_s24_dat <- read_csv("data/quads_s24.csv")
+quad_s25_dat <- read_csv("data/quads_s25.csv")
 seine_dat <- read_csv("data/seine.csv")
 trap_dat <- read_csv("data/traps.csv")
 farm_dat <- read_csv("data/farms.csv")
@@ -22,7 +25,7 @@ msl <- select(msl, 1:10) |>
   rename(species_code = code)
 
 # bind data together, and drop the two NAs in Bayside Berm
-richness_dat <- rbind(quad_dat |> 
+richness_dat <- rbind(quad_s23_dat |> 
                         group_by(site, treatment) |> 
                         reframe(species_code = unique(species_code)), 
                       seine_dat |> 
@@ -143,3 +146,5 @@ richness_ttest <- richness_summary_modified |>
   mutate(results = map(t_test, tidy)) |> 
   unnest(results) |> 
   select(level, estimate, statistic, p.value, conf.low, conf.high)
+
+

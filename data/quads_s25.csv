@@ -1,0 +1,407 @@
+site,treatment,quadrat,height,latitude,longitude,day,month,year,slope,aspect,substrate,relief,observer,species_code,square,measurement,measurement_type,entered_by
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,CESP,2,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,CESP,3,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,CESP,13,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,5,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,7,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,9,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,17,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,23,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,24,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,1,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,2,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,3,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,4,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,5,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,7,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,8,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,9,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,11,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,13,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,14,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,15,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,16,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,20,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,23,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,24,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,25,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTI,5,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,COFR,5,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,COFR,7,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,COFR,13,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,COFR,17,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,COFR,18,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,COFR,19,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGBL,7,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGBL,12,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGBL,24,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,UGBL,25,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,URCR,7,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,URCR,9,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,URBL,7,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,URBL,23,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,CRFO,9,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,CRFO,13,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,CRFO,14,4,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,SEBA,13,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,SEBA,17,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,SEBA,19,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,17,0.1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,18,2,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,19,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,CRPL,17,1,Percent Cover,EW
+Bayside,Control,5,Low,42.322179,71.043083,27,5,2025,0,50,Sand,Flat,EW/CRM,CRPL,18,4,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,1,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,5,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,8,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,10,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,21,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,22,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,25,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,1,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,2,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,3,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,4,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,6,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,7,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,10,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,12,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,16,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,18,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,19,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,20,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,22,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,23,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URFI,24,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,1,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,3,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,13,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,16,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,1,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,3,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,4,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,6,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,7,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,8,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,11,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,12,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,13,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,14,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,17,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,18,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,20,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,22,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,24,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGBL,25,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTU,2,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTU,10,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTU,11,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTU,12,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTU,14,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTU,20,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URCR,2,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URCR,6,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URCR,10,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URCR,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,URCR,25,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,2,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,4,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,5,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,6,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,16,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,21,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,22,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,GRTI,25,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CAMA,2,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,2,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,11,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,12,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,13,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,14,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,17,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,18,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,19,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,20,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,21,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,COFR,23,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UBCR,3,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UBCR,11,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,PASP,3,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,PASP,9,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRPL,4,2,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRPL,5,2,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRPL,6,8,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRPL,9,2,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRPL,10,5,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRPL,25,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,4,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,9,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRFO,5,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRFO,7,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRFO,21,3,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRFO,22,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CRFO,25,4,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGTH,5,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,8,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,9,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,19,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,21,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,24,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CHCR,25,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,LILI,10,2,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,LILI,11,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,LILI,16,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,LILI,18,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,LILI,22,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,LILI,23,1,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,LILI,24,2,Count,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,STCL,11,3,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,BOVI,13,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,BOVI,14,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,CAMA,13,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,16,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,17,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,19,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,21,2,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,22,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,MYED,25,1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,DUCO,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,DUCO,17,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,FUVE,15,0.1,Percent Cover,EW
+Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,UGAA,21,0.1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,PASP,2,1,Count,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,PASP,6,1,Count,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,PASP,17,1,Count,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,UGTH,7,0.1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,7,0.1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,16,0.1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,19,1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTU,24,1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,LILI,16,1,Count,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,UGBL,16,0.1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,CRPL,16,1,Count,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,CRPL,23,1,Count,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,GRTI,16,0.1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,CESP,19,0.1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,URCR,24,0.1,Percent Cover,EW
+Bayside,Control,4,Low,42.52206,71.042912,27,5,2025,0,50,Sand,Flat,EW/CRM,UBEN,24,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,GRTU,1,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,GRTU,2,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,GRTU,9,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,GRTU,11,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,GRTU,17,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,GRTU,18,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,GRTU,22,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,1,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,2,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,6,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,7,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,9,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,10,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,12,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,13,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,14,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,15,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,16,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,17,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,20,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,22,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGBL,25,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,1,3,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,2,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,6,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,7,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,10,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,12,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,16,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,17,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CESP,23,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,SEBA,1,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,SEBA,15,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,SEBA,20,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,SEBA,25,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,URCR,2,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,3,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,4,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,5,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,7,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,9,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,10,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,11,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,13,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,14,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,15,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,16,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,18,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,19,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,20,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,21,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,23,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,24,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGTH,25,1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CRFO,7,1,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CRFO,13,1,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CRFO,15,2,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CRFO,20,1,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,PASP,10,1,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,PASP,19,1,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CRPL,10,2,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,CRPL,12,1,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,LILI,20,1,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,LILI,23,2,Count,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,DUCO,23,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,COFR,23,0.1,Percent Cover,EW
+Bayside,Control,3,Low,42.322037,71.043108,27,5,2025,-2,50,Sand,Low,EW/CRM,UGAA,25,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,FUCU,1,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,FUCU,3,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,CHCR,3,0.5,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,URFI,3,0.5,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,URFI,13,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,URFI,16,0.5,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,URFI,18,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,URFI,25,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,GRTU,6,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,GRTU,7,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,GRTU,9,1,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,UGAA,21,0.5,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,SCLO,21,2,Percent Cover,EW
+Bayside,Control,2,Low,42.32196,71.042873,27,5,2025,-5,55,Sand,Low,JB,LILI,17,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,URFI,3,1,Percent Cover,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,CHLI,9,0.5,Percent Cover,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,CHLI,11,0.5,Percent Cover,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,GRTU,14,0.5,Percent Cover,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,1,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,2,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,3,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,10,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,11,2,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,13,2,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,14,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,15,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,16,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,18,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,21,2,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,22,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,23,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,24,1,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,LILI,25,2,Count,EW
+Bayside,Control,1,Low,42.321845,71.042455,27,5,2025,-6,55,Sand,Low,JB,PALO,20,1,Count,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUVE,1,4,Percent Cover,AM
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUVE,5,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUVE,6,2,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUVE,11,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUVE,21,3,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,1,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,2,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,3,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,4,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,5,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,10,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,13,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,14,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,15,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,19,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,24,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,UGBL,25,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,1,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,2,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,4,2,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,5,3,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,6,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,7,3,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,8,2,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,9,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,11,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,12,2,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,14,3,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,15,3,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,18,2,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,19,2,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,20,2,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,21,0.1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,22,0.1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,23,3,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,URFI,24,3,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUSP,2,3,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUSP,3,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUSP,4,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUSP,7,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUSP,8,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUSP,9,2,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUSP,10,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,FUSP,20,0.1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,MYED,3,1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,SEBA,4,0.1,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,SEBA,12,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,CHLI,5,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,GRTI,7,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,GRTI,8,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,HIRU,16,0.5,Percent Cover,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,LILI,1,1,Count,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,LILI,5,1,Count,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,LILI,9,1,Count,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,LILI,12,1,Count,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,LILI,24,1,Count,EW
+Bayside,Control,1,Mid,42.321889,71.043034,27,5,2025,9,70,Cobble,Low,JB,LILI,25,1,Count,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,SEBA,3,0.1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,SEBA,15,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,SEBA,17,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,1,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,5,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,6,2,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,13,2,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,16,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,18,3,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,19,3,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,20,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,24,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,URFI,25,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,FUVE,2,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,FUVE,3,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,FUVE,4,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,FUCU,20,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,SCLO,5,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,SCLO,20,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,FUSP,1,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,FUSP,21,0.1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,FUSP,23,0.1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,CHLI,4,0.1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,CHLI,6,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,CHCR,8,0.5,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,AHPL,14,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,LILI,8,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,LILI,14,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,LILI,19,2,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,LILI,20,2,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,LILI,23,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,LILI,25,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,TETE,15,1,Percent Cover,EW
+Bayside,Control,2,Mid,42.32191,71.043092,27,5,2025,5,70,Cobble,Low,JB,PALO,12,1,Percent Cover,EW
+Bayside,Control,4,High,42.321888,71.043278,27,5,2025,8,63,Cobble,Low,JB,UGBL,2,0.5,Percent Cover,AM
+Bayside,Control,4,High,42.321888,71.043278,27,5,2025,8,63,Cobble,Low,JB,UGBL,5,0.5,Percent Cover,AM
+Bayside,Control,4,High,42.321888,71.043278,27,5,2025,8,63,Cobble,Low,JB,CHLI,25,0.5,Percent Cover,AM
+Bayside,Control,3,High,42.321908,71.043279,27,5,2025,8,65,Cobble,Low,JB,UGBL,4,0.1,Percent Cover,AM
+Bayside,Control,3,High,42.321908,71.043279,27,5,2025,8,65,Cobble,Low,JB,UGBL,13,0.5,Percent Cover,AM
+Bayside,Control,3,High,42.321908,71.043279,27,5,2025,8,65,Cobble,Low,JB,FUCU,8,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,FUSP,1,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,FUSP,2,2,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,SEBA,3,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,SEBA,6,1,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,SEBA,7,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,UGBL,10,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,UGBL,15,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,UGBL,17,0.1,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,UGBL,18,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,UGBL,23,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,UGBL,25,0.5,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,GRTU,10,0.1,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,GRTU,18,2,Percent Cover,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,LILI,23,1,Count,AM
+Bayside,Control,1,High,42.321765,71.043125,27,5,2025,7,65,Cobble,Low,JB,CAMA,9,1,Count,AM
+Bayside,Control,2,High,42.321997,71.0432216,27,5,2025,6,50,Cobble,Low,JB,FUVE,21,0.5,Percent Cover,EW
