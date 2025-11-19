@@ -68,13 +68,13 @@ sp_replace_codes <- read_excel("data/species_list.xlsx",
 write_csv(master_sp_list, "data/master_sp_list.csv")
 
 ###
-# Quad Data
+# Quad Data (summer & fall 23; summer 24; summer 25)
 ###
-quads <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iENRJUrdz52BS-GOp260UR6Pnno/edit?gid=0#gid=0",
+quads_s23 <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iENRJUrdz52BS-GOp260UR6Pnno/edit?gid=0#gid=0",
                     sheet = "data",
                     na = c("", "NA"))
 
-quads <- quads |>
+quads_s23 <- quads_s23 |>
   clean_berm_file() |> 
   update_spp_codes()|>
   filter(!c(site %in% c("Thompson_Island", #bad install
@@ -84,11 +84,11 @@ quads <- quads |>
 
 
 # check
-visdat::vis_dat(quads)
-skimr::skim(quads)
+visdat::vis_dat(quads_s23)
+skimr::skim(quads_s23)
 
 # write out
-write_csv(quads, "data/quads.csv")
+write_csv(quads_s23, "data/quads_s23.csv")
 
 
 ###
