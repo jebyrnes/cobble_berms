@@ -20,10 +20,10 @@ library(vegan)
 library(patchwork)
 
 ## load data
-quad_dat <- read_csv("data/quads.csv")
+quad_s23_dat <- read_csv("data/quads.csv")
 
 # Sum across squares for percent data
-percent_dat <- quad_dat |> 
+percent_dat <- quad_s23_dat |> 
   filter(measurement_type != "Count") |> 
   group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
@@ -31,7 +31,7 @@ percent_dat <- quad_dat |>
   ungroup()
 
 # Sum across squares for count data
-count_dat <- quad_dat |> 
+count_dat <- quad_s23_dat |> 
   filter(measurement_type == "Count") |> 
   group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
