@@ -52,33 +52,11 @@ richness_dat <- rbind(quad_s23_dat |>
 ) |> 
   filter(species_code != is.na(species_code)) |> 
   filter(species_code != "NOSP")
-  
-
-# bind data together, and drop the two NAs in Bayside Berm
-seasonal_richness_dat <- rbind(quad_s23_dat |> 
-                        group_by(season, site, treatment) |> 
-                        reframe(species_code = unique(species_code)),
-                      quad_f23_dat |> 
-                        group_by(season, site, treatment) |> 
-                        reframe(species_code = unique(species_code)), 
-                      quad_s24_dat |> 
-                        group_by(season, site, treatment) |> 
-                        reframe(species_code = unique(species_code)), 
-                      quad_s25_dat |> 
-                        group_by(season, site, treatment) |> 
-                        reframe(species_code = unique(species_code))
-) |> 
-  filter(species_code != is.na(species_code)) |> 
-  filter(species_code != "NOSP")
 
 # attach taxonomic data
 richness_dat <- left_join(richness_dat, 
                           msl, 
                           "species_code")
-
-seasonal_richness_dat <- left_join(richness_dat, 
-                                  msl, 
-                                  "species_code")
 
 ## Write a function that references the MSL, checks if a given site-treatment 
 ## has a lower order (i.e. more specific) spp entry, if yes then drop the
@@ -88,8 +66,7 @@ seasonal_richness_dat <- left_join(richness_dat,
 ## Maybe easiest to do by changing species to genera_species
 
 
-
-## Calculate Richness by taxonomic level
+## write a function to calculate richness
 
 # Write function to compute richness for a given taxonomic level
 compute_richness <- function(df, level) {
@@ -102,6 +79,8 @@ compute_richness <- function(df, level) {
 
 # List of taxonomic levels to include
 tax_levels <- c("kingdom", "phylum", "class", "order", "family", "genus", "species")
+
+## Calculate Richness by taxonomic level for all methods
 
 # Compute richness for each level
 richness_list <- lapply(tax_levels, function(level) {
@@ -178,4 +157,3 @@ richness_ttest <- richness_summary_modified |>
   mutate(results = map(t_test, tidy)) |> 
   unnest(results) |> 
   select(level, estimate, statistic, p.value, conf.low, conf.high)
-
