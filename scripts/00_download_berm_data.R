@@ -33,6 +33,14 @@ clean_berm_file <- function(dat) {
     mutate(species_code = ifelse(is.na(species_code), "NOSP", species_code))
   
 }
+# Duplicate function but w/o the site-treatment separating aspect. Data from summer 24 and 25 were entered w/ that already being done
+clean_berm_file2 <- function(dat) {
+  dat |>
+    remove_empty("cols") |>
+    clean_names() |>
+    mutate(species_code = ifelse(is.na(species_code), "NOSP", species_code))
+  
+}
 
 update_spp_codes <- function(dat) {
   dat |> 
@@ -70,6 +78,8 @@ write_csv(master_sp_list, "data/master_sp_list.csv")
 ###
 # Quad Data (summer & fall 23; summer 24; summer 25)
 ###
+
+#summer 23
 quads_s23 <- read_sheet("https://docs.google.com/spreadsheets/d/1eOic8zhjAKyBWss7iENRJUrdz52BS-GOp260UR6Pnno/edit?gid=0#gid=0",
                     sheet = "data",
                     na = c("", "NA"))
@@ -81,6 +91,41 @@ quads_s23 <- quads_s23 |>
                         "Trunk",
                         "Powder_Point_Bridge"))) #not yet a berm
 
+# fall 23
+quads_f23 <- read_sheet("https://docs.google.com/spreadsheets/d/182VCWn9GilEg4azCROsCkW-00jX9Vh0m2vD0MaJSiyI/edit?usp=sharing",
+                        sheet = "Data",
+                        na = c("", "NA"))
+
+quads_f23 <- quads_f23 |>
+  clean_berm_file() |> 
+  update_spp_codes()|>
+  filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Trunk",
+                        "Powder_Point_Bridge"))) #not yet a berm
+
+# summer 24
+quads_s24 <- read_sheet("https://docs.google.com/spreadsheets/d/1kTPiddF99S1HdPHgCMqbkuihAMIQtLUUdf7wVVuIK0g/edit?usp=sharing",
+                        sheet = "data",
+                        na = c("", "NA"))
+
+quads_s24 <- quads_s24 |>
+  clean_berm_file2() |> 
+  update_spp_codes()|>
+  filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Trunk",
+                        "Powder_Point_Bridge"))) #not yet a berm
+
+# summer 25
+quads_s25 <- read_sheet("https://docs.google.com/spreadsheets/d/1Xf5Vn37xUHWXqCxI4qrG2g93NgV5MlSFyicqP3BPupI/edit?usp=sharing",
+                        sheet = "data",
+                        na = c("", "NA"))
+
+quads_s25 <- quads_s25 |>
+  clean_berm_file2() |> 
+  update_spp_codes()|>
+  filter(!c(site %in% c("Thompson_Island", #bad install
+                        "Trunk",
+                        "Powder_Point_Bridge"))) #not yet a berm
 
 
 # check
