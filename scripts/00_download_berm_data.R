@@ -119,7 +119,7 @@ quads_s24 <- quads_s24 |>
                         "Powder_Point_Bridge"))) #not yet a berm
 
 # summer 25
-quads_s25 <- read_sheet("https://docs.google.com/spreadsheets/d/1Xf5Vn37xUHWXqCxI4qrG2g93NgV5MlSFyicqP3BPupI/edit?usp=sharing",
+quads_s25 <- read_sheet("https://docs.google.com/spreadsheets/d/1qpe9UG-28v-oLscKI0Qw3N-6jHnes01so5xNrJuElQQ/edit?usp=sharing",
                         sheet = "data",
                         na = c("", "NA"))
 
