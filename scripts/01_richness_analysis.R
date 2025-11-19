@@ -27,6 +27,15 @@ msl <- select(msl, 1:10) |>
 # bind data together, and drop the two NAs in Bayside Berm
 richness_dat <- rbind(quad_s23_dat |> 
                         group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)),
+                      quad_f23_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      quad_s24_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      quad_s25_dat |> 
+                        group_by(site, treatment) |> 
                         reframe(species_code = unique(species_code)), 
                       seine_dat |> 
                         group_by(site, treatment) |> 
@@ -45,10 +54,31 @@ richness_dat <- rbind(quad_s23_dat |>
   filter(species_code != "NOSP")
   
 
+# bind data together, and drop the two NAs in Bayside Berm
+seasonal_richness_dat <- rbind(quad_s23_dat |> 
+                        group_by(season, site, treatment) |> 
+                        reframe(species_code = unique(species_code)),
+                      quad_f23_dat |> 
+                        group_by(season, site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      quad_s24_dat |> 
+                        group_by(season, site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      quad_s25_dat |> 
+                        group_by(season, site, treatment) |> 
+                        reframe(species_code = unique(species_code))
+) |> 
+  filter(species_code != is.na(species_code)) |> 
+  filter(species_code != "NOSP")
+
 # attach taxonomic data
 richness_dat <- left_join(richness_dat, 
                           msl, 
                           "species_code")
+
+seasonal_richness_dat <- left_join(richness_dat, 
+                                  msl, 
+                                  "species_code")
 
 ## Write a function that references the MSL, checks if a given site-treatment 
 ## has a lower order (i.e. more specific) spp entry, if yes then drop the
@@ -101,12 +131,14 @@ richness_long <- richness_summary |>
   )
 
 # Create boxplots
-richness_plot <- ggplot(richness_long, mapping = 
+richness_plot <- ggplot(richness_long |> 
+                          filter(taxonomic_level %in% c("genus", "species")), 
+                        mapping = 
          aes(x = treatment, 
              y = richness, 
              fill = treatment)) +
   geom_boxplot() +
-  facet_wrap(~ taxonomic_level, scales = "free_y") +
+  facet_wrap(vars(taxonomic_level), scales = "free_y") +
   labs(title = "Taxonomic Richness by Treatment",
        x = "Treatment",
        y = "Species Richness",
@@ -146,5 +178,4 @@ richness_ttest <- richness_summary_modified |>
   mutate(results = map(t_test, tidy)) |> 
   unnest(results) |> 
   select(level, estimate, statistic, p.value, conf.low, conf.high)
-
 
