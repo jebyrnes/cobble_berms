@@ -64,7 +64,7 @@ richness_dat <- left_join(richness_dat,
 ## function should spit out a summarised df with richness counts by level
 ## Also, species level richness should include the genus in case we have any spp with the same epithet but different genera
 ## Maybe easiest to do by changing species to genera_species
-
+# if - then check one level up, if CODE then check that CODE doesnt already exist for that group
 
 ## write a function to calculate richness
 

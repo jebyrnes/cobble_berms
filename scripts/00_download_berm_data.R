@@ -150,7 +150,7 @@ write_csv(quads_s23, "data/quads_s23.csv")
 write_csv(quads_f23, "data/quads_f23.csv")
 write_csv(quads_s24, "data/quads_s24.csv")
 write_csv(quads_s25, "data/quads_s25.csv")
-getwd()
+
 ###
 # Seine Data
 ###
