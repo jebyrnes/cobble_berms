@@ -89,15 +89,41 @@ seasonal_richness <- seasonal_richness |>
 
 # time series of genus richness faceted by site
 seasonal_plot <- ggplot(seasonal_richness |> 
-                          filter(taxonomic_level == "genus"), 
+                          filter(taxonomic_level == "genus") |> 
+                          filter(season != "fall_23"), 
                         mapping = 
                           aes(x = season, 
                               y = richness, 
-                              shape = treatment)) +
+                              shape = treatment,
+                              group = treatment,
+                              color = treatment,
+                              alpha = .6)) +
   geom_point() +
-  facet_wrap(vars(site), scales = "free_y")
+  geom_line() +
+  facet_wrap(vars(site), scales = "free_y") +
+  scale_color_manual(values = c("Berm" = "#af8dc3", "Control" = "#7fbf7b"))
 
 # write out richness figure
-ggsave("figures/richness_plot.jpg", 
-       richness_plot,
+ggsave("figures/seasonal_plot.jpg", 
+       seasonal_plot,
        dpi = 600)
+
+##
+# Calculate unique species in each site-treatment
+##
+
+berm_dat <- seasonal_dat[seasonal_dat$treatment == "Berm", ]
+cont_dat <- seasonal_dat[seasonal_dat$treatment == "Control", ]
+
+spp_not_shared <- bind_rows(
+  anti_join(berm_dat, cont_dat, by = "species_code"), 
+  anti_join(cont_dat, berm_dat, by = "species_code")  
+)
+
+
+richness_temp <- seasonal_dat |> 
+  distinct(season, site, treatment, species_code) |>
+  filter(species_code != "NOSP") |> 
+  left_join(y = msl, 
+            by = "species_code")
+
