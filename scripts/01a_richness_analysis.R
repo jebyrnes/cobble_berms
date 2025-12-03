@@ -51,24 +51,19 @@ richness_dat <- rbind(quad_s23_dat |>
                         reframe(species_code = unique(bait_consumer))
 ) |> 
   filter(species_code != is.na(species_code)) |> 
-  filter(species_code != "NOSP")
+  filter(species_code != "NOSP") |> 
+  filter(species_code != "none_present") |> 
+  filter(species_code != "UCRA")
 
 # attach taxonomic data
 richness_dat <- left_join(richness_dat, 
                           msl, 
                           "species_code")
 
-## Write a function that references the MSL, checks if a given site-treatment 
-## has a lower order (i.e. more specific) spp entry, if yes then drop the
-## higher order code and dont count it in richness, if no then keep and count, 
-## function should spit out a summarised df with richness counts by level
-## Also, species level richness should include the genus in case we have any spp with the same epithet but different genera
-## Maybe easiest to do by changing species to genera_species
-# if - then check one level up, if CODE then check that CODE doesnt already exist for that group
 
-## write a function to calculate richness
-
+##
 # Write function to compute richness for a given taxonomic level
+##
 compute_richness <- function(df, level) {
   level_sym <- sym(level)
   
@@ -80,7 +75,9 @@ compute_richness <- function(df, level) {
 # List of taxonomic levels to include
 tax_levels <- c("kingdom", "phylum", "class", "order", "family", "genus", "species")
 
-## Calculate Richness by taxonomic level for all methods
+## 
+# Calculate Richness by taxonomic level
+## 
 
 # Compute richness for each level
 richness_list <- lapply(tax_levels, function(level) {
@@ -96,7 +93,7 @@ richness_summary <- richness_summary |>
   arrange(site, treatment)
 
 # Convert wide format to long format for plotting
-richness_long <- richness_summary |> 
+richness_summary <- richness_summary |> 
   pivot_longer(
     cols = ends_with("_richness"),
     names_to = "taxonomic_level",
@@ -109,16 +106,20 @@ richness_long <- richness_summary |>
                                         "family", "genus", "species")) 
   )
 
+##
+# Visualize
+##
+
 # Create boxplots
-richness_plot <- ggplot(richness_long |> 
-                          filter(taxonomic_level %in% c("genus", "species")), 
+richness_plot <- ggplot(richness_summary |> 
+                          filter(taxonomic_level == "species"), 
                         mapping = 
          aes(x = treatment, 
              y = richness, 
              fill = treatment)) +
   geom_boxplot() +
   facet_wrap(vars(taxonomic_level), scales = "free_y") +
-  labs(title = "Taxonomic Richness by Treatment",
+  labs(title = "Species Richness by Treatment",
        x = "Treatment",
        y = "Species Richness",
        fill = "Treatment") +
@@ -129,11 +130,48 @@ ggsave("figures/richness_plot.jpg",
        richness_plot,
        dpi = 600)
 
-## Analysis of Richness
+## Analysis of Species Richness
 
+# Set up data
+species_ttest_data <- richness_dat |> 
+  select()
+  filter(taxonomic_level == "species") |> 
+  select(-"taxonomic_level") |> 
+  pivot_wider(names_from = "treatment",
+              values_from = "richness")
+# Run ttest 
+richness_ttest <- t.test(species_ttest_data$Berm, species_ttest_data$Control, paired = TRUE)
+
+
+    
+    
+    
+# Helper function that safely runs t.test and returns NA on error
+safe_t_test <- function(x, y) {
+  tryCatch(
+    t.test(x, y, paired = TRUE),
+    error = function(e) NULL
+  )
+}
+
+# Run paired t-tests by level
+richness_ttest <- richness_summary_modified |> 
+  group_by(level) |> 
+  summarise(
+    t_test = list(safe_t_test(Berm, Control)),
+    .groups = "drop"
+  ) |> 
+  # Remove levels where t-test failed (returned NULL)
+  filter(!sapply(t_test, is.null)) |> 
+  mutate(results = map(t_test, tidy)) |> 
+  unnest(results) |> 
+  select(level, estimate, statistic, p.value, conf.low, conf.high)
+
+
+## Archive
 # Pivot longer
 richness_summary_modified <- pivot_longer(data = richness_summary,
-             cols = ends_with("_richness"),
+             cols = "taxonomic_level",
              names_to = "level") |> 
   pivot_wider(names_from = "treatment")
 

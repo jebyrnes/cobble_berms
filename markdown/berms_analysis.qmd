@@ -1,0 +1,68 @@
+---
+title: "berms_analysis"
+author: "Curtis R. Morris"
+date: "12/03/25"
+format: html
+---
+
+### 1. Richness
+```{r}
+#Setwd
+setwd(dir = "C:/Users/morri/Files/Projects/R/cobble_berms")
+
+## load libraries
+library(tidyverse)
+library(broom)
+
+## load data, bind them together, and add taxonomic data
+quad_s23_dat <- read_csv("data/quads_s23.csv")
+quad_f23_dat <- read_csv("data/quads_f23.csv")
+quad_s24_dat <- read_csv("data/quads_s24.csv")
+quad_s25_dat <- read_csv("data/quads_s25.csv")
+seine_dat <- read_csv("data/seine.csv")
+trap_dat <- read_csv("data/traps.csv")
+farm_dat <- read_csv("data/farms.csv")
+briv_dat <- read_csv("data/brivs.csv")
+msl <- read_csv("data/master_sp_list.csv")
+
+# Drop uneeded cols in msl and rename col
+msl <- select(msl, 1:10) |> 
+  rename(species_code = code)
+
+# bind data together, and drop the two NAs in Bayside Berm
+richness_dat <- rbind(quad_s23_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)),
+                      quad_f23_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      quad_s24_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      quad_s25_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      seine_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)),
+                      trap_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(species_code)),
+                      briv_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(first_predator)),
+                      briv_dat |> 
+                        group_by(site, treatment) |> 
+                        reframe(species_code = unique(bait_consumer))
+) |> 
+  filter(species_code != is.na(species_code)) |> 
+  filter(species_code != "NOSP") |> 
+  filter(species_code != "none_present") |> 
+  filter(species_code != "UCRA")
+
+# attach taxonomic data
+richness_dat <- left_join(richness_dat, 
+                          msl, 
+                          "species_code")
+```
+

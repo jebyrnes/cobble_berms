@@ -11,9 +11,10 @@ library(tidyverse)
 library(broom)
 library(vegan)
 library(patchwork)
+library(emmeans)
 
 ## load data
-quad_s23_dat <- read_csv("data/quads.csv")
+quad_s23_dat <- read_csv("data/quads_s23.csv")
 
 ## Planning
 #' Process all the below into this new rproject(its unedited since I was working w/o git)
