@@ -195,11 +195,12 @@ ggsave("figures/richness_sitelvl_plot.jpg",
        richness_plot,
        dpi = 600)
 
-
+# Table of site level richness
 richness_table <- ttest_dat |> 
   kable("html", caption = "Site Level Species Richness by Treatment") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
                 full_width = FALSE) %>%
   row_spec(0, bold = TRUE, background = "#D3D3D3")
 
+# Write out Table
 save_kable(richness_table, file = "figures/richness_sitelvl_table.html")
