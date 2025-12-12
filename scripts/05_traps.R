@@ -25,10 +25,6 @@ trap_dat <- read_csv("data/traps.csv")
 #   View()
 # All there!
 
-# Drop the NOSP
-trap_dat <- trap_dat |> 
-  filter(species_code != "NOSP")
-
 ##
 # Exploring the data
 ##
@@ -37,13 +33,14 @@ trap_dat <- trap_dat |>
 abundance_dat <- trap_dat |>
     group_by(site, treatment, trap_name, trap_number, species_code) |>
     reframe(abundance = n()) |> 
-  pivot_wider(names_from = species_code, values_from = abundance, values_fill = NA)
+  pivot_wider(names_from = species_code, values_from = abundance, values_fill = 0) |> 
+  select(-NOSP)
 
 # CAMA only
-CAMA_dat <- trap_dat |>
-  filter(species_code == "CAMA") |> 
-  group_by(site, treatment, trap_name, trap_number) |>
-  reframe(abundance = n())
+CAMA_dat <- abundance_dat |>
+  select(1:5) |> 
+  filter(trap_name == "Crab") |> 
+  select(-trap_name)
 
 ##
 # Visualize
@@ -52,7 +49,7 @@ CAMA_dat <- trap_dat |>
 # CAMA abundance by site as a function of treatment
 CAMA_plot <- ggplot(CAMA_dat, 
                     mapping = aes(x = treatment, 
-                              y = abundance)) +
+                              y = CAMA)) +
   geom_boxplot() +
   geom_point(position = "jitter",
               alpha = .6)+
@@ -66,11 +63,11 @@ CAMA_plot <- ggplot(CAMA_dat,
 ##
 
 # ttest for CAMA abundnace
-  CAMA_ttest <- t.test(abundance ~ treatment, data = CAMA_dat, var.equal = FALSE) |> 
+  CAMA_ttest <- t.test(CAMA ~ treatment, data = CAMA_dat, var.equal = FALSE) |> 
     tidy()
 
-#  estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high 
-#  0.0814      6.24      6.15    0.0283   0.978      27.8    -5.82      5.98 
-  
+# estimate estimate1 estimate2 statistic p.value parameter conf.low   conf.high 
+# 1.73      6.87      5.13     0.573   0.572      24.5    -4.51      7.97
+#   
 # Conclusions: no difference in CAMA abundance in a trap given a treatment
   

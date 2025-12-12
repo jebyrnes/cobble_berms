@@ -326,9 +326,14 @@ Our model predicts an increase of 1.29 LILI when going from the Control to Berm 
 
 These results align with what we see at the sites. At Bayside, the presence of the berm modifies the substrate such that the control is characterized as a small grain sand-shell hash ecosystem, and the berm has ample habitat as provisioned by the cobbles. The cobbles are also present at coughlin, however their ecological effect on provisioning habitat/ameliorating stress and thus increasing LILI abundance is decreased because the preexisting substrate is already large grain cobble in nature, so it's not modifying the preexisting substrate of the area and thus does not affect LILI abundance in a significant way. Duxbury cannot be analyzed due to the absence of LILI, but again, I would argue this is due to underlying differences in substrate among sites amd thus the impact of the berm. Duxbury is a sand ecosystem. The installation of the berm fundamentally changes this system, such that without the berm LILI simply are not present (instead Illynasa is, a soft sediment snail). 
 
+See section 9 for an analysis of sediment differences between treatments.
+
 # If time, include ILOB in this analysis.
 
 ### 6. Mobiles: Traps and Seine
+
+
+
 ### 7. Predation: BRIVS
 ### 8. Crypto-benthic Fish: FARMS
 ### 9. Sediment variation among sites:treatments
