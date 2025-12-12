@@ -36,7 +36,8 @@ trap_dat <- trap_dat |>
 # Abundance of each spp per trap
 abundance_dat <- trap_dat |>
     group_by(site, treatment, trap_name, trap_number, species_code) |>
-    reframe(abundance = n())
+    reframe(abundance = n()) |> 
+  pivot_wider(names_from = species_code, values_from = abundance, values_fill = NA)
 
 # CAMA only
 CAMA_dat <- trap_dat |>

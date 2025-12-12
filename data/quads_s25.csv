@@ -45,13 +45,13 @@ Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,CRFO,9
 Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,CRFO,13,1,Percent Cover,EW,JW/SB,summer_25
 Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,CRFO,14,4,Percent Cover,EW,JW/SB,summer_25
 Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,SEBA,13,0.1,Percent Cover,EW,JW/SB,summer_25
-Bayside,Control,5,Low,42.322179,71.0430479999999,27,5,2025,0,50,Sand,Flat,EW/CRM,SEBA,17,0.1,Percent Cover,EW,JW/SB,summer_25
-Bayside,Control,5,Low,42.322179,71.0430479999999,27,5,2025,0,50,Sand,Flat,EW/CRM,SEBA,19,0.1,Percent Cover,EW,JW/SB,summer_25
-Bayside,Control,5,Low,42.322179,71.0430479999999,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,17,0.1,Percent Cover,EW,JW/SB,summer_25
-Bayside,Control,5,Low,42.322179,71.0430479999999,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,18,2,Percent Cover,EW,JW/SB,summer_25
-Bayside,Control,5,Low,42.322179,71.0430479999999,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,19,1,Percent Cover,EW,JW/SB,summer_25
-Bayside,Control,5,Low,42.322179,71.0430479999999,27,5,2025,0,50,Sand,Flat,EW/CRM,CRPL,17,1,Percent Cover,EW,JW/SB,summer_25
-Bayside,Control,5,Low,42.322179,71.0430479999999,27,5,2025,0,50,Sand,Flat,EW/CRM,CRPL,18,4,Percent Cover,EW,JW/SB,summer_25
+Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,SEBA,17,0.1,Percent Cover,EW,JW/SB,summer_25
+Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,SEBA,19,0.1,Percent Cover,EW,JW/SB,summer_25
+Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,17,0.1,Percent Cover,EW,JW/SB,summer_25
+Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,18,2,Percent Cover,EW,JW/SB,summer_25
+Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,URFI,19,1,Percent Cover,EW,JW/SB,summer_25
+Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,CRPL,17,1,Percent Cover,EW,JW/SB,summer_25
+Bayside,Control,5,Low,42.322179,71.043048,27,5,2025,0,50,Sand,Flat,EW/CRM,CRPL,18,4,Percent Cover,EW,JW/SB,summer_25
 Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,1,0.1,Percent Cover,EW,JW/SB,summer_25
 Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,5,0.1,Percent Cover,EW,JW/SB,summer_25
 Bayside,Control,6,Low,42.322166,71.043058,27,5,2025,-1,50,Cobble,Low,EW/CRM,SEBA,8,0.1,Percent Cover,EW,JW/SB,summer_25
@@ -3069,7 +3069,7 @@ Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,PASP,24
 Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,PASP,25,1,Count,JW,JW/SB,summer_25
 Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,CRFO,4,3,Count,JW,JW/SB,summer_25
 Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,CRFO,15,1,Count,JW,JW/SB,summer_25
-Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,MAST,5,1,Count,JW,JW/SB,summer_25
+Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,MAST,5,1,Percent Cover,JW,JW/SB,summer_25
 Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,UBBL,13,0.1,Percent Cover,JW,JW/SB,summer_25
 Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,UBBL,18,0.1,Percent Cover,JW,JW/SB,summer_25
 Coughlin,Control,4,Mid,42.361205,70.975165,27,6,2025,-3.7,260,Mud,Low,SB,UBBL,20,0.1,Percent Cover,JW,JW/SB,summer_25
@@ -3276,18 +3276,18 @@ Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,UFAC
 Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,UFAC,22,1,Percent Cover,SB,JW/SB,summer_25
 Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,UFAC,23,0.1,Percent Cover,SB,JW/SB,summer_25
 Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,UFAC,24,1,Percent Cover,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,UFAC,25,0.1,Percent Cover,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,3,1,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,4,1,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,5,2,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,6,2,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,9,3,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,10,1,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,11,1,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,21,1,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,22,1,Count,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,MYED,19,0.5,Percent Cover,SB,JW/SB,summer_25
-Duxbury_Beach,Berm,2,Mid,42.0439729999999,70.640746,15,7,2025,1,240,Cobble,Low,CRM,SEBA,1,0.1,Percent Cover,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,UFAC,25,0.1,Percent Cover,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,3,1,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,4,1,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,5,2,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,6,2,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,9,3,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,10,1,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,11,1,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,21,1,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,LILI,22,1,Count,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,MYED,19,0.5,Percent Cover,SB,JW/SB,summer_25
+Duxbury_Beach,Berm,2,Mid,42.043973,70.640746,15,7,2025,1,240,Cobble,Low,CRM,SEBA,1,0.1,Percent Cover,SB,JW/SB,summer_25
 Duxbury_Beach,Berm,1,Mid,42.043971,70.640853,15,7,2025,6,250,Cobble,Low,CRM,UFAC,1,1,Percent Cover,SB,JW/SB,summer_25
 Duxbury_Beach,Berm,1,Mid,42.043971,70.640853,15,7,2025,6,250,Cobble,Low,CRM,UFAC,2,2,Percent Cover,SB,JW/SB,summer_25
 Duxbury_Beach,Berm,1,Mid,42.043971,70.640853,15,7,2025,6,250,Cobble,Low,CRM,UFAC,3,3,Percent Cover,SB,JW/SB,summer_25

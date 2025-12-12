@@ -15,7 +15,7 @@ library(easystats)
 # library(broom)
 library(vegan)
 # library(patchwork)
-# library(emmeans)
+library(emmeans)
 
 # load data
 quad_s23_dat <- read_csv("data/quads_s23.csv")
@@ -28,6 +28,10 @@ quad_dat <- rbind(quad_s23_dat,
                   quad_f23_dat,
                   quad_s24_dat,
                   quad_s25_dat)
+
+# rm/ spaces in col titles
+quad_dat <- quad_dat |> 
+  mutate(measurement_type = recode(measurement_type, "Percent Cover" = "Percent"))
 
 # Drop data that are no longer needed
 rm(quad_s23_dat)
@@ -56,20 +60,24 @@ rm(quad_s25_dat)
 quad_dat <- quad_dat |> 
   group_by(season, site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
-  filter(species_code != "NOSP") |> 
-  filter(species_code != "none_present") |> 
   ungroup()
-
-# Pull out quad richness w/o measurement_type
-quad_richness <- quad_dat |> 
-  group_by(season, site, treatment, height, quadrat) |> 
-  reframe(richness = n_distinct(species_code))
 
 # Pivot data for use in vegan::diversity() 
 quad_dat <- quad_dat |> 
   pivot_wider(names_from = "species_code",
               values_from = "sum",
               values_fill = 0)
+
+# Drop placeholder spp for quads w/ nothing 
+quad_dat <- quad_dat |> 
+  select(-c("NOSP", "none_present"))
+
+# Seperate out functional groups
+func_dat <- quad_dat |> 
+  select(c(1:6,"ASNO", "FUCU", "FUSP", "FUVE", "FUDI", "CHCR", "MAST", "SEBA", "MYED")) |> 
+  mutate(temp = rowSums(across(c(ASNO, FUCU, FUSP, FUVE, FUDI, CHCR, MAST, SEBA, MYED)))) |> 
+  filter(temp > 0) |> 
+  select(-temp)
 
 # Calculate Shannon, InvSimpson, richness, evenness, and rearrange
 quad_dat <- quad_dat |> 
@@ -78,46 +86,94 @@ quad_dat <- quad_dat |>
 quad_dat <- quad_dat |> 
   mutate(invsimpson = diversity(quad_dat[,-c(1:6,85)], index = "invsimpson")) # The Inverse Simpson Index is an alternative diversity measure that focuses more on the dominance of species. The lower the value, the greater the diversity. Unlike the Shannon-Wiener index, which treats all species equally, the Inverse Simpson Index weighs more heavily on rare species, but it gives more weight to dominant species.
 
-quad_dat <- quad_dat |> mutate(richness = specnumber(quad_dat[,-c(1:6),85,86])) |> 
-  mutate(evenness = shannon/log(richness))  # Pielous eveness how evenly individuals are distributed across the different species in a community. It ranges from 0 (completely uneven) to 1 (perfectly even).
+quad_dat <- quad_dat |> 
+  mutate(richness = specnumber(quad_dat[,-c(1:6,85,86)])) 
+
+quad_dat <- quad_dat |> 
+  mutate(evenness = shannon/log(richness)) # Pielous eveness how evenly individuals are distributed across the different species in a community. It ranges from 0 (completely uneven) to 1 (perfectly even).# Evenness of 0 occurs when richness is 1 (i.e. log 1 = 0, dividing by 0 = NaN)
   
 quad_dat <- quad_dat |> 
 select(richness, shannon, evenness, invsimpson, everything())
   
-## Something is wrong here. Its detecting richness of 2 when there is only a single species present
-
-  
-##
-# Visualize
-##
-
 # Set up data for plotting
 div_plot_dat <- quad_dat[,-c(11:88)] |> 
   pivot_longer(cols = richness:invsimpson, 
                values_to = "value", 
                names_to = "index")
 
+div_plot_dat$height <- factor(div_plot_dat$height,
+                              levels = c("Low", "Mid", "High"))
 
-ggplot(div_plot_dat,
+
+##
+# Visualize
+##
+
+
+
+
+ggplot(div_plot_dat |> filter(measurement_type == "Count"),
        aes(x = treatment,
            y = value)) +
-  geom_boxplot() +
-  facet_grid(rows = vars(height), cols = vars(index))
+  geom_violin() +
+  facet_grid(rows = vars(index), 
+             cols = vars(height),
+             scales = "free_y")
 
-
+ggplot(div_plot_dat |> filter(measurement_type == "Percent"),
+       aes(x = treatment,
+           y = value)) +
+  geom_violin() +
+  facet_grid(rows = vars(index), 
+             cols = vars(height),
+             scales = "free_y")
 
 ##
 # Analysis
 ##
 
-# Models for those over 0
-percent_shannon_mod <- lm(sqrt(shannon) ~ treatment + height + site,
-                      data = quad_dat |> 
-                        filter(measurement_type != "Count"))
+# Hurdle Model - Odds of being over 0
+shannon_percent_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site,
+                                  family = binomial(link = "logit"),
+                                  data = quad_dat |> filter(measurement_type == "Percent"))
 
-count_shannon_mod <- lm(sqrt(shannon) ~ treatment + height + site,
-                    data = quad_dat |> 
-                      filter(measurement_type == "Count"))
+shannon_count_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site,
+                                  family = binomial(link = "logit"),
+                                  data = quad_dat |> filter(measurement_type == "Count"))
+
+# Models for those over 0
+shannon_percent_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site,
+                          data = quad_dat |> filter(measurement_type == "Percent"))
+
+shannon_count_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site,
+                        data = quad_dat |> filter(measurement_type == "Count"))
+
+# Get model stats
+check_model(shannon_percent_hurdle_mod)
+check_model(shannon_count_hurdle_mod)
+check_model(shannon_percent_posthurdle_mod)
+check_model(shannon_count_posthurdle_mod)
+
+# Quad richness
+percent_shannon_mod <- lm(sqrt(shannon) ~ treatment + height + site,
+                          data = quad_dat |> 
+                            filter(measurement_type != "Count"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -180,42 +236,34 @@ ggsave("figures/shannon_plot.jpg",
        dpi = 600)
 
 
-
-
-
-
+# Make sure that for every 0 quad that there is a 0 placeholder for both percent and count 
 
 
 ##
-# Analysis
+# Functional Group Analysis
 ##
 
+# Where has what
+func_dat <- func_dat |> 
+  group_by(season, site, treatment, height) |> 
+  mutate(phaeo = rowSums(across(c(ASNO, FUCU, FUSP, FUVE, FUDI)))) |> 
+  select(-c(ASNO, FUCU, FUSP, FUVE, FUDI)) |> 
+  mutate(rhodo = rowSums(across(c(CHCR, MAST)))) |> 
+  select(-c(CHCR, MAST))
 
-# Hurdle Mod Analysis
+# Model of Phaeo abundance
+phaeo_mod <- lm(log(phaeo) ~ site + treatment + height,
+                data = func_dat |> filter(phaeo > 0))
 
-# Odds of being over 0
-percent_dat_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site,
-                             family = binomial(link = "logit"),
-                             data = percent_dat)
+check_model(phaeo_mod)
 
-count_dat_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site,
-                             family = binomial(link = "logit"),
-                             data = count_dat)
-
-# Model for those over 0
-percent_dat_mod <- lm(sqrt(shannon) ~ treatment + height + site,
-                     data = percent_dat |> 
-                       filter(shannon > 0))
-
-count_dat_mod <- lm(sqrt(shannon) ~ treatment + height + site,
-                     data = count_dat |> 
-                       filter(shannon > 0))
+hist(func_dat$phaeo[func_dat$phaeo > 0])
 
 
-
-# Get model stats
-
-summary(percent_dat_hurdle_mod)
-summary(percent_dat_mod)
-summary(count_dat_hurdle_mod)
-summary(count_dat_mod)
+# Option for completing percent cover and coutns for all sites and treatments to have 0
+## Fix up snail data to fill in 0 for quads where there
+## were no snails
+# snail_dat <- snail_dat |>
+#   complete(site, treatment, nesting(quadrat, height),
+#            fill = list(snails = 0)) |>
+#   mutate(are_there_snails = as.numeric(snails !=0))

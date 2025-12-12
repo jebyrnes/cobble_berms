@@ -136,6 +136,9 @@ richness_dat <- richness_dat |>
     !(site == "Duxbury_Beach" & treatment == "Control" & species_code %in% c("UFAC", "URFC"))
   )
 
+# Retain data w/ spp for later use
+lostspp_dat <- richness_dat
+
 ##
 # Calculate Richness
 ##
@@ -144,6 +147,15 @@ richness_dat <- richness_dat |>
 richness_dat <- richness_dat |>
   group_by(site, treatment) |>
   reframe(richness = n())
+
+# Identify what species are found on berms and not on controls (and v.v.)
+lostspp_dat <- lostspp_dat |> 
+  group_by(species) %>%
+  filter(n_distinct(treatment) == 1) %>%
+  ungroup() |> 
+  select(c(site, treatment, classification_description))
+
+
 
 ##
 # Analyze Richness
@@ -155,7 +167,9 @@ richness_dat <- richness_dat |>
 # Set up data
 ttest_dat <- richness_dat |> 
   pivot_wider(names_from = "treatment",
-              values_from = "richness")
+              values_from = "richness") |> 
+  mutate(delta = Berm-Control)
+
 # Run ttest 
 richness_ttest <- t.test(ttest_dat$Berm, ttest_dat$Control, paired = TRUE) |> 
 tidy()
@@ -198,6 +212,23 @@ ggsave("figures/richness_sitelvl_plot.jpg",
 # Table of site level richness
 richness_table <- ttest_dat |> 
   kable("html", caption = "Site Level Species Richness by Treatment") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+
+# Table of species lost per site-treatments
+berm_lostspp_table <- lostspp_dat |> 
+  filter(treatment == "Berm") |> 
+  select(c(site, classification_description)) |> 
+  kable("html", caption = "Species found only on Berm") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+
+control_lostspp_table <- lostspp_dat |> 
+  filter(treatment == "Control") |> 
+  select(c(site, classification_description)) |> 
+  kable("html", caption = "Species found only on Berm") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
                 full_width = FALSE) %>%
   row_spec(0, bold = TRUE, background = "#D3D3D3")

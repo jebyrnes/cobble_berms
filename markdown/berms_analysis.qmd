@@ -2,17 +2,33 @@
 title: "berms_analysis"
 author: "Curtis R. Morris"
 date: "12/03/25"
-format: html
+format:
+  html:
+    code-fold: true
+    code-summary: "Code"
 ---
 
-### 1. Richness
+### 0. Set-up
 ```{r}
+## Setup/Loading Data
+
 #Setwd
 setwd(dir = "C:/Users/morri/Files/Projects/R/cobble_berms")
 
 ## load libraries
-library(tidyverse)
-library(broom)
+pacman::p_load(dplyr,
+               tidyverse,
+               readr,
+               glmmTMB, # zero inflation!
+               car,
+               broom.mixed,
+               emmeans,
+               vegan,
+               easystats,
+               knitr,
+               kableExtra,
+               broom
+               )
 
 ## load data, bind them together, and add taxonomic data
 quad_s23_dat <- read_csv("data/quads_s23.csv")
@@ -29,6 +45,12 @@ msl <- read_csv("data/master_sp_list.csv")
 msl <- select(msl, 1:10) |> 
   rename(species_code = code)
 
+
+```
+
+
+### 1. Site-level Richness
+```{r}
 # bind data together, and drop the two NAs in Bayside Berm
 richness_dat <- rbind(quad_s23_dat |> 
                         group_by(site, treatment) |> 
@@ -64,5 +86,249 @@ richness_dat <- rbind(quad_s23_dat |>
 richness_dat <- left_join(richness_dat, 
                           msl, 
                           "species_code")
+
+# Remove duplicate rows
+richness_dat <- unique(richness_dat)
+
+# Filter our codes to drop
+richness_dat <- richness_dat |> 
+  filter(
+    !(site == "Bayside" & treatment == "Berm" & species_code %in% c("UFAC", "FUCU", "UBBL", "URAL")) &
+    !(site == "Bayside" & treatment == "Control" & species_code %in% c("UFAC", "UFIS", "FUCU", "UBBL", "URFI", "URBL", "UCCA")) &
+    !(site == "Coughlin" & treatment == "Berm" & species_code %in% c("UNAL", "UFAC", "FUCU", "UBAL", "UBBL", "UBFI", "URCB", "UCL", "URFC", "UCCA", "UBFC")) &
+    !(site == "Coughlin" & treatment == "Control" & species_code %in% c("UNAL", "UFAC", "PHSP", "UCCA")) &
+    !(site == "Duxbury_Beach" & treatment == "Berm" & species_code %in% c("UFAC", "PASP", "URFC")) &
+    !(site == "Duxbury_Beach" & treatment == "Control" & species_code %in% c("UFAC", "URFC"))
+  )
+
+
+# Identify what species are found on berms and not on controls (and v.v.)
+lostspp_dat <- richness_dat |> 
+  group_by(species) %>%
+  filter(n_distinct(treatment) == 1) %>%
+  ungroup() |> 
+  select(c(site, treatment, classification_description))
+
+# Calc richness per site_treatment
+richness_dat <- richness_dat |>
+  group_by(site, treatment) |>
+  reframe(richness = n())
+
+# Pivot for table
+ttest_dat <- richness_dat |> 
+  pivot_wider(names_from = "treatment",
+              values_from = "richness") |> 
+  mutate(delta = Berm-Control)
+
+
+# Visualize
+ggplot(richness_dat, 
+                        mapping = 
+         aes(x = treatment, 
+             y = richness, 
+             group = site,
+             fill = treatment,
+             shape = site)) +
+  geom_line(color = "black") +
+  geom_point(size = 3, 
+             color = "black", 
+             stroke = 1.2) +
+  labs(title = "Site Level Species Richness by Treatment",
+       x = "Treatment",
+       y = "Species Richness") +
+  scale_fill_manual(values = c("Berm" = "#af8dc3", "Control" = "#7fbf7b")) + 
+  scale_shape_manual(values = c(21, 22, 24)) +
+  guides(fill = "none")
 ```
 
+
+```{r}
+# Table of site level richness
+ttest_dat |> 
+  kable("html", caption = "Site Level Species Richness by Treatment") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+```
+
+Data from from all sampling methods and timepoints indicate that  site-level richness at all sites is higher in the berm treatment than in the control. Due to low sample size (n=3) these results are not statistically significant.
+
+```{r}
+# Table of species lost per site-treatments
+lostspp_dat |> 
+  filter(treatment == "Berm") |> 
+  select(c(site, classification_description)) |> 
+  kable("html", caption = "Species found only on the Berm Treatment") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+
+lostspp_dat |> 
+  filter(treatment == "Control") |> 
+  select(c(site, classification_description)) |> 
+  kable("html", caption = "Species found only on the Control Treatment") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+
+```
+
+I would say, I'm not convinced that these differences in site level richness are real. It's a small difference, and some of the lost species are highly mobile (A. rostrata and S. fuscus). Also, the site with the greatest difference (duxbury) is wide and sandy. So we're comparing communities found on a rocky cobble shore (berm) to that on a dynamic sandy ecosystem. Our protocol does not sample interstitial spp, so richness is likely underestimated on Dux control.
+
+So I would argue against greater site-level richness on the Berms. HOWEVER, I think the bigger story here is that richness was unchanged between treatments, i.e. no negative effect of berms.
+
+### 2. Biodiversity 
+
+```{r}
+# Bind together all quad data
+quad_dat <- rbind(quad_s23_dat,
+                  quad_f23_dat,
+                  quad_s24_dat,
+                  quad_s25_dat)
+
+
+# Sum to the quad level
+quad_dat <- quad_dat |> 
+  group_by(season, site, treatment, height, quadrat, measurement_type, species_code) |> 
+  reframe(sum = sum(measurement)) |> 
+  filter(species_code != "NOSP") |> 
+  filter(species_code != "none_present") |> 
+  ungroup()
+
+# Pull out quad richness w/o measurement_type
+quad_richness <- quad_dat |> 
+  group_by(season, site, treatment, height, quadrat) |> 
+  reframe(richness = n_distinct(species_code))
+
+# Pivot data for use in vegan::diversity() 
+quad_dat <- quad_dat |> 
+  pivot_wider(names_from = "species_code",
+              values_from = "sum",
+              values_fill = 0)
+
+# Calculate Shannon, InvSimpson, richness, evenness, and rearrange
+quad_dat <- quad_dat |> 
+  mutate(shannon = diversity(quad_dat[,-c(1:6)], index = "shannon")) # measures the uncertainty in predicting the species identity of an individual chosen at random from the community. A higher value indicates higher diversity (more species and/or more even distribution), and a lower value indicates lower diversity. It equals 0 only when there is no uncertainty—meaning there is only ONE species present.
+
+quad_dat <- quad_dat |> 
+  mutate(invsimpson = diversity(quad_dat[,-c(1:6,85)], index = "invsimpson")) # The Inverse Simpson Index is an alternative diversity measure that focuses more on the dominance of species. The lower the value, the greater the diversity. Unlike the Shannon-Wiener index, which treats all species equally, the Inverse Simpson Index weighs more heavily on rare species, but it gives more weight to dominant species.
+
+quad_dat <- quad_dat |> 
+  mutate(richness = specnumber(quad_dat[,-c(1:6,85,86)])) # Pielous eveness how evenly individuals are distributed across the different species in a community. It ranges from 0 (completely uneven) to 1 (perfectly even).
+
+quad_dat <- quad_dat |> 
+  mutate(evenness = shannon/log(richness)) # Evenness of 0 occurs when richness is 1 (i.e. log 1 = 0, dividing by 0 = NaN)
+  
+quad_dat <- quad_dat |> 
+select(richness, shannon, evenness, invsimpson, everything())
+
+# Set up data for plotting
+div_plot_dat <- quad_dat[,-c(11:88)] |> 
+  pivot_longer(cols = richness:invsimpson, 
+               values_to = "value", 
+               names_to = "index")
+  
+
+```
+
+### 3. Functional Groups 
+### 4. Cover Composition (NMDS) 
+### 5. Herbivore Abundance (LILI)
+```{r}
+## load the data and filter to Littorina littorea
+## then sum for each quad
+snail_dat <- read_csv("data/quads_s23.csv") |>
+  filter(measurement_type == "Count") |>
+  filter(species_code == "LILI") |>
+  group_by(site, treatment, quadrat, height) |>
+  summarize(snails = sum(measurement, na.rm = TRUE)) |>
+  ungroup() |> fix_data_for_plots()
+
+## Fix up snail data to fill in 0 for quads where there
+## were no snails
+snail_dat <- snail_dat |>
+  complete(site, treatment, nesting(quadrat, height),
+           fill = list(snails = 0)) |>
+  mutate(are_there_snails = as.numeric(snails !=0))
+
+
+## an initial plot
+ggplot(snail_dat,
+       aes(x = site, color = treatment,
+           y = snails)) +
+  geom_point(position = position_dodge(width = 0.5),
+             alpha = 0.5,
+             size = 2) +
+  scale_color_manual(values = berm_control_colors) +
+  facet_wrap(vars(height)) +
+  labs(x="", 
+       y = "Littorina per\n0.25 sq m",
+       color = "") 
+
+
+# what's the distribution of snails?
+ggplot(snail_dat,
+       aes(x = snails, fill = site)) +
+  geom_histogram() +
+  facet_grid(rows = vars(treatment),
+             cols = vars(height)) +
+  labs(x = "Littorina per\n0.25 sq m")
+```
+
+Difficult to impossible to analyze statistically due to complete seperation - i.e. presence of site:treatments that are completely 0 (for example, no LILI in Bayside|Duxbury:Control for the High and Mid). But we can analyze for the low zone at Coughlin and Bayside which contain non-zero values at both treatments.
+
+```{r}
+##
+# Analysis of where are there even snails
+##
+# snail_pres_mod <- glm(are_there_snails ~
+#                         height * treatment*site,
+#                       data = snail_dat,
+#                       family = binomial)
+# 
+# Anova(snail_pres_mod) |> tidy() |>
+#   mutate(p.value = round(p.value, digits = 10))
+
+## Complete separation problem - write about things
+## without stats in the text!
+
+##
+# Analysis of Low tide height
+##
+## an analysis using zero inflated negative binomial
+## just for the low where we don't have site:treatments
+## that are completely 0
+snail_mod <- glmmTMB(snails ~ treatment*site,
+                     zi = ~  site,
+                     data = snail_dat |> filter(height == "Low"),
+                     family = nbinom2)
+
+# model diagnostics
+# performance::check_model(snail_mod)
+
+
+# summarizing tests
+Anova(snail_mod) |> tidy()
+tidy(snail_mod)
+
+# posthoc
+snail_em <- emmeans(snail_mod,
+                    ~treatment | site)
+
+snail_pairwise <- contrast(snail_em, method = "pairwise") |> 
+  as.data.frame()
+
+kable(snail_pairwise, digits = 3, caption = "LILI Abundance Contrasts by Site")
+# Must ignore Dux results because there were no LILI in the low control treatment
+```
+
+Our model predicts an increase of 1.29 LILI when going from the Control to Berm in the low zone of Bayside. Duxbury cannot be determined statistically, however, this is  due to the absence of any LILI in the control. Results for Coughlin were not statistically significant.
+
+These results align with what we see at the sites. At Bayside, the presence of the berm modifies the substrate such that the control is characterized as a small grain sand-shell hash ecosystem, and the berm has ample habitat as provisioned by the cobbles. The cobbles are also present at coughlin, however their ecological effect on provisioning habitat/ameliorating stress and thus increasing LILI abundance is decreased because the preexisting substrate is already large grain cobble in nature, so it's not modifying the preexisting substrate of the area and thus does not affect LILI abundance in a significant way. Duxbury cannot be analyzed due to the absence of LILI, but again, I would argue this is due to underlying differences in substrate among sites amd thus the impact of the berm. Duxbury is a sand ecosystem. The installation of the berm fundamentally changes this system, such that without the berm LILI simply are not present (instead Illynasa is, a soft sediment snail). 
+
+# If time, include ILOB in this analysis.
+
+### 6. Mobiles: Traps and Seine
+### 7. Predation: BRIVS
+### 8. Crypto-benthic Fish: FARMS
+### 9. Sediment variation among sites:treatments

@@ -7,11 +7,9 @@ source("scripts/helpers.R")
 
 ## Planning
 #' Determine what func groups we are interested in: Habitat formers (ASCO, FUSP, CHCR/MAST), 
-#' sessile inverts (SEBA, MYED); Predators, i.e. crabs
-#' Pull out the relevant taxa by selecting those codes
-#' Compare abundance (pc or count) by quad for each species
+#' sessile inverts (SEBA, MYED)
 #' lm brown_macrophytes ~ site + treatment + zone
-#' 
+#' EXCLUDE MYED from year 1 due to count-PC issue
 
 ## load libraries
 library(tidyverse)
@@ -20,23 +18,44 @@ library(vegan)
 library(patchwork)
 
 ## load data
-quad_s23_dat <- read_csv("data/quads.csv")
+quad_s23_dat <- read_csv("data/quads_s23.csv")
+quad_f23_dat <- read_csv("data/quads_f23.csv")
+quad_s24_dat <- read_csv("data/quads_s24.csv")
+quad_s25_dat <- read_csv("data/quads_s25.csv")
 
-# Sum across squares for percent data
-percent_dat <- quad_s23_dat |> 
-  filter(measurement_type != "Count") |> 
+# Bind data
+func_dat <- rbind(quad_s23_dat |> 
+                        group_by(season, site, treatment) |> 
+                        reframe(species_code = unique(species_code)),
+                      quad_f23_dat |> 
+                        group_by(season, site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      quad_s24_dat |> 
+                        group_by(season, site, treatment) |> 
+                        reframe(species_code = unique(species_code)), 
+                      quad_s25_dat |> 
+                        group_by(season, site, treatment) |> 
+                        reframe(species_code = unique(species_code))
+) |> 
+  filter(species_code != is.na(species_code)) |> 
+  filter(!species_code %in% c("none_persent", "NOSP"))
+
+# Drop data that are no longer needed
+rm(quad_s23_dat)
+rm(quad_f23_dat)
+rm(quad_s24_dat)
+rm(quad_s25_dat)
+
+# Select relevant spp, and sum across squares
+func_dat <- func_dat |>
+  filter(species_code %in% c("ASNO", "FUCU", "FUSP", "FUVE", "FUDI", "CHCR", "MAST", "SEBA", "MYED")) |> 
   group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
-  filter(species_code != "NOSP") |> 
   ungroup()
 
-# Sum across squares for count data
-count_dat <- quad_s23_dat |> 
-  filter(measurement_type == "Count") |> 
-  group_by(site, treatment, height, quadrat, measurement_type, species_code) |> 
-  reframe(sum = sum(measurement)) |> 
-  filter(species_code != "NOSP") |> 
-  ungroup()
+
+
+
 
 ##
 # Brown Macrophytes

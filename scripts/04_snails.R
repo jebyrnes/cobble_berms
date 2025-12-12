@@ -57,6 +57,15 @@ ggplot(snail_dat,
   facet_wrap(vars(height)) +
   labs(x = "Littorina per\n0.25 sq m")
 
+ggplot(snail_dat, 
+       aes(x = snails)) +
+  geom_histogram() +
+  facet_grid(rows = vars(treatment), 
+             cols = vars(height),
+             scales = "free_y") +
+  labs(x = "Littorina per\n0.25 sq m")
+
+
 ##
 # Analysis of where are there even snails
 ##
