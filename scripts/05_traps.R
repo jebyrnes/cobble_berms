@@ -42,6 +42,16 @@ CAMA_dat <- abundance_dat |>
   filter(trap_name == "Crab") |> 
   select(-trap_name)
 
+# All spp for table
+abundance_dat <- abundance_dat |>
+  group_by(site, treatment, trap_name) |> 
+  summarise(
+    n = n_distinct(trap_number),
+    across(CAMA:FUNS, ~ sum(.x, na.rm = TRUE)),
+    .groups = "drop"
+  )
+
+
 ##
 # Visualize
 ##
