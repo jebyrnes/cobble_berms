@@ -51,6 +51,11 @@ abundance_dat <- abundance_dat |>
     .groups = "drop"
   )
 
+trap_table <- abundance_dat |> 
+  kable("html", caption = "Species abundance by site, treatment, and trap type") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
 
 ##
 # Visualize
@@ -80,4 +85,4 @@ CAMA_plot <- ggplot(CAMA_dat,
 # 1.73      6.87      5.13     0.573   0.572      24.5    -4.51      7.97
 #   
 # Conclusions: no difference in CAMA abundance in a trap given a treatment
-  
+

@@ -332,7 +332,88 @@ See section 9 for an analysis of sediment differences between treatments.
 
 ### 6. Mobiles: Traps and Seine
 
+In 2023 we assessed mobile species presence and abundance using baited crab traps, unbaited conical fish traps, and seine net tows conducted parallel to the shore.
+```{r}
+##
+# Exploring the data
+##
 
+# Abundance of each spp per trap
+abundance_dat <- trap_dat |>
+    group_by(site, treatment, trap_name, trap_number, species_code) |>
+    reframe(abundance = n()) |> 
+  pivot_wider(names_from = species_code, values_from = abundance, values_fill = 0) |> 
+  select(-NOSP)
+
+# CAMA only
+CAMA_dat <- abundance_dat |>
+  select(1:5) |> 
+  filter(trap_name == "Crab") |> 
+  select(-trap_name)
+
+# All spp for table
+abundance_dat <- abundance_dat |>
+  group_by(site, treatment, trap_name) |> 
+  summarise(
+    n = n_distinct(trap_number),
+    across(CAMA:FUNS, ~ sum(.x, na.rm = TRUE)),
+    .groups = "drop"
+  )
+
+abundance_dat |> 
+  kable("html", caption = "Species abundance by site, treatment, and trap type") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+```
+
+Across all sites and treatments Carcinus maenus was the most abundant catch. Hemigrapsus occurred as a single individual in three traps, and all other species occurred only as a single individual. We will analyze only the abundance of CAMA as a function of treatment.
+
+```{r}
+# CAMA only
+CAMA_dat <- abundance_dat |>
+  select(1:5) |> 
+  filter(trap_name == "Crab") |> 
+  select(-trap_name)
+
+##
+# Visualize
+##
+
+# CAMA abundance by site as a function of treatment
+ggplot(CAMA_dat, 
+                    mapping = aes(x = treatment, 
+                              y = CAMA)) +
+  geom_boxplot() +
+  geom_point(position = "jitter",
+              alpha = .6)+
+  labs(title = "CAMA abundance in traps",
+       x = "Treatment",
+       y = "CAMA Abundance") +
+    facet_wrap(vars(site))
+
+##
+# Stats
+##
+
+# ttest for CAMA abundnace
+  CAMA_ttest <- t.test(CAMA ~ treatment, data = CAMA_dat, var.equal = FALSE) |> 
+    tidy()
+
+CAMA_ttest |> 
+  kable("html", caption = "T-test results for CAMA abundance by treatment") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+  
+  
+# estimate estimate1 estimate2 statistic p.value parameter conf.low   conf.high 
+# 1.73      6.87      5.13     0.573   0.572      24.5    -4.51      7.97
+#   
+```
+ Conclusions: no differences in CAMA abundance in a trap given a treatment. 
+ 
+ 
 
 ### 7. Predation: BRIVS
 ### 8. Crypto-benthic Fish: FARMS

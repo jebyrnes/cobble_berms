@@ -37,6 +37,22 @@ seine_dat <- seine_dat|>
   reframe(abundance = n()) |> 
   mutate(concentration = abundance/vol_sampled)
 
+# Make a table showing concentration by species for each tow
+seine_table_dat <- seine_dat |> 
+  select(-abundance) |> 
+  mutate(concentration_100m3 = concentration*100) |>
+  select(-concentration) |> 
+  pivot_wider(names_from = species_code, 
+              values_from = concentration_100m3,
+              values_fill = 0) |> 
+  mutate(across(where(is.numeric), ~ ifelse(.x == 0, "0", format(round(.x, 2), nsmall = 2))))
+
+seine_table <- seine_table_dat |> 
+  kable("html", caption = "Seine Haul Species Abundance per 100 m3", digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+
 ##
 # Visualize
 ##
