@@ -34,7 +34,7 @@ farm_dat <- farm_dat |>
   rename(FUNS = FUSP) # correcting this code. FUSP is an algae, FUNS is a fish
 
 
-# Calc abundance found per trap by retrieval season/soak duration
+# Calc abundance found per farm by retrieval season/soak duration
 farm_soak_dat <- farm_dat |>
   select(1,2,20, 7:19) 
 
@@ -44,18 +44,18 @@ farm_soak_dat <- farm_soak_dat |>
     n_farms = n(),
     across(
       where(is.numeric),
-      \(x) sum(x, na.rm = TRUE)),
+      \(x) sum(x, na.rm = TRUE)), # sum up across farms
     .groups = "drop"
   ) |>
   mutate(
     across(
       -c(1:4),
-      ~ round(.x / n_farms,2)))
+      ~ round(.x / n_farms,2))) # standardize by count per farm
 
   
   
 # FPEN, CAMA, LILI, PHGU, PAHE are the codes that occur in abundance
-# LILI exclusivly in the short/summer soak
+# LILI exclusively in the short/summer soak
 # FPEN most abundant in the long soak, but still present in the short soak
 # PAHE only in winter/long soak. Seasonality or duration thing?
 # PHGU mostly in winter/long soak. Seasonality or duration thing?
@@ -68,52 +68,111 @@ CAMA_mod <- glmmTMB(CAMA ~ treatment + soak_class,
                      data = farm_dat |> filter(site == "Bayside"), 
                      family = poisson(link = "log"))
 
-check_model(CAMA_mod)
-
+# check_model(CAMA_mod)
+# 
 # summarizing tests
-Anova(CAMA_mod) |> tidy() 
+Anova(CAMA_mod) |> tidy() # Soak class seems to explain more than the treatment
 tidy(CAMA_mod)
+
+CAMA_plot <- ggplot(farm_dat |> filter(site == "Bayside"), 
+                    mapping = aes(x = treatment, 
+                                  y = CAMA,
+                                  fill = treatment)) +
+  geom_boxplot() +
+  geom_jitter(aes(shape = soak_class),  
+              width = 0.2,
+              height = 0, 
+              alpha = 0.6, 
+              size = 2) +
+  labs(title = "CAMA abundance in farms",
+       x = "Treatment",
+       y = "CAMA Abundance") +
+  facet_wrap(vars(soak_class))
+
+
 
 # FPEN
 FPEN_mod <- glmmTMB(FPEN ~ treatment + soak_class, 
                     data = farm_dat |> filter(site == "Bayside"), 
                     family = poisson(link = "log"))
 
-check_model(FPEN_mod)
+# check_model(FPEN_mod)
+# 
+# # summarizing tests
+# Anova(FPEN_mod) |> tidy() 
+# tidy(FPEN_mod)
+# Fewer shrimps in the control and in the short soak time. Excluded coughlin due to low soak time
 
-# summarizing tests
-Anova(FPEN_mod) |> tidy() 
-tidy(FPEN_mod)
+ggplot(farm_dat |> filter(site == "Bayside"), 
+       mapping = aes(x = treatment, 
+                     y = FPEN,
+                     fill = treatment)) +
+  geom_boxplot() +
+  geom_jitter(aes(shape = soak_class),  
+              width = 0.2,
+              height = 0, 
+              alpha = 0.6, 
+              size = 2) +
+  labs(title = "FPEN abundance in farms",
+       x = "Treatment",
+       y = "FPEN Abundance") +
+  facet_wrap(vars(soak_class))
 
-# LILI - Although exclusivly in the summer/short, so maybe should just do a ttest? 0 inflation for remainder
-LILI_mod <- glmmTMB(LILI ~ treatment + soak_class, 
-                    data = farm_dat |> filter(site == "Bayside"), 
-                    family = poisson(link = "log"))
 
-check_model(LILI_mod)
+# LILI - Ignoring LILI here. they were measured in other ways, and I'm not sure that they were reliably counted in the winter time point
+# LILI_mod <- glmmTMB(LILI ~ treatment + site, 
+#                     data = farm_dat |> filter(soak_class == "short"), 
+#                     family = poisson(link = "log"))
+# 
+# # check_model(LILI_mod)
+# # 
+# # # summarizing tests
+# Anova(LILI_mod) |> tidy()
+# tidy(LILI_mod)
+# 
+# # no LILI in the long/winter soak class. Coughlin seems to support more than Bayside, no effect of treatment
+# # I'm concerned we may not have counted LILI in the winter retrieval but i'm not sure
+# ggplot(farm_dat |> filter(soak_class == "short"), 
+#        mapping = aes(x = treatment, 
+#                      y = LILI,
+#                      fill = treatment)) +
+#   geom_boxplot() +
+#   geom_jitter(aes(shape = site),  
+#               width = 0.2,
+#               height = 0, 
+#               alpha = 0.6, 
+#               size = 2) +
+#   labs(title = "LILI abundance in farms after a short soak",
+#        x = "Treatment",
+#        y = "LILI Abundance") +
+#   facet_wrap(vars(site))
 
-# summarizing tests
-Anova(LILI_mod) |> tidy() 
-tidy(LILI_mod)
-
-# PHGU
+# PHGU - Bayside only
 PHGU_mod <- glmmTMB(PHGU ~ treatment + soak_class, 
                     data = farm_dat |> filter(site == "Bayside"), 
                     family = poisson(link = "log"))
 
-check_model(PHGU_mod)
 
-# summarizing tests
-Anova(PHGU_mod) |> tidy() 
-tidy(PHGU_mod)
 
-# PAHE
-PAHE_mod <- glmmTMB(PAHE ~ treatment + soak_class,
-                    data = farm_dat |> filter(site == "Bayside"),
-                    family = poisson(link = "log"))
+# check_model(PHGU_mod)
+# 
+# # summarizing tests
+# Anova(PHGU_mod) |> tidy() 
+# tidy(PHGU_mod)
+# Lose PHGU in the control and the short
 
-check_model(PAHE_mod)
 
-# summarizing tests
-Anova(PAHE_mod) |> tidy() 
-tidy(PAHE_mod)
+ggplot(farm_dat |> filter(site == "Bayside"), 
+       mapping = aes(x = treatment, 
+                     y = PHGU,
+                     fill = treatment)) +
+  geom_boxplot() +
+  geom_jitter(aes(shape = soak_class),  
+              width = 0.2,
+              height = 0, 
+              alpha = 0.6, 
+              size = 2) +
+  labs(title = "PHGU abundance in farms",
+       x = "Treatment",
+       y = "PHGU Abundance") +
+  facet_wrap(vars(soak_class))
