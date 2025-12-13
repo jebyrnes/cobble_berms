@@ -519,6 +519,53 @@ More CAMA were captured in hauls done at the control site, however results were 
 
 ### 7. Predation: BRIVS
 
+```{r}
+
+## Verify same amount of brivs per site-treatment
+# briv_dat |>
+#   group_by(site, treatment) |>
+#   reframe(briv_count = n()) |>
+#   View()
+# Not quite even, Coughlin has 5 in each, bayside is 9/8, dux is 10/10
+
+
+# Clean up data
+briv_scrub_dat <- briv_dat |> 
+  select(52, everything ()) |> 
+  filter(notes != "No visibility") |> 
+  filter(notes != "video data not usable") |> 
+  filter(notes != "No data, camera did not record") |> 
+  filter(notes != "No Visibility") |> 
+  filter(notes != "No visibility for first 2 videos, count started after bait was eaten") |>
+  filter(notes != "No Visibility, cannot see bait for much of video, benthos cannot be seen at all. CAMA at 1098 was persistent and potentially consumer, however visibility prevents conclusive determination.") |>
+  filter(notes != "No Visibility, cannot see bait or benthos") |>
+  filter(notes != "No Visibility, cannot see bait or benthos; bait quickly targeted by CAMA, which dissapears and reappears frequently due to poor visibility. Likely only one individual, and this islikely the consumer of bait. Impossible to confirm the moment that the bait is actualy removed entirely.") |> 
+  filter(notes != "No visibility. A crab appears at somepoint clasped to the BRIV and feeding on squid. Unknown when it first appears, whether it eats the bait completly, and what it is.") |> 
+  filter(notes != "No visibility for much of video.Unknown what ultimatly consumes the bait. Likely CAMA but cannot be confirmed from the video")
+  
+# briv_scrub_dat |> 
+#   group_by(site, treatment) |> 
+#   summarise(n = n())
+
+
+briv_dat |> 
+  group_by(site, treatment, first_predator) |>
+  filter(!is.na(first_predator)) |> 
+  filter(first_predator != "NOSP") |> 
+  summarise(n = n())
+  
+briv_dat |> 
+  group_by(site, treatment, bait_consumer) |>
+  filter(!is.na(bait_consumer)) |> 
+  filter(bait_consumer != "NOSP") |> 
+  summarise(n = n())
+
+```
+When scrubbed of poor quality video, no replication remains for predation analysis. 
+
+For usable videos, save for two instances where an unknown crab could not be identified, the first predator was always CAMA, across all sites and treatments. Likewise, bait consumer was always CAMA. 
+
+
 
 ### 8. Crypto-benthic Fish: FARMS
 ```{r}
@@ -572,6 +619,8 @@ farm_soak_dat |>
 
  For this analysis, I will focus only on those spp which occur at some abundance (FPEN, CAMA, PHGU, PAHE)
  Also excluding coughlin due to not enough farms recovered
+ 
+ # CAMA
 
 ```{r}
 # CAMA
@@ -585,7 +634,7 @@ CAMA_mod <- glmmTMB(CAMA ~ treatment + soak_class,
 Anova(CAMA_mod) |> tidy() # Soak class seems to explain more than the treatment
 tidy(CAMA_mod)
 
-CAMA_plot <- ggplot(farm_dat |> filter(site == "Bayside"), 
+ggplot(farm_dat |> filter(site == "Bayside"), 
                     mapping = aes(x = treatment, 
                                   y = CAMA,
                                   fill = treatment)) +
@@ -602,6 +651,8 @@ CAMA_plot <- ggplot(farm_dat |> filter(site == "Bayside"),
 ```
 
 Soak duration explains more of CAMA abundance than treatment, however neither had a statistically significant effect.
+
+# FPEN
 
 ```{r}
 # FPEN
@@ -632,6 +683,8 @@ ggplot(farm_dat |> filter(site == "Bayside"),
   facet_wrap(vars(soak_class))
 ```
 Fewer shrimps in the short soak time/winter time point. Fewer shrimp in the control treatment, though this is not reflected in the winter timepoint.
+
+# PHGU
 
 ```{r}
 # PHGU - Bayside only

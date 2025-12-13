@@ -124,21 +124,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Setup/Loading Data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">## load libraries</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               tidyverse,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>               readr,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>               glmmTMB, <span class="co"># zero inflation!</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>               car,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>               broom.mixed,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>               emmeans,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>               vegan,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>               easystats,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>               knitr,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>               kableExtra,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>               broom,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>               lubridate</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## load libraries</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               tidyverse,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               readr,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>               glmmTMB, <span class="co"># zero inflation!</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>               car,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>               broom.mixed,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>               emmeans,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>               vegan,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>               easystats,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>               knitr,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>               kableExtra,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>               broom,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>               lubridate,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>               performance</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>               )</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Helpers</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>)<span class="sc">+</span></span>
@@ -581,8 +581,8 @@ lgl  (1): functional_group
 <p>I would say, I’m not convinced that these differences in site level richness are real. It’s a small difference, and some of the lost species are highly mobile (A. rostrata and S. fuscus). Also, the site with the greatest difference (duxbury) is wide and sandy. So we’re comparing communities found on a rocky cobble shore (berm) to that on a dynamic sandy ecosystem. Our protocol does not sample interstitial spp, so richness is likely underestimated on Dux control.</p>
 <p>So I would argue against greater site-level richness on the Berms. HOWEVER, I think the bigger story here is that richness was unchanged between treatments, i.e.&nbsp;no negative effect of berms.</p>
 </section>
-<section id="biodiversity" class="level3">
-<h3 class="anchored" data-anchor-id="biodiversity">2. Biodiversity</h3>
+<section id="biodiversity-cover-composition-functional-groups" class="level3">
+<h3 class="anchored" data-anchor-id="biodiversity-cover-composition-functional-groups">2. Biodiversity, Cover Composition, &amp; Functional Groups</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -635,12 +635,6 @@ lgl  (1): functional_group
 <span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"index"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section id="functional-groups" class="level3">
-<h3 class="anchored" data-anchor-id="functional-groups">3. Functional Groups</h3>
-</section>
-<section id="cover-composition-nmds" class="level3">
-<h3 class="anchored" data-anchor-id="cover-composition-nmds">4. Cover Composition (NMDS)</h3>
 </section>
 <section id="herbivore-abundance-lili" class="level3">
 <h3 class="anchored" data-anchor-id="herbivore-abundance-lili">5. Herbivore Abundance (LILI)</h3>
@@ -1488,13 +1482,495 @@ dbl (10): quadrat, latitude, longitude, day, month, year, slope, aspect, squ...
 </section>
 <section id="predation-brivs" class="level3">
 <h3 class="anchored" data-anchor-id="predation-brivs">7. Predation: BRIVS</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Verify same amount of brivs per site-treatment</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># briv_dat |&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(site, treatment) |&gt;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   reframe(briv_count = n()) |&gt;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   View()</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Not quite even, Coughlin has 5 in each, bayside is 9/8, dux is 10/10</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean up data</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>briv_scrub_dat <span class="ot">&lt;-</span> briv_dat <span class="sc">|&gt;</span> </span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">52</span>, <span class="fu">everything</span> ()) <span class="sc">|&gt;</span> </span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No visibility"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"video data not usable"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No data, camera did not record"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No Visibility"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No visibility for first 2 videos, count started after bait was eaten"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No Visibility, cannot see bait for much of video, benthos cannot be seen at all. CAMA at 1098 was persistent and potentially consumer, however visibility prevents conclusive determination."</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No Visibility, cannot see bait or benthos"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No Visibility, cannot see bait or benthos; bait quickly targeted by CAMA, which dissapears and reappears frequently due to poor visibility. Likely only one individual, and this islikely the consumer of bait. Impossible to confirm the moment that the bait is actualy removed entirely."</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No visibility. A crab appears at somepoint clasped to the BRIV and feeding on squid. Unknown when it first appears, whether it eats the bait completly, and what it is."</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(notes <span class="sc">!=</span> <span class="st">"No visibility for much of video.Unknown what ultimatly consumes the bait. Likely CAMA but cannot be confirmed from the video"</span>)</span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="co"># briv_scrub_dat |&gt; </span></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(site, treatment) |&gt; </span></span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(n = n())</span></span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>briv_dat <span class="sc">|&gt;</span> </span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, treatment, first_predator) <span class="sc">|&gt;</span></span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(first_predator)) <span class="sc">|&gt;</span> </span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(first_predator <span class="sc">!=</span> <span class="st">"NOSP"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'site', 'treatment'. You can override using
+the `.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 4
+# Groups:   site, treatment [6]
+  site          treatment first_predator     n
+  &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;
+1 Bayside       Berm      CAMA               2
+2 Bayside       Control   CAMA               6
+3 Coughlin      Berm      CAMA               4
+4 Coughlin      Control   CAMA               5
+5 Duxbury_Beach Berm      CAMA               7
+6 Duxbury_Beach Berm      UCRA               1
+7 Duxbury_Beach Control   CAMA               3
+8 Duxbury_Beach Control   UCRA               1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>briv_dat <span class="sc">|&gt;</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, treatment, bait_consumer) <span class="sc">|&gt;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bait_consumer)) <span class="sc">|&gt;</span> </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bait_consumer <span class="sc">!=</span> <span class="st">"NOSP"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'site', 'treatment'. You can override using
+the `.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+# Groups:   site, treatment [6]
+  site          treatment bait_consumer     n
+  &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;         &lt;int&gt;
+1 Bayside       Berm      CAMA              2
+2 Bayside       Control   CAMA              6
+3 Coughlin      Berm      CAMA              4
+4 Coughlin      Control   CAMA              5
+5 Duxbury_Beach Berm      CAMA              4
+6 Duxbury_Beach Control   CAMA              1</code></pre>
+</div>
+</div>
+<p>When scrubbed of poor quality video, no replication remains for predation analysis.</p>
+<p>For usable videos, save for two instances where an unknown crab could not be identified, the first predator was always CAMA, across all sites and treatments. Likewise, bait consumer was always CAMA.</p>
 </section>
 <section id="crypto-benthic-fish-farms" class="level3">
 <h3 class="anchored" data-anchor-id="crypto-benthic-fish-farms">8. Crypto-benthic Fish: FARMS</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (re)load data</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>farm_dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/farms.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 735 Columns: 20
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (9): site, treatment, farms_number, line_of_site, species_code, sex, en...
+dbl  (9): latitudes_for, longitude, day_deployed, month_deployed, year_deplo...
+dttm (2): time_deployed, time_retrieved
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Work it up</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>farm_dat <span class="ot">&lt;-</span> farm_dat <span class="sc">|&gt;</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_deployed =</span> <span class="fu">make_date</span>(year_deployed, month_deployed, day_deployed)) <span class="sc">|&gt;</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_retrieved =</span> <span class="fu">make_date</span>(year_retrieved, month_retrieved, day_retrieved)) <span class="sc">|&gt;</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">soak_duration =</span> date_retrieved <span class="sc">-</span> date_deployed) <span class="sc">|&gt;</span> </span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">14</span>,<span class="dv">16</span><span class="sc">:</span><span class="dv">20</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, treatment, farms_number, date_deployed, date_retrieved, soak_duration, species_code) <span class="sc">|&gt;</span></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">abundance =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> species_code, <span class="at">values_from =</span> abundance, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(date_retrieved)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(NOSP, LESP, CRFO, ULSL, LILI)) <span class="sc">|&gt;</span> <span class="co"># get rid of nothing placeholder, ULSL is supposed to be ULSP which is an algae, not sure why it was recorded, CRFO only recoreded on one (i.e. not consistently recorded), ditto for lesp</span></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">soak_class =</span> <span class="fu">if_else</span>(<span class="at">condition =</span> soak_duration <span class="sc">&gt;</span> <span class="dv">100</span>, <span class="st">"long"</span>, <span class="st">"short"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">FUNS =</span> FUSP) <span class="co"># correcting this code. FUSP is an algae, FUNS is a fish</span></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calc abundance found per farm by retrieval season/soak duration</span></span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>farm_soak_dat <span class="ot">&lt;-</span> farm_dat <span class="sc">|&gt;</span></span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">19</span>, <span class="dv">7</span><span class="sc">:</span><span class="dv">18</span>) </span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>farm_soak_dat <span class="ot">&lt;-</span> farm_soak_dat <span class="sc">|&gt;</span> </span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, treatment, soak_class) <span class="sc">|&gt;</span> </span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_farms =</span> <span class="fu">n</span>(),</span>
+<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">where</span>(is.numeric),</span>
+<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a>      \(x) <span class="fu">sum</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="co"># sum up across farms</span></span>
+<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb52-30"><a href="#cb52-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb52-31"><a href="#cb52-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
+<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">round</span>(.x <span class="sc">/</span> n_farms,<span class="dv">2</span>))) <span class="co"># standardize by count per farm</span></span>
+<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Table of FARM occupancy</span></span>
+<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a>farm_soak_dat <span class="sc">|&gt;</span> </span>
+<span id="cb52-37"><a href="#cb52-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="st">"html"</span>, <span class="at">caption =</span> <span class="st">"FARM occupancy by soak duration"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb52-38"><a href="#cb52-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
+<span id="cb52-39"><a href="#cb52-39" aria-hidden="true" tabindex="-1"></a>                <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb52-40"><a href="#cb52-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">background =</span> <span class="st">"#D3D3D3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<caption>FARM occupancy by soak duration</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">site</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">treatment</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">soak_class</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">n_farms</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">CAMA</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">FPEN</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">PHGU</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">FUNS</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">PAHE</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">TAAD</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">HESA</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">MYAE</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">PALO</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">LIDU</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">CAIR</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; background-color: rgba(211, 211, 211, 255) !important;">HEAN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Bayside</td>
+<td style="text-align: left;">Berm</td>
+<td style="text-align: left;">long</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3.75</td>
+<td style="text-align: right;">64.5</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bayside</td>
+<td style="text-align: left;">Berm</td>
+<td style="text-align: left;">short</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bayside</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">long</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">7.25</td>
+<td style="text-align: right;">35.0</td>
+<td style="text-align: right;">2.25</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bayside</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">short</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2.75</td>
+<td style="text-align: right;">19.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Coughlin</td>
+<td style="text-align: left;">Berm</td>
+<td style="text-align: left;">short</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">1.50</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">1.50</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Coughlin</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">long</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">17.0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Coughlin</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">short</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>FPEN, CAMA, PHGU, PAHE are the codes that occur in abundance FPEN most abundant in the long soak, but still present in the short soak PAHE only in winter/long soak, and PHGU mostly occurs in winter/long soak. This could be a factor of soak duration or seasonal displacement/migration of species.</p>
+<p>For this analysis, I will focus only on those spp which occur at some abundance (FPEN, CAMA, PHGU, PAHE) Also excluding coughlin due to not enough farms recovered</p>
+<p># CAMA</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CAMA</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>CAMA_mod <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(CAMA <span class="sc">~</span> treatment <span class="sc">+</span> soak_class, </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> farm_dat <span class="sc">|&gt;</span> <span class="fu">filter</span>(site <span class="sc">==</span> <span class="st">"Bayside"</span>), </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co"># check_model(CAMA_mod)</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co"># summarizing tests</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(CAMA_mod) <span class="sc">|&gt;</span> <span class="fu">tidy</span>() <span class="co"># Soak class seems to explain more than the treatment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  term       statistic    df p.value
+  &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+1 treatment       2.68     1  0.102 
+2 soak_class      6.41     1  0.0113</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(CAMA_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  effect component term             estimate std.error statistic  p.value
+  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 fixed  cond      (Intercept)         1.47      0.217      6.77 1.27e-11
+2 fixed  cond      treatmentControl    0.423     0.259      1.64 1.02e- 1
+3 fixed  cond      soak_classshort    -0.684     0.270     -2.53 1.13e- 2</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(farm_dat <span class="sc">|&gt;</span> <span class="fu">filter</span>(site <span class="sc">==</span> <span class="st">"Bayside"</span>), </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">y =</span> CAMA,</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">shape =</span> soak_class),  </span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">height =</span> <span class="dv">0</span>, </span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.6</span>, </span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"CAMA abundance in farms"</span>,</span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"CAMA Abundance"</span>) <span class="sc">+</span></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(soak_class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="berms_analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Soak duration explains more of CAMA abundance than treatment, however neither had a statistically significant effect.</p>
 </section>
-<section id="sediment-variation-among-sitestreatments" class="level3">
-<h3 class="anchored" data-anchor-id="sediment-variation-among-sitestreatments">9. Sediment variation among sites:treatments</h3>
 </section>
+<section id="fpen" class="level1">
+<h1>FPEN</h1>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FPEN</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>FPEN_mod <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(FPEN <span class="sc">~</span> treatment <span class="sc">+</span> soak_class, </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> farm_dat <span class="sc">|&gt;</span> <span class="fu">filter</span>(site <span class="sc">==</span> <span class="st">"Bayside"</span>), </span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co"># check_model(FPEN_mod)</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># # summarizing tests</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(FPEN_mod) <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  term       statistic    df  p.value
+  &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 treatment       9.99     1 1.57e- 3
+2 soak_class    129.       1 7.06e-30</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(FPEN_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  effect component term             estimate std.error statistic  p.value
+  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 fixed  cond      (Intercept)         4.04     0.0636     63.6  0       
+2 fixed  cond      treatmentControl   -0.288    0.0912     -3.16 1.57e- 3
+3 fixed  cond      soak_classshort    -1.32     0.116     -11.4  7.06e-30</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fewer shrimps in the control and in the short soak time. Excluded coughlin due to low soak time</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(farm_dat <span class="sc">|&gt;</span> <span class="fu">filter</span>(site <span class="sc">==</span> <span class="st">"Bayside"</span>), </span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> FPEN,</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">shape =</span> soak_class),  </span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">height =</span> <span class="dv">0</span>, </span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.6</span>, </span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"FPEN abundance in farms"</span>,</span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"FPEN Abundance"</span>) <span class="sc">+</span></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(soak_class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="berms_analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Fewer shrimps in the short soak time/winter time point. Fewer shrimp in the control treatment, though this is not reflected in the winter timepoint.</p>
+</section>
+<section id="phgu" class="level1">
+<h1>PHGU</h1>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PHGU - Bayside only</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>PHGU_mod <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(PHGU <span class="sc">~</span> treatment <span class="sc">+</span> soak_class, </span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> farm_dat <span class="sc">|&gt;</span> <span class="fu">filter</span>(site <span class="sc">==</span> <span class="st">"Bayside"</span>), </span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co"># check_model(PHGU_mod)</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="co"># # summarizing tests</span></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(PHGU_mod) <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  term       statistic    df  p.value
+  &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 treatment       12.1     1 0.000513
+2 soak_class      11.9     1 0.000556</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(PHGU_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  effect component term             estimate std.error statistic  p.value
+  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 fixed  cond      (Intercept)          2.09     0.176     11.9  1.28e-32
+2 fixed  cond      treatmentControl    -1.31     0.376     -3.47 5.13e- 4
+3 fixed  cond      soak_classshort     -3.49     1.01      -3.45 5.56e- 4</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lose PHGU in the control and the short</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(farm_dat <span class="sc">|&gt;</span> <span class="fu">filter</span>(site <span class="sc">==</span> <span class="st">"Bayside"</span>), </span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, </span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> PHGU,</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">shape =</span> soak_class),  </span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">height =</span> <span class="dv">0</span>, </span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.6</span>, </span>
+<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PHGU abundance in farms"</span>,</span>
+<span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb67-16"><a href="#cb67-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"PHGU Abundance"</span>) <span class="sc">+</span></span>
+<span id="cb67-17"><a href="#cb67-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(soak_class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="berms_analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Both treatment and soak class affected PHGU abundance, with the short class and the control haveing fewer individuals.</p>
 </section>
 
 </main>
