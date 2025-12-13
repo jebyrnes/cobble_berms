@@ -13,7 +13,6 @@ format:
 ## Setup/Loading Data
 
 
-
 ## load libraries
 pacman::p_load(dplyr,
                tidyverse,
@@ -27,7 +26,8 @@ pacman::p_load(dplyr,
                knitr,
                kableExtra,
                broom,
-               lubridate
+               lubridate,
+               performance
                )
 ## Helpers
 theme_set(theme_classic(base_size = 14)+
@@ -521,4 +521,150 @@ More CAMA were captured in hauls done at the control site, however results were 
 
 ### 7. Predation: BRIVS
 ### 8. Crypto-benthic Fish: FARMS
+```{r}
+# (re)load data
+farm_dat <- read_csv("../data/farms.csv")
+
+# Work it up
+farm_dat <- farm_dat |> 
+  mutate(date_deployed = make_date(year_deployed, month_deployed, day_deployed)) |>
+  mutate(date_retrieved = make_date(year_retrieved, month_retrieved, day_retrieved)) |>
+  mutate(soak_duration = date_retrieved - date_deployed) |> 
+  select(-c(4:14,16:20)) |> 
+  select(1,2,3,5,6,7,4) |> 
+  group_by(site, treatment, farms_number, date_deployed, date_retrieved, soak_duration, species_code) |>
+  reframe(abundance = n()) |> 
+  pivot_wider(names_from = species_code, values_from = abundance, values_fill = 0) |> 
+  filter(!is.na(date_retrieved)) |> 
+  select(-c(NOSP, LESP, CRFO, ULSL, LILI)) |> # get rid of nothing placeholder, ULSL is supposed to be ULSP which is an algae, not sure why it was recorded, CRFO only recoreded on one (i.e. not consistently recorded), ditto for lesp
+  mutate(soak_class = if_else(condition = soak_duration > 100, "long", "short")) |> 
+  rename(FUNS = FUSP) # correcting this code. FUSP is an algae, FUNS is a fish
+
+
+# Calc abundance found per farm by retrieval season/soak duration
+farm_soak_dat <- farm_dat |>
+  select(1,2,19, 7:18) 
+
+farm_soak_dat <- farm_soak_dat |> 
+  group_by(site, treatment, soak_class) |> 
+  summarise(
+    n_farms = n(),
+    across(
+      where(is.numeric),
+      \(x) sum(x, na.rm = TRUE)), # sum up across farms
+    .groups = "drop"
+  ) |>
+  mutate(
+    across(
+      -c(1:4),
+      ~ round(.x / n_farms,2))) # standardize by count per farm
+
+# Table of FARM occupancy
+farm_soak_dat |> 
+  kable("html", caption = "FARM occupancy by soak duration") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+```
+# FPEN, CAMA, PHGU, PAHE are the codes that occur in abundance
+# FPEN most abundant in the long soak, but still present in the short soak
+# PAHE only in winter/long soak, and PHGU mostly occurs in winter/long soak. This could be a factor of soak duration or seasonal displacement/migration of species.
+
+# For this analysis, I will focus only on those spp which occur at some abundance (FPEN, CAMA, PHGU, PAHE)
+# Also excluding coughlin due to not enough farms recovered
+
+```{r}
+# CAMA
+CAMA_mod <- glmmTMB(CAMA ~ treatment + soak_class, 
+                     data = farm_dat |> filter(site == "Bayside"), 
+                     family = poisson(link = "log"))
+
+# check_model(CAMA_mod)
+# 
+# summarizing tests
+Anova(CAMA_mod) |> tidy() # Soak class seems to explain more than the treatment
+tidy(CAMA_mod)
+
+CAMA_plot <- ggplot(farm_dat |> filter(site == "Bayside"), 
+                    mapping = aes(x = treatment, 
+                                  y = CAMA,
+                                  fill = treatment)) +
+  geom_boxplot() +
+  geom_jitter(aes(shape = soak_class),  
+              width = 0.2,
+              height = 0, 
+              alpha = 0.6, 
+              size = 2) +
+  labs(title = "CAMA abundance in farms",
+       x = "Treatment",
+       y = "CAMA Abundance") +
+  facet_wrap(vars(soak_class))
+```
+
+Soak duration explains more of CAMA abundance than treatment, however neither had a statistically significant effect.
+
+```{r}
+# FPEN
+FPEN_mod <- glmmTMB(FPEN ~ treatment + soak_class, 
+                    data = farm_dat |> filter(site == "Bayside"), 
+                    family = poisson(link = "log"))
+
+# check_model(FPEN_mod)
+# 
+# # summarizing tests
+Anova(FPEN_mod) |> tidy()
+tidy(FPEN_mod)
+# Fewer shrimps in the control and in the short soak time. Excluded coughlin due to low soak time
+
+ggplot(farm_dat |> filter(site == "Bayside"), 
+       mapping = aes(x = treatment, 
+                     y = FPEN,
+                     fill = treatment)) +
+  geom_boxplot() +
+  geom_jitter(aes(shape = soak_class),  
+              width = 0.2,
+              height = 0, 
+              alpha = 0.6, 
+              size = 2) +
+  labs(title = "FPEN abundance in farms",
+       x = "Treatment",
+       y = "FPEN Abundance") +
+  facet_wrap(vars(soak_class))
+```
+Fewer shrimps in the short soak time/winter time point. Fewer shrimp in the control treatment, though this is not reflected in the winter timepoint.
+
+```{r}
+# PHGU - Bayside only
+PHGU_mod <- glmmTMB(PHGU ~ treatment + soak_class, 
+                    data = farm_dat |> filter(site == "Bayside"), 
+                    family = poisson(link = "log"))
+
+
+
+# check_model(PHGU_mod)
+# 
+# # summarizing tests
+Anova(PHGU_mod) |> tidy()
+tidy(PHGU_mod)
+# Lose PHGU in the control and the short
+
+
+ggplot(farm_dat |> filter(site == "Bayside"), 
+       mapping = aes(x = treatment, 
+                     y = PHGU,
+                     fill = treatment)) +
+  geom_boxplot() +
+  geom_jitter(aes(shape = soak_class),  
+              width = 0.2,
+              height = 0, 
+              alpha = 0.6, 
+              size = 2) +
+  labs(title = "PHGU abundance in farms",
+       x = "Treatment",
+       y = "PHGU Abundance") +
+  facet_wrap(vars(soak_class))
+
+```
+Both treatment and soak class affected PHGU abundance, with the short class and the control haveing fewer individuals.  
+
 ### 9. Sediment variation among sites:treatments

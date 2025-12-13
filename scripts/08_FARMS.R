@@ -29,14 +29,14 @@ farm_dat <- farm_dat |>
   reframe(abundance = n()) |> 
   pivot_wider(names_from = species_code, values_from = abundance, values_fill = 0) |> 
   filter(!is.na(date_retrieved)) |> 
-  select(-c(NOSP, LESP, CRFO, ULSL)) |> # get rid of nothing placeholder, ULSL is supposed to be ULSP which is an algae, not sure why it was recorded, CRFO only recoreded on one (i.e. not consistently recorded), ditto for lesp
+  select(-c(NOSP, LESP, CRFO, ULSL, LILI)) |> # get rid of nothing placeholder, ULSL is supposed to be ULSP which is an algae, not sure why it was recorded, CRFO only recoreded on one (i.e. not consistently recorded), ditto for lesp. Also droppuing LILI, not assessed in winter I dont think
   mutate(soak_class = if_else(condition = soak_duration > 100, "long", "short")) |> 
   rename(FUNS = FUSP) # correcting this code. FUSP is an algae, FUNS is a fish
 
 
 # Calc abundance found per farm by retrieval season/soak duration
 farm_soak_dat <- farm_dat |>
-  select(1,2,20, 7:19) 
+  select(1,2,19, 7:18) 
 
 farm_soak_dat <- farm_soak_dat |> 
   group_by(site, treatment, soak_class) |> 
