@@ -57,31 +57,45 @@ seine_table <- seine_table_dat |>
 # Visualize
 ##
 
-# CAMA abundance by site as a function of treatment
+# Select only bayside data, other sites have no replication
+seine_bayside_dat <- seine_table_dat |> 
+  filter(site == "Bayside") |> 
+  ungroup()
+
+# Make numberic
+seine_bayside_dat$CAMA <- as.numeric(seine_bayside_dat$CAMA)
+
+
+# CAMA abundance at bayside as a function of treatment
 #seine_plot <- 
-  ggplot(seine_dat, 
+  ggplot(seine_bayside_dat, 
                     mapping = aes(x = treatment, 
-                                  y = concentration)) +
+                                  y = CAMA)) +
   geom_boxplot() +
-  geom_point(position = "jitter",
-             alpha = .6) +
-  labs(title = "Individual concentration per m3",
+  labs(title = "CAMA per 100 m3",
        x = "Treatment",
-       y = "Concentration (indiv/m3)") +
-  facet_wrap(vars(site))
+       y = "Concentration (indiv/100m3)")
 
 ##
 # Stats
 ##
 
-# ttest for CAMA abundnace
+# ttest for CAMA abundnace at bayside
 CAMA_seine_dat <- seine_dat |> 
   filter(species_code == "CAMA")
 
-CAMA_seine_ttest <- t.test(data = CAMA_seine_dat, 
-                     concentration ~ treatment, var.equal = FALSE) 
+CAMA_seine_ttest <- t.test(data = seine_bayside_dat, 
+                     CAMA ~ treatment, var.equal = FALSE) |> 
+  tidy()
 
-#t = -1.1274, df = 7.4981, p-value = 0.2944
-# Conclusions: no difference in CAMA abundance in a seine given a treatment
 
-## NEXT: Does probability of finding a different species vary with treatment?
+trap_ttest_table <- CAMA_seine_ttest |> 
+  kable("html", caption = "T-test results for CAMA abundance in Seine tows at Bayside") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+
+# estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high      
+# -6.92      4.06      11.0     -1.39   0.221      5.15    -19.6      5.76 
+
+# Not significant

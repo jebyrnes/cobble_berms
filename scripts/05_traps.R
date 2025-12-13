@@ -63,15 +63,15 @@ trap_table <- abundance_dat |>
 
 # CAMA abundance by site as a function of treatment
 CAMA_plot <- ggplot(CAMA_dat, 
-                    mapping = aes(x = treatment, 
-                              y = CAMA)) +
+mapping = aes(x = treatment, 
+              y = CAMA)) +
   geom_boxplot() +
   geom_point(position = "jitter",
-              alpha = .6)+
+             alpha = .6)+
   labs(title = "CAMA abundance in traps",
        x = "Treatment",
        y = "CAMA Abundance") +
-    facet_wrap(vars(site))
+  facet_wrap(vars(site))
 
 ##
 # Stats

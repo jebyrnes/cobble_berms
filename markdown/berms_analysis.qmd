@@ -12,8 +12,7 @@ format:
 ```{r}
 ## Setup/Loading Data
 
-#Setwd
-setwd(dir = "C:/Users/morri/Files/Projects/R/cobble_berms")
+
 
 ## load libraries
 pacman::p_load(dplyr,
@@ -27,19 +26,39 @@ pacman::p_load(dplyr,
                easystats,
                knitr,
                kableExtra,
-               broom
+               broom,
+               lubridate
                )
+## Helpers
+theme_set(theme_classic(base_size = 14)+
+            theme(axis.text.x = 
+                    element_text(angle = 40, 
+                                 vjust = 1, 
+                                 hjust=1),
+                  legend.position = "bottom"))
+
+berm_control_colors <- c("#af8dc3", "#7fbf7b")
+
+fix_data_for_plots <- function(dat){
+  dat |>
+    # make duxbury not have a _
+    mutate(site = gsub("_", " ", site)) |>
+    
+    # make zone a factor and order so it's low, mid, high
+    mutate( height = factor(height, levels = c("Low", "Mid", "High")))
+}
+
 
 ## load data, bind them together, and add taxonomic data
-quad_s23_dat <- read_csv("data/quads_s23.csv")
-quad_f23_dat <- read_csv("data/quads_f23.csv")
-quad_s24_dat <- read_csv("data/quads_s24.csv")
-quad_s25_dat <- read_csv("data/quads_s25.csv")
-seine_dat <- read_csv("data/seine.csv")
-trap_dat <- read_csv("data/traps.csv")
-farm_dat <- read_csv("data/farms.csv")
-briv_dat <- read_csv("data/brivs.csv")
-msl <- read_csv("data/master_sp_list.csv")
+quad_s23_dat <- read_csv("../data/quads_s23.csv")
+quad_f23_dat <- read_csv("../data/quads_f23.csv")
+quad_s24_dat <- read_csv("../data/quads_s24.csv")
+quad_s25_dat <- read_csv("../data/quads_s25.csv")
+seine_dat <- read_csv("../data/seine.csv")
+trap_dat <- read_csv("../data/traps.csv")
+farm_dat <- read_csv("../data/farms.csv")
+briv_dat <- read_csv("../data/brivs.csv")
+msl <- read_csv("../data/master_sp_list.csv")
 
 # Drop uneeded cols in msl and rename col
 msl <- select(msl, 1:10) |> 
@@ -237,7 +256,7 @@ div_plot_dat <- quad_dat[,-c(11:88)] |>
 ```{r}
 ## load the data and filter to Littorina littorea
 ## then sum for each quad
-snail_dat <- read_csv("data/quads_s23.csv") |>
+snail_dat <- read_csv("../data/quads_s23.csv") |>
   filter(measurement_type == "Count") |>
   filter(species_code == "LILI") |>
   group_by(site, treatment, quadrat, height) |>
@@ -370,11 +389,6 @@ abundance_dat |>
 Across all sites and treatments Carcinus maenus was the most abundant catch. Hemigrapsus occurred as a single individual in three traps, and all other species occurred only as a single individual. We will analyze only the abundance of CAMA as a function of treatment.
 
 ```{r}
-# CAMA only
-CAMA_dat <- abundance_dat |>
-  select(1:5) |> 
-  filter(trap_name == "Crab") |> 
-  select(-trap_name)
 
 ##
 # Visualize
@@ -411,9 +425,99 @@ CAMA_ttest |>
 # 1.73      6.87      5.13     0.573   0.572      24.5    -4.51      7.97
 #   
 ```
- Conclusions: no differences in CAMA abundance in a trap given a treatment. 
+Conclusions: no differences in CAMA abundance in a trap given a treatment. 
  
+Results will now be presented for the Seine tows. 8 tows were conducted at Bayside (4 per treatment), however only 2 were conducted at Coughlin and Duxbury (1 per treatment). Data will be presented for all tows, however due to sample size only the resutls from Bayside will be analyzed.
  
+```{r}
+# Add date column
+seine_dat <- seine_dat |> 
+  mutate(date = make_date(year, month, day))
+
+# Estimate Volume sampled
+seine_dat <- seine_dat|>
+  group_by(site, treatment, date) |>
+  mutate(vol_sampled = ((estimated_depth_pole_1_m/estimated_depth_pole_2_m)/2)*width_net_aperture_m*distance_walked_m)
+
+# Drop cols not interested in anymore
+seine_dat <- seine_dat |> 
+  select(-c(3:17,19:22))
+
+# Reframe for abundance per m3 sampled
+seine_dat <- seine_dat|>
+  group_by(site, treatment, date, vol_sampled, species_code) |>
+  reframe(abundance = n()) |> 
+  mutate(concentration = abundance/vol_sampled)
+
+# Make a table showing concentration by species for each tow
+seine_table_dat <- seine_dat |> 
+  select(-abundance) |> 
+  mutate(concentration_100m3 = concentration*100) |>
+  select(-concentration) |> 
+  pivot_wider(names_from = species_code, 
+              values_from = concentration_100m3,
+              values_fill = 0) |> 
+  mutate(across(where(is.numeric), ~ ifelse(.x == 0, "0", format(round(.x, 2), nsmall = 2))))
+
+seine_table_dat |> 
+  kable("html", caption = "Seine Haul Species Abundance per 100 m3", digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+```
+As with the traps, at all sites and treatments Carcinus maenus was the most abundant catch and thus is the only species to be included in the analysis below. 
+
+```{r}
+##
+# Visualize
+##
+
+# Select only bayside data, other sites have no replication
+seine_bayside_dat <- seine_table_dat |> 
+  filter(site == "Bayside") |> 
+  ungroup()
+
+# Make numberic
+seine_bayside_dat$CAMA <- as.numeric(seine_bayside_dat$CAMA)
+
+
+# CAMA abundance at bayside as a function of treatment
+#seine_plot <- 
+  ggplot(seine_bayside_dat, 
+                    mapping = aes(x = treatment, 
+                                  y = CAMA)) +
+  geom_boxplot() +
+  labs(title = "CAMA per 100 m3",
+       x = "Treatment",
+       y = "Concentration (indiv/100m3)")
+
+##
+# Stats
+##
+
+# ttest for CAMA abundnace at bayside
+CAMA_seine_dat <- seine_dat |> 
+  filter(species_code == "CAMA")
+
+CAMA_seine_ttest <- t.test(data = seine_bayside_dat, 
+                     CAMA ~ treatment, var.equal = FALSE) |> 
+  tidy()
+
+
+CAMA_seine_ttest |> 
+  kable("html", caption = "T-test results for CAMA abundance in Seine tows at Bayside") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#D3D3D3")
+
+# estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high      
+# -6.92      4.06      11.0     -1.39   0.221      5.15    -19.6      5.76 
+
+# Not significant
+```
+
+More CAMA were captured in hauls done at the control site, however results were not signficant.
+
 
 ### 7. Predation: BRIVS
 ### 8. Crypto-benthic Fish: FARMS
