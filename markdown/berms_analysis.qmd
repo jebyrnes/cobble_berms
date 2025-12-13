@@ -196,7 +196,7 @@ I would say, I'm not convinced that these differences in site level richness are
 
 So I would argue against greater site-level richness on the Berms. HOWEVER, I think the bigger story here is that richness was unchanged between treatments, i.e. no negative effect of berms.
 
-### 2. Biodiversity 
+### 2. Biodiversity, Cover Composition, & Functional Groups
 
 ```{r}
 # Bind together all quad data
@@ -250,8 +250,6 @@ div_plot_dat <- quad_dat[,-c(11:88)] |>
 
 ```
 
-### 3. Functional Groups 
-### 4. Cover Composition (NMDS) 
 ### 5. Herbivore Abundance (LILI)
 ```{r}
 ## load the data and filter to Littorina littorea
@@ -520,6 +518,8 @@ More CAMA were captured in hauls done at the control site, however results were 
 
 
 ### 7. Predation: BRIVS
+
+
 ### 8. Crypto-benthic Fish: FARMS
 ```{r}
 # (re)load data
@@ -566,12 +566,12 @@ farm_soak_dat |>
                 full_width = FALSE) %>%
   row_spec(0, bold = TRUE, background = "#D3D3D3")
 ```
-# FPEN, CAMA, PHGU, PAHE are the codes that occur in abundance
-# FPEN most abundant in the long soak, but still present in the short soak
-# PAHE only in winter/long soak, and PHGU mostly occurs in winter/long soak. This could be a factor of soak duration or seasonal displacement/migration of species.
+ FPEN, CAMA, PHGU, PAHE are the codes that occur in abundance
+ FPEN most abundant in the long soak, but still present in the short soak
+ PAHE only in winter/long soak, and PHGU mostly occurs in winter/long soak. This could be a factor of soak duration or seasonal displacement/migration of species.
 
-# For this analysis, I will focus only on those spp which occur at some abundance (FPEN, CAMA, PHGU, PAHE)
-# Also excluding coughlin due to not enough farms recovered
+ For this analysis, I will focus only on those spp which occur at some abundance (FPEN, CAMA, PHGU, PAHE)
+ Also excluding coughlin due to not enough farms recovered
 
 ```{r}
 # CAMA
@@ -666,5 +666,3 @@ ggplot(farm_dat |> filter(site == "Bayside"),
 
 ```
 Both treatment and soak class affected PHGU abundance, with the short class and the control haveing fewer individuals.  
-
-### 9. Sediment variation among sites:treatments
