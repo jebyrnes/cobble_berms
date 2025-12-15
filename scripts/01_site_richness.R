@@ -136,8 +136,28 @@ richness_dat <- richness_dat |>
     !(site == "Duxbury_Beach" & treatment == "Control" & species_code %in% c("UFAC", "URFC"))
   )
 
-# Retain data w/ spp for later use
-lostspp_dat <- richness_dat
+##
+# Lost Spp: Identify spp lost when going from berm to control w/in a site
+##
+
+lostspp_dat1 <- richness_dat |> 
+  filter(treatment == "Berm")
+
+lostspp_dat2 <- richness_dat |> 
+  filter(treatment == "Control")
+
+# Species in lostspp_dat1 but not in lostspp_dat2
+lost1 <- lostspp_dat1 |>
+  anti_join(lostspp_dat2, by = c("site", "species_code"))
+
+# Species in lostspp_dat2 but not in lostspp_dat1
+lost2 <- lostspp_dat2 |>
+  anti_join(lostspp_dat1, by = c("site", "species_code"))
+
+# Combine both and remove temp df
+lostspp_dat <- bind_rows(lost1, lost2)
+rm(lostspp_dat1, lostspp_dat2, lost1, lost2)
+
 
 ##
 # Calculate Richness
@@ -147,15 +167,6 @@ lostspp_dat <- richness_dat
 richness_dat <- richness_dat |>
   group_by(site, treatment) |>
   reframe(richness = n())
-
-# Identify what species are found on berms and not on controls (and v.v.)
-lostspp_dat <- lostspp_dat |> 
-  group_by(species) %>%
-  filter(n_distinct(treatment) == 1) %>%
-  ungroup() |> 
-  select(c(site, treatment, classification_description))
-
-
 
 ##
 # Analyze Richness
