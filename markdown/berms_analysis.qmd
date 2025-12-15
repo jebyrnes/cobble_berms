@@ -50,15 +50,15 @@ fix_data_for_plots <- function(dat){
 
 
 ## load data, bind them together, and add taxonomic data
-quad_s23_dat <- read_csv("../data/quads_s23.csv")
-quad_f23_dat <- read_csv("../data/quads_f23.csv")
-quad_s24_dat <- read_csv("../data/quads_s24.csv")
-quad_s25_dat <- read_csv("../data/quads_s25.csv")
-seine_dat <- read_csv("../data/seine.csv")
-trap_dat <- read_csv("../data/traps.csv")
-farm_dat <- read_csv("../data/farms.csv")
-briv_dat <- read_csv("../data/brivs.csv")
-msl <- read_csv("../data/master_sp_list.csv")
+quad_s23_dat <- read_csv("../data/quads_s23.csv", show_col_types = FALSE)
+quad_f23_dat <- read_csv("../data/quads_f23.csv", show_col_types = FALSE)
+quad_s24_dat <- read_csv("../data/quads_s24.csv", show_col_types = FALSE)
+quad_s25_dat <- read_csv("../data/quads_s25.csv", show_col_types = FALSE)
+seine_dat <- read_csv("../data/seine.csv", show_col_types = FALSE)
+trap_dat <- read_csv("../data/traps.csv", show_col_types = FALSE)
+farm_dat <- read_csv("../data/farms.csv", show_col_types = FALSE)
+briv_dat <- read_csv("../data/brivs.csv", show_col_types = FALSE)
+msl <- read_csv("../data/master_sp_list.csv", show_col_types = FALSE)
 
 # Drop uneeded cols in msl and rename col
 msl <- select(msl, 1:10) |> 
@@ -170,7 +170,7 @@ ttest_dat |>
   row_spec(0, bold = TRUE, background = "#D3D3D3")
 ```
 
-Data from from all sampling methods and timepoints indicate that  site-level richness at all sites is higher in the berm treatment than in the control. Due to low sample size (n=3) these results are not statistically significant.
+Site-level richness at all sites and across all sampling methods and timepoints is higher in the berm treatment than in the control. Due to low sample size (n=3) these results are not statistically significant.
 
 ```{r}
 # Table of species lost per site-treatments
@@ -192,6 +192,8 @@ lostspp_dat |>
 
 ```
 
+Given results of later analysis and the nature of the specific species (highly mobile or rare, more tied to stochasticity than to an actual effect) that are missing from a giving treatment, I would argue that the story here is richness is unchanged between the treatments, i.e. no negative effect of berms (as opposed to greater richness on the berms). This is good, given the known decrease in richness/diversity/function of the biological communities found on grey infrastructure.
+
 I would say, I'm not convinced that these differences in site level richness are real. It's a small difference, and some of the lost species are highly mobile (A. rostrata and S. fuscus). Also, the site with the greatest difference (duxbury) is wide and sandy. So we're comparing communities found on a rocky cobble shore (berm) to that on a dynamic sandy ecosystem. Our protocol does not sample interstitial spp, so richness is likely underestimated on Dux control.
 
 So I would argue against greater site-level richness on the Berms. HOWEVER, I think the bigger story here is that richness was unchanged between treatments, i.e. no negative effect of berms.
@@ -199,25 +201,56 @@ So I would argue against greater site-level richness on the Berms. HOWEVER, I th
 ### 2. Biodiversity, Cover Composition, & Functional Groups
 
 ```{r}
-# Bind together all quad data
+
+# Bind together
 quad_dat <- rbind(quad_s23_dat,
                   quad_f23_dat,
                   quad_s24_dat,
                   quad_s25_dat)
 
+# rm/ spaces in col titles and change none_present to NOSP, and change measurement type = NA to PErcent, also drop the duplicate entry of a quad
+quad_dat <- quad_dat |> 
+  mutate(measurement_type = if_else(measurement_type == "Percent Cover", "Percent", measurement_type))
+
+quad_dat <- quad_dat |> 
+  mutate(species_code = if_else(species_code == "none_present", "NOSP", species_code),
+         measurement_type = if_else(species_code == "NOSP" & is.na(measurement_type),"Percent", measurement_type),
+         height = factor(height, levels = c("Low", "Mid", "High"))) |> 
+  slice(-808)
+
+
+# Drop data that are no longer needed
+rm(quad_s23_dat)
+rm(quad_f23_dat)
+rm(quad_s24_dat)
+rm(quad_s25_dat)
+
+# Store total quad count for later use
+n_total <- quad_dat |>
+group_by(site, treatment, season, height) |>
+  summarise(quad_count = n_distinct(quadrat), .groups = "drop") |>
+  summarise(n_total = sum(quad_count))
+
+# Make sure every quad with 0 has at a NOSP place holder for percent and for count
+quad_dat <- quad_dat |> 
+  filter(species_code == "NOSP") |> 
+  group_by(season, site, treatment, height, quadrat) |> 
+  complete(measurement_type = c("Percent", "Count"),
+    fill = list(value = 0, species_code = "NOSP")) |> 
+  ungroup() |>
+  bind_rows(quad_dat %>% filter(species_code != "NOSP"))
+
+# quad_dat |>
+#   filter(species_code == "NOSP") |>
+#   count(season, site, treatment, height, quadrat) |> 
+#   View()
+# All there!
 
 # Sum to the quad level
 quad_dat <- quad_dat |> 
   group_by(season, site, treatment, height, quadrat, measurement_type, species_code) |> 
   reframe(sum = sum(measurement)) |> 
-  filter(species_code != "NOSP") |> 
-  filter(species_code != "none_present") |> 
   ungroup()
-
-# Pull out quad richness w/o measurement_type
-quad_richness <- quad_dat |> 
-  group_by(season, site, treatment, height, quadrat) |> 
-  reframe(richness = n_distinct(species_code))
 
 # Pivot data for use in vegan::diversity() 
 quad_dat <- quad_dat |> 
@@ -225,29 +258,384 @@ quad_dat <- quad_dat |>
               values_from = "sum",
               values_fill = 0)
 
-# Calculate Shannon, InvSimpson, richness, evenness, and rearrange
+# Drop placeholder spp for quads w/ nothing 
 quad_dat <- quad_dat |> 
+  select(-c("NOSP"))
+
+##
+#  Richness and Shannon Biodiversity analysis ----------------------------------
+##
+
+# Calculate Shannon, InvSimpson, richness, evenness, and rearrange
+div_dat <- quad_dat |> 
   mutate(shannon = diversity(quad_dat[,-c(1:6)], index = "shannon")) # measures the uncertainty in predicting the species identity of an individual chosen at random from the community. A higher value indicates higher diversity (more species and/or more even distribution), and a lower value indicates lower diversity. It equals 0 only when there is no uncertainty—meaning there is only ONE species present.
 
-quad_dat <- quad_dat |> 
-  mutate(invsimpson = diversity(quad_dat[,-c(1:6,85)], index = "invsimpson")) # The Inverse Simpson Index is an alternative diversity measure that focuses more on the dominance of species. The lower the value, the greater the diversity. Unlike the Shannon-Wiener index, which treats all species equally, the Inverse Simpson Index weighs more heavily on rare species, but it gives more weight to dominant species.
+div_dat <- div_dat |>  # not going to analyze. Shannon and richness should suffice
+  mutate(invsimpson = diversity(div_dat[,-c(1:6,85)], index = "invsimpson")) 
 
-quad_dat <- quad_dat |> 
-  mutate(richness = specnumber(quad_dat[,-c(1:6,85,86)])) # Pielous eveness how evenly individuals are distributed across the different species in a community. It ranges from 0 (completely uneven) to 1 (perfectly even).
+div_dat <- div_dat |> 
+  mutate(richness = specnumber(div_dat[,-c(1:6,85,86)])) 
 
-quad_dat <- quad_dat |> 
-  mutate(evenness = shannon/log(richness)) # Evenness of 0 occurs when richness is 1 (i.e. log 1 = 0, dividing by 0 = NaN)
+div_dat <- div_dat |>  # Going to ignore this in anlysis since they're similar and I think this will be better captured by the analysis in the cover composition section
+  mutate(evenness = shannon/log(richness)) # Pielous eveness how evenly individuals are distributed across the different species in a community. It ranges from 0 (completely uneven) to 1 (perfectly even).# Evenness of 0 occurs when richness is 1 (i.e. log 1 = 0, dividing by 0 = NaN)
   
-quad_dat <- quad_dat |> 
+div_dat <- div_dat |> 
 select(richness, shannon, evenness, invsimpson, everything())
-
+  
 # Set up data for plotting
-div_plot_dat <- quad_dat[,-c(11:88)] |> 
+div_plot_dat <- div_dat[,-c(11:88)] |> 
   pivot_longer(cols = richness:invsimpson, 
                values_to = "value", 
                names_to = "index")
-  
 
+div_plot_dat$height <- factor(div_plot_dat$height,
+                              levels = c("Low", "Mid", "High"))
+
+
+##
+# Analysis
+##
+
+## Shannon
+# Hurdle Model - Odds of being over 0
+shannon_percent_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site + treatment:height,
+                                  family = binomial(link = "logit"),
+                                  data = div_dat |> filter(measurement_type == "Percent"))
+
+shannon_count_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site + treatment:height,
+                                  family = binomial(link = "logit"),
+                                  data = div_dat |> filter(measurement_type == "Count"))
+
+# Models for those over 0
+shannon_percent_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + treatment:height, # note that shannon at richness of 1 is 0, no diversity, only 1 sp present which is the same as richness of 0
+                          data = div_dat |> filter(measurement_type == "Percent", shannon > 0))
+
+shannon_count_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + treatment:height,
+                        data = div_dat |> filter(measurement_type == "Count", shannon > 0))
+
+# Get model stats
+# check_model(shannon_percent_hurdle_mod) # Homogeneity of variance seems to be the only problem
+# check_model(shannon_count_hurdle_mod) # Homogeneity of variance, also high collinearity for interaction parameter
+# check_model(shannon_percent_posthurdle_mod) # PPC could be better, Homogeneity of variance not great
+# check_model(shannon_count_posthurdle_mod) # treatment and treatment:height has high colineaerity
+
+## So what does this tell us
+# Hurdle (0,1) for shannon percent
+Anova(shannon_percent_hurdle_mod) |> tidy() # height plys biggest roll, but site and treatment also play a roll
+tidy(shannon_percent_hurdle_mod)
+
+shannon_percent_hurdle_em <- emmeans(shannon_percent_hurdle_mod,
+                    ~treatment | height)
+
+contrast(shannon_percent_hurdle_em, method = "pairwise") # Significant effect of treatment in the low and mid
+
+
+# Hurdle (0,1) for shannon count
+Anova(shannon_count_hurdle_mod) |> tidy() # all important, by again height the most so
+tidy(shannon_count_hurdle_mod) # need to back transform the estimate?
+
+shannon_count_hurdle_em <- emmeans(shannon_count_hurdle_mod,
+                                     ~treatment | height)
+
+contrast(shannon_percent_hurdle_em, method = "pairwise") # Significant effect of treatment in the low and mid
+
+# Post-hurdle (>0) for shannon percent
+Anova(shannon_percent_posthurdle_mod) |> tidy() # Percent Shannon  differs significantly across heights and sites, but is not strongly affected by treatment, and the interaction between treatment and height is also not significant.
+tidy(shannon_percent_posthurdle_mod) |>  
+  mutate(estimate_original = sign(estimate) * estimate^2,
+         std.error_original = 2 * abs(estimate) * std.error) |> 
+  mutate(lower.CL = ((estimate_original - std.error_original)^2),
+         upper.CL = ((estimate_original + std.error_original)^2))
+
+# Height matters a lot: Low  plots have the highest Shannon diversity (0.768 and 0.535).Mid heights are intermediate (0.511 and 0.375). High height plots have the lowest diversity (0.070 and 0.049).
+# Treatment effect is small: Within each height category, Berm has slightly higher Shannon diversity than Control.
+# So these differences are statistically robust (all p values are << .001.)
+# Differences between heights are much larger than differences between treatments. Matches ANOVA: height is the main driver, treatment is minor.
+
+shannon_percent_posthurdle_em <- emmeans(shannon_percent_posthurdle_mod,
+                                   ~treatment | height)
+
+contrast(shannon_percent_posthurdle_em, method = "pairwise") # low and mid treatment has a significant effect
+
+# Post-hurdle (>0) for shannon count
+Anova(shannon_count_posthurdle_mod) |> tidy() # essentially the same as percent
+tidy(shannon_count_posthurdle_mod) |>  # height has largest effect, while there is some decrease between treatment
+  mutate(estimate_original = sign(estimate) * estimate^2, # note that the negative estimates are lost after the back transformation, so i've multiplioed them by the sign to return the original sign
+         std.error_original = 2 * abs(estimate) * std.error) |> 
+  mutate(lower.CL = ((estimate_original - std.error_original)^2),
+         upper.CL = ((estimate_original + std.error_original)^2))
+
+
+shannon_count_posthurdle_em <- emmeans(shannon_count_posthurdle_mod,
+                                   ~treatment | height)
+
+contrast(shannon_count_posthurdle_em, method = "pairwise") # no significance
+
+## richness
+# Hurdle Model - Odds of being over 0
+richness_percent_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
+                                   family = binomial(link = "logit"),
+                                   data = div_dat |> filter(measurement_type == "Percent"))
+
+richness_count_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
+                                 family = binomial(link = "logit"),
+                                 data = div_dat |> filter(measurement_type == "Count"))
+
+# Models for those over 0
+richness_percent_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
+                                      data = div_dat |> filter(measurement_type == "Percent", richness > 0))
+
+richness_count_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
+                                    data = div_dat |> filter(measurement_type == "Count", richness > 0))
+
+# Get model stats
+# check_model(richness_percent_hurdle_mod)
+# check_model(richness_count_hurdle_mod)
+# check_model(richness_percent_posthurdle_mod)
+# check_model(richness_count_posthurdle_mod) 
+
+## So what does this tell us
+# Hurdle (0,1) for richness percent
+Anova(richness_percent_hurdle_mod) |> tidy() # all sig, height > treatment > site
+tidy(richness_percent_hurdle_mod)
+
+richness_percent_hurdle_em <- emmeans(richness_percent_hurdle_mod,
+                                     ~treatment | height)
+
+contrast(richness_percent_hurdle_em, method = "pairwise") # Significant effect of treatment in all (results identical?)
+
+
+# Hurdle (0,1) for richness count
+Anova(richness_count_hurdle_mod) |> tidy() # all sig, height > treatment > site
+tidy(richness_count_hurdle_mod) # effect of treatment and height evident
+
+richness_count_hurdle_em <- emmeans(richness_count_hurdle_mod,
+                                   ~treatment | height)
+
+contrast(richness_count_hurdle_em, method = "pairwise") #Significant effect of treatment in all (results identical?)
+
+# Post-hurdle (>0) for richness percent
+Anova(richness_percent_posthurdle_mod) |> tidy() # effect of height and site, not treatment 
+tidy(richness_percent_posthurdle_mod) |>  
+  mutate(estimate_original = sign(estimate) * estimate^2,
+         std.error_original = 2 * abs(estimate) * std.error)|> 
+  mutate(lower.CL = ((estimate_original - std.error_original)^2),
+         upper.CL = ((estimate_original + std.error_original)^2))
+
+richness_percent_posthurdle_em <- emmeans(richness_percent_posthurdle_mod,
+                                         ~treatment | height)
+
+contrast(richness_percent_posthurdle_em, method = "pairwise") #no sig
+
+# Post-hurdle (>0) for richness count
+Anova(richness_count_posthurdle_mod) |> tidy() # height and site
+
+tidy(richness_count_posthurdle_mod) |>  # low zone and duxbury are particularlly impactful
+  mutate(estimate_original = sign(estimate) * estimate^2, # note that the negative estimates are lost after the back transformation, so i've multiplioed them by the sign to return the original sign
+         std.error_original = 2 * abs(estimate) * std.error) |> 
+  mutate(lower.CL = ((estimate_original - std.error_original)^2),
+         upper.CL = ((estimate_original + std.error_original)^2))
+
+
+richness_count_posthurdle_em <- emmeans(richness_count_posthurdle_mod,
+                                       ~treatment + height)
+
+contrast(richness_count_posthurdle_em, method = "pairwise") # no significance
+
+
+
+
+# ##
+# # Analysis of non-selected indices. Not including this in report and thus did not finish these
+# ##
+# 
+# ## Evenness
+# # Hurdle Model - Odds of being over 0
+# evenness_percent_hurdle_mod <- glm(evenness > 0 ~ treatment + height + site,
+#                                   family = binomial(link = "logit"),
+#                                   data = div_dat |> filter(measurement_type == "Percent"))
+# 
+# evenness_count_hurdle_mod <- glm(evenness > 0 ~ treatment + height + site,
+#                                 family = binomial(link = "logit"),
+#                                 data = div_dat |> filter(measurement_type == "Count"))
+# 
+# # Models for those over 0
+# evenness_percent_posthurdle_mod <- lm(sqrt(evenness) ~ treatment + height + site,
+#                                      data = div_dat |> filter(measurement_type == "Percent"))
+# 
+# evenness_count_posthurdle_mod <- lm(sqrt(evenness) ~ treatment + height + site,
+#                                    data = div_dat |> filter(measurement_type == "Count"))
+# 
+# # Get model stats
+# check_model(evenness_percent_hurdle_mod)
+# check_model(evenness_count_hurdle_mod)
+# check_model(evenness_percent_posthurdle_mod)
+# check_model(evenness_count_posthurdle_mod)
+# 
+# ## invsimpson
+# # Hurdle Model - Odds of being over 0
+# invsimpson_percent_hurdle_mod <- glm(invsimpson > 0 ~ treatment + height + site,
+#                                    family = binomial(link = "logit"),
+#                                    data = div_dat |> filter(measurement_type == "Percent"))
+# 
+# invsimpson_count_hurdle_mod <- glm(invsimpson > 0 ~ treatment + height + site,
+#                                  family = binomial(link = "logit"),
+#                                  data = div_dat |> filter(measurement_type == "Count"))
+# 
+# # Models for those over 0
+# invsimpson_percent_posthurdle_mod <- lm(sqrt(invsimpson) ~ treatment + height + site,
+#                                       data = div_dat |> filter(measurement_type == "Percent"))
+# 
+# invsimpson_count_posthurdle_mod <- lm(sqrt(invsimpson) ~ treatment + height + site,
+#                                     data = div_dat |> filter(measurement_type == "Count"))
+# 
+# # Get model stats
+# check_model(invsimpson_percent_hurdle_mod)
+# check_model(invsimpson_count_hurdle_mod)
+# check_model(invsimpson_percent_posthurdle_mod)
+# check_model(invsimpson_count_posthurdle_mod)
+
+##
+# Viz
+##
+
+# Shannon, post-hurdle
+## by percent cover
+
+# Summarize mean and standard error for plotting
+plot_data <- div_dat %>%
+  filter(measurement_type == "Percent") %>%
+  group_by(height, site, treatment) %>%
+  summarise(
+    mean_shannon = mean(shannon, na.rm = TRUE),
+    se_shannon = sd(shannon, na.rm = TRUE)/sqrt(n()),
+    .groups = "drop") |> 
+  mutate(height = factor(height, levels = c("Low", "Mid", "High")))
+
+# Plot that shows shannon decreasing by zone and site, but relatively unchanged by treatment
+ggplot(plot_data, aes(x = height, y = mean_shannon, fill = site)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_shannon - se_shannon, ymax = mean_shannon + se_shannon),
+                width = 0.2, position = position_dodge(width = 0.8)) +
+  facet_wrap(~treatment) +
+  labs(
+    y = "Shannon Diversity",
+    x = "Height",
+    title = "Effect of Height and Site on Shannon Diversity for Percent Cover")
+
+# Plot that shows shannon unchanged by treatment
+ggplot(plot_data, aes(x = height, y = mean_shannon, fill = treatment)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_shannon - se_shannon, ymax = mean_shannon + se_shannon),
+                width = 0.2, position = position_dodge(width = 0.8)) +
+  facet_wrap(~site) +
+  labs(
+    y = "Shannon Diversity",
+    x = "Height",
+    title = "Effect of Treatment on Shannon Diversity for Percent Cover")
+
+## by count
+
+# Summarize mean and standard error for plotting
+plot_data <- div_dat %>%
+  filter(measurement_type == "Count") %>%
+  group_by(height, site, treatment) %>%
+  summarise(
+    mean_shannon = mean(shannon, na.rm = TRUE),
+    se_shannon = sd(shannon, na.rm = TRUE)/sqrt(n()),
+    .groups = "drop") |> 
+  mutate(height = factor(height, levels = c("Low", "Mid", "High")))
+
+# Plot that shows shannon decreasing by zone and site, but relatively unchanged by treatment
+ggplot(plot_data, aes(x = height, y = mean_shannon, fill = site)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_shannon - se_shannon, ymax = mean_shannon + se_shannon),
+                width = 0.2, position = position_dodge(width = 0.8)) +
+  facet_wrap(~treatment) +
+  labs(
+    y = "Shannon Diversity",
+    x = "Height",
+    title = "Effect of Height and Site on Shannon Diversity for Count")
+
+# Plot that shows shannon unchanged by treatment
+ggplot(plot_data, aes(x = height, y = mean_shannon, fill = treatment)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_shannon - se_shannon, ymax = mean_shannon + se_shannon),
+                width = 0.2, position = position_dodge(width = 0.8)) +
+  facet_wrap(~site) +
+  labs(
+    y = "Shannon Diversity",
+    x = "Height",
+    title = "Effect of Treatment on Shannon Diversity for Count")
+
+# Richness, post-hurdle
+## by percent cover
+
+# Summarize mean and standard error for plotting
+plot_data <- div_dat %>%
+  filter(measurement_type == "Percent") %>%
+  group_by(height, site, treatment) %>%
+  summarise(
+    mean_richness = mean(richness, na.rm = TRUE),
+    se_richness = sd(richness, na.rm = TRUE)/sqrt(n()),
+    .groups = "drop") |> 
+  mutate(height = factor(height, levels = c("Low", "Mid", "High")))
+
+# Plot that shows richness decreasing by zone and site, but relatively unchanged by treatment
+ggplot(plot_data, aes(x = height, y = mean_richness, fill = site)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_richness - se_richness, ymax = mean_richness + se_richness),
+                width = 0.2, position = position_dodge(width = 0.8)) +
+  facet_wrap(~treatment) +
+  labs(
+    y = "Species Richness",
+    x = "Height",
+    title = "Effect of Height and Site on Species Richness for Percent Cover")
+
+# Plot that shows richness unchanged by treatment
+ggplot(plot_data, aes(x = height, y = mean_richness, fill = treatment)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_richness - se_richness, ymax = mean_richness + se_richness),
+                width = 0.2, position = position_dodge(width = 0.8)) +
+  facet_wrap(~site) +
+  labs(
+    y = "Species Richness",
+    x = "Height",
+    title = "Effect of Treatment on Species Richness for Percent Cover")
+
+## by count
+
+# Summarize mean and standard error for plotting
+plot_data <- div_dat %>%
+  filter(measurement_type == "Count") %>%
+  group_by(height, site, treatment) %>%
+  summarise(
+    mean_richness = mean(richness, na.rm = TRUE),
+    se_richness = sd(richness, na.rm = TRUE)/sqrt(n()),
+    .groups = "drop") |> 
+  mutate(height = factor(height, levels = c("Low", "Mid", "High")))
+
+# Plot that shows richness decreasing by zone and site, but relatively unchanged by treatment
+ggplot(plot_data, aes(x = height, y = mean_richness, fill = site)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_richness - se_richness, ymax = mean_richness + se_richness),
+                width = 0.2, position = position_dodge(width = 0.8)) +
+  facet_wrap(~treatment) +
+  labs(
+    y = "Species Richness",
+    x = "Height",
+    title = "Effect of Height and Site on Species Richness for Count")
+
+# Plot that shows richness unchanged by treatment
+ggplot(plot_data, aes(x = height, y = mean_richness, fill = treatment)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_richness - se_richness, ymax = mean_richness + se_richness),
+                width = 0.2, position = position_dodge(width = 0.8)) +
+  facet_wrap(~site) +
+  labs(
+    y = "Species Richness",
+    x = "Height",
+    title = "Effect of Treatment on Species Richness for Count")
 ```
 
 ### 5. Herbivore Abundance (LILI)
