@@ -348,9 +348,12 @@ shannon_count_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + t
 #                                      ~treatment | height)
 # 
 # contrast(shannon_percent_hurdle_em, method = "pairwise") # Significant effect of treatment in the low and mid
+```
 
+#### Post-hurdle model stats (>0) for shannon percent
+```{r}
 # Post-hurdle (>0) for shannon percent
-# Anova(shannon_percent_posthurdle_mod) |> tidy() # Percent Shannon  differs significantly across heights and sites, but is not strongly affected by treatment, and the interaction between treatment and height is also not significant.
+Anova(shannon_percent_posthurdle_mod) |> tidy() # Percent Shannon  differs significantly across heights and sites, but is not strongly affected by treatment, and the interaction between treatment and height is also not significant.
 # tidy(shannon_percent_posthurdle_mod) |>  
 #   mutate(estimate_original = sign(estimate) * estimate^2,
 #          std.error_original = 2 * abs(estimate) * std.error) |> 
@@ -366,9 +369,12 @@ shannon_count_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + t
 #                                    ~treatment | height)
 # 
 # contrast(shannon_percent_posthurdle_em, method = "pairwise") # low and mid treatment has a significant effect
+```
 
+#### Post-hurdle model stats (>0) for shannon count
+```{r}
 # Post-hurdle (>0) for shannon count
-# Anova(shannon_count_posthurdle_mod) |> tidy() # essentially the same as percent
+Anova(shannon_count_posthurdle_mod) |> tidy() # essentially the same as percent
 # tidy(shannon_count_posthurdle_mod) |>  # height has largest effect, while there is some decrease between treatment
 #   mutate(estimate_original = sign(estimate) * estimate^2, # note that the negative estimates are lost after the back transformation, so i've multiplioed them by the sign to return the original sign
 #          std.error_original = 2 * abs(estimate) * std.error) |> 
@@ -423,6 +429,10 @@ richness_count_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site +
 #                                    ~treatment | height)
 # 
 # contrast(richness_count_hurdle_em, method = "pairwise") #Significant effect of treatment in all (results identical?)
+```
+
+#### Post-hurdle model stats (>0) for richness percent
+```{r}
 # 
 # # Post-hurdle (>0) for richness percent
 # Anova(richness_percent_posthurdle_mod) |> tidy() # effect of height and site, not treatment 
@@ -436,6 +446,11 @@ richness_count_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site +
 #                                          ~treatment | height)
 # 
 # contrast(richness_percent_posthurdle_em, method = "pairwise") #no sig
+```
+
+
+#### Post-hurdle model stats (>0) for richness count
+```{r}
 # 
 # # Post-hurdle (>0) for richness count
 # Anova(richness_count_posthurdle_mod) |> tidy() # height and site
