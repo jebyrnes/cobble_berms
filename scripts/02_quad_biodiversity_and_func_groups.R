@@ -133,21 +133,21 @@ div_plot_dat$height <- factor(div_plot_dat$height,
 ##
 
 
-ggplot(div_plot_dat |> filter(measurement_type == "Count"),
-       aes(x = treatment,
-           y = value)) +
-  geom_violin() +
-  facet_grid(rows = vars(index), 
-             cols = vars(height),
-             scales = "free_y")
-
-ggplot(div_plot_dat |> filter(measurement_type == "Percent"),
-       aes(x = treatment,
-           y = value)) +
-  geom_violin() +
-  facet_grid(rows = vars(index), 
-             cols = vars(height),
-             scales = "free_y")
+# ggplot(div_plot_dat |> filter(measurement_type == "Count"),
+#        aes(x = treatment,
+#            y = value)) +
+#   geom_violin() +
+#   facet_grid(rows = vars(index), 
+#              cols = vars(height),
+#              scales = "free_y")
+# 
+# ggplot(div_plot_dat |> filter(measurement_type == "Percent"),
+#        aes(x = treatment,
+#            y = value)) +
+#   geom_violin() +
+#   facet_grid(rows = vars(index), 
+#              cols = vars(height),
+#              scales = "free_y")
 
 ##
 # Analysis
@@ -368,6 +368,27 @@ plot_data <- div_dat %>%
     se_shannon = sd(shannon, na.rm = TRUE)/sqrt(n()),
     .groups = "drop") |> 
   mutate(height = factor(height, levels = c("Low", "Mid", "High")))
+
+##
+#  heres ----------------------------------
+##
+ggplot(plot_data, aes(x = treatment, y = mean_shannon, color = height, group = height)) +
+  geom_line(position = position_dodge(width = 0.8)) +
+  geom_point(stat = "identity", position = position_dodge(width = 0.8)) +
+  geom_errorbar(
+    aes(ymin = mean_shannon - se_shannon,
+        ymax = mean_shannon + se_shannon),
+    width = 0.2,
+    position = position_dodge(width = 0.8)
+  ) +
+  facet_wrap(~site) +
+  labs(
+    y = "Shannon Diversity",
+    x = "Treatment",
+    title = "Effect of Height and Site on Shannon Diversity for Percent Cover"
+  )
+
+
 
 # Plot that shows shannon decreasing by zone and site, but relatively unchanged by treatment
 ggplot(plot_data, aes(x = height, y = mean_shannon, fill = site)) +
@@ -627,3 +648,61 @@ t.test(x, y, paired = TRUE)
 #' across berms versus controls and
 #' quads cover only
 
+##
+# NMDS ----------------------------------------------
+##
+# 
+# 
+# comm_percent <- quad_dat |>
+#   filter(measurement_type == "Percent") |>
+#   filter(height == "Low") |>
+#   select(7:84) |>
+#   mutate(across(everything(), ~ as.numeric(.x))) |>
+#   mutate(across(everything(), ~ replace_na(.x, 0)))
+# 
+# meta_percent <- quad_dat |>
+#   filter(measurement_type == "Percent")|>
+#   filter(height == "Low") |>
+#   select(site, treatment, height)
+# 
+# meta_percent <- meta_percent[
+#   rowSums(comm_percent) > 0,
+# ]
+# 
+# comm_percent <- comm_percent[
+#   rowSums(comm_percent) > 0,
+# ] #remove all zeros
+# 
+# nmds_percent <- metaMDS(
+#   comm_percent,
+#   distance = "bray",
+#   k = 2,
+#   trymax = 100,
+#   autotransform = FALSE
+# )
+# nmds_plot <- scores(nmds_percent, display = "sites") |>
+#   as.data.frame() |>
+#   bind_cols(meta_percent)
+# 
+# ggplot(nmds_plot, aes(NMDS1, NMDS2)) +
+#   geom_point(
+#     aes(color = site, shape = treatment),
+#     size = 4
+#   ) +
+#   stat_ellipse(
+#     aes(
+#       color = site,
+#       group = interaction(site, treatment)
+#     ),
+#     linetype = 2,
+#     linewidth = 0.8
+#   ) +
+#   theme_classic() +
+#   labs(
+#     x = "NMDS1",
+#     y = "NMDS2",
+#     color = "Site",
+#     shape = "Treatment",
+#     title = "NMDS of Percent Cover"
+#   )
+# 
