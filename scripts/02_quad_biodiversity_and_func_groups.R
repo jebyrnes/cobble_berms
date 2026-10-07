@@ -95,9 +95,11 @@ quad_dat <- quad_dat |>
               values_from = "sum",
               values_fill = 0)
 
-# Drop placeholder spp for quads w/ nothing 
+# Drop placeholder spp for quads w/ nothing and remove na
 quad_dat <- quad_dat |> 
   select(-c("NOSP"))
+
+quad_dat[is.na(quad_dat)] <- 0
 
 ##
 #  Richness and Shannon Biodiversity set up ----------------------------------
@@ -249,21 +251,37 @@ contrast(shannon_count_posthurdle_em, method = "pairwise") # no significance
 ##
 #  richness analysis ----------------------------------
 ##
+
+# Just realized that this doesn't need to be done seperatly for count and percent. Redoing the analysis.
+rich_dat <- div_dat |> 
+  group_by(season, site, treatment, height, quadrat) |> 
+  summarise(richness = sum(richness))
+
 # Hurdle Model - Odds of being over 0
 # richness_percent_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
 #                                    family = binomial(link = "logit"),
 #                                    data = div_dat |> filter(measurement_type == "Percent"))
 # Above model didnt work due to no 0s (i.e. prob of 1) in berm low and mid
 
-richness_percent_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height, 
+richness_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height, 
                                    family = binomial,
-                                   data = div_dat |> filter(measurement_type == "Percent"),
+                                   data = rich_dat,
                                    method = "brglmFit")
 
-richness_count_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
-                                 family = binomial(link = "logit"),
-                                 data = div_dat |> filter(measurement_type == "Count"))
+# Check models predicted probabilities
+emmeans(richness_hurdle_mod,
+        ~ treatment | height,
+        type = "response")
 
+# And compare to the observed probabilities -- looks good!
+rich_dat |>
+  group_by(treatment, height) |>
+  summarise(
+    n = n(),
+    nonzero = sum(richness > 0),
+    prop_nonzero = mean(richness > 0),
+    .groups = "drop"
+  )
 
 
 # Models for those over 0
@@ -282,14 +300,15 @@ richness_count_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site +
 ## So what does this tell us
 # Hurdle (0,1) for richness percent 
 # Models dont work as currently configured, huge SE bc there are no 0s in low and mid zones on the berm. MEaning there is a 100 percent probability of something, and that doesnt model well, hence the rediculous SE
-Anova(richness_percent_hurdle_mod) |> tidy() # all sig, height > treatment > site
-tidy(richness_percent_hurdle_mod)
-
+summary(richness_percent_hurdle_mod)
 richness_percent_hurdle_em <- emmeans(richness_percent_hurdle_mod,
                                      ~treatment | height)
 
-contrast(richness_percent_hurdle_em, method = "pairwise") # Significant effect of treatment in all (results identical?)
+richness_percent_hurdle_em_rg <- regrid(richness_percent_hurdle_em,
+                                        transform = "response")
 
+pairs(richness_percent_hurdle_em_rg)
+summary(richness_percent_hurdle_em_rg)
 
 # Hurdle (0,1) for richness count
 Anova(richness_count_hurdle_mod) |> tidy() # all sig, height > treatment > site
