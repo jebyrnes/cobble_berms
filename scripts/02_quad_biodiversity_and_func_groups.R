@@ -19,6 +19,7 @@ library(vegan)
 library(car)
 # library(patchwork)
 library(emmeans)
+library(brglm2)
 
 # load data
 quad_s23_dat <- read_csv("data/quads_s23.csv")
@@ -249,13 +250,21 @@ contrast(shannon_count_posthurdle_em, method = "pairwise") # no significance
 #  richness analysis ----------------------------------
 ##
 # Hurdle Model - Odds of being over 0
-richness_percent_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
-                                   family = binomial(link = "logit"),
-                                   data = div_dat |> filter(measurement_type == "Percent"))
+# richness_percent_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
+#                                    family = binomial(link = "logit"),
+#                                    data = div_dat |> filter(measurement_type == "Percent"))
+# Above model didnt work due to no 0s (i.e. prob of 1) in berm low and mid
+
+richness_percent_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height, 
+                                   family = binomial,
+                                   data = div_dat |> filter(measurement_type == "Percent"),
+                                   method = "brglmFit")
 
 richness_count_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
                                  family = binomial(link = "logit"),
                                  data = div_dat |> filter(measurement_type == "Count"))
+
+
 
 # Models for those over 0
 richness_percent_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
