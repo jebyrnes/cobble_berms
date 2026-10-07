@@ -20,6 +20,7 @@ library(car)
 # library(patchwork)
 library(emmeans)
 library(brglm2)
+library(glmmTMB)
 
 # load data
 quad_s23_dat <- read_csv("data/quads_s23.csv")
@@ -239,7 +240,7 @@ shannon_count_posthurdle_em <- emmeans(shannon_count_posthurdle_mod,
 contrast(shannon_count_posthurdle_em, method = "pairwise") # no significance
 
 ##
-#  richness analysis ----------------------------------
+#  Richness analysis ----------------------------------
 ##
 
 # Just realized that this doesn't need to be done seperatly for count and percent. Redoing the analysis.
@@ -247,12 +248,7 @@ rich_dat <- div_dat |>
   group_by(season, site, treatment, height, quadrat) |> 
   summarise(richness = sum(richness))
 
-# Hurdle Model - Odds of being over 0
-# richness_percent_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
-#                                    family = binomial(link = "logit"),
-#                                    data = div_dat |> filter(measurement_type == "Percent"))
-# Above model didnt work due to no 0s (i.e. prob of 1) in berm low and mid
-
+#Hurdle mod
 richness_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height, 
                                    family = binomial,
                                    data = rich_dat,
@@ -276,7 +272,12 @@ rich_dat |>
 
 # Models for those over 0
 richness_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
-                                      data = rich_dat)
+                                      data = rich_dat |> 
+                                filter(richness > 0))
+
+# Potentially worth considering:
+richness_posthurdle_em_rg
+
 
 # Get model stats
 # check_model(richness_hurdle_mod)
@@ -303,12 +304,20 @@ tidy(richness_posthurdle_mod) |>
   mutate(lower.CL = ((estimate_original - std.error_original)^2),
          upper.CL = ((estimate_original + std.error_original)^2))
 
+summary(richness_posthurdle_mod)
 richness_posthurdle_em <- emmeans(richness_posthurdle_mod,
                                          ~treatment | height)
 
-contrast(richness_posthurdle_em, method = "pairwise") #no sig
+contrast(richness_posthurdle_em, method = "pairwise")
 
+richness_posthurdle_em_rg <- regrid(
+  richness_posthurdle_em,
+  transform = "response"
+)
 
+summary(richness_posthurdle_em_rg)
+
+pairs(richness_posthurdle_em_rg)
 
 # ##
 # # Analysis of non-selected indices. Not including this in report and thus did not finish these
