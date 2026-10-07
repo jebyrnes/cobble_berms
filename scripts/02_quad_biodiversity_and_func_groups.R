@@ -99,7 +99,7 @@ quad_dat <- quad_dat |>
   select(-c("NOSP"))
 
 ##
-#  Richness and Shannon Biodiversity analysis ----------------------------------
+#  Richness and Shannon Biodiversity set up ----------------------------------
 ##
 
 # Calculate Shannon, InvSimpson, richness, evenness, and rearrange
@@ -150,7 +150,7 @@ div_plot_dat$height <- factor(div_plot_dat$height,
 #              scales = "free_y")
 
 ##
-# Analysis
+#  Shannon analysis ----------------------------------
 ##
 
 ## Shannon
@@ -164,7 +164,7 @@ shannon_count_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site + treatm
                                   data = div_dat |> filter(measurement_type == "Count"))
 
 # Models for those over 0
-shannon_percent_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + treatment:height, # note that shannon at richness of 1 is 0, no diversity, only 1 sp present which is the same as richness of 0
+shannon_percent_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + treatment:height, # note that shannon at richness of 1 is 0, no diversity, only 1 sp present which is the same as div of 0
                           data = div_dat |> filter(measurement_type == "Percent", shannon > 0))
 
 shannon_count_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + treatment:height,
@@ -194,7 +194,15 @@ tidy(shannon_count_hurdle_mod) # need to back transform the estimate?
 shannon_count_hurdle_em <- emmeans(shannon_count_hurdle_mod,
                                      ~treatment | height)
 
-contrast(shannon_percent_hurdle_em, method = "pairwise") # Significant effect of treatment in the low and mid
+contrast(shannon_count_hurdle_em, method = "pairwise") # Significant effect of treatment in the low and mid
+
+emmeans(
+  shannon_count_hurdle_mod,
+  ~ treatment * height
+) |>
+  contrast(
+    interaction = "pairwise"
+  )
 
 # Post-hurdle (>0) for shannon percent
 Anova(shannon_percent_posthurdle_mod) |> tidy() # Percent Shannon  differs significantly across heights and sites, but is not strongly affected by treatment, and the interaction between treatment and height is also not significant.
@@ -204,6 +212,15 @@ tidy(shannon_percent_posthurdle_mod) |>
   mutate(lower.CL = ((estimate_original - std.error_original)^2),
          upper.CL = ((estimate_original + std.error_original)^2))
 
+summary(shannon_percent_posthurdle_mod)
+summary(shannon_percent_posthurdle_mod)$r.squared
+summary(shannon_percent_posthurdle_mod)$adj.r.squared
+
+shannon_percent_mod <- lm(
+  sqrt(shannon) ~ treatment + height + site + treatment:height,
+  data = div_dat |> filter(measurement_type == "Percent")
+)
+check_model(shannon_percent_mod)
 # Height matters a lot: Low  plots have the highest Shannon diversity (0.768 and 0.535).Mid heights are intermediate (0.511 and 0.375). High height plots have the lowest diversity (0.070 and 0.049).
 # Treatment effect is small: Within each height category, Berm has slightly higher Shannon diversity than Control.
 # So these differences are statistically robust (all p values are << .001.)
@@ -228,7 +245,9 @@ shannon_count_posthurdle_em <- emmeans(shannon_count_posthurdle_mod,
 
 contrast(shannon_count_posthurdle_em, method = "pairwise") # no significance
 
-## richness
+##
+#  richness analysis ----------------------------------
+##
 # Hurdle Model - Odds of being over 0
 richness_percent_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height,
                                    family = binomial(link = "logit"),
@@ -252,7 +271,8 @@ richness_count_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site +
 # check_model(richness_count_posthurdle_mod) 
 
 ## So what does this tell us
-# Hurdle (0,1) for richness percent
+# Hurdle (0,1) for richness percent 
+# Models dont work as currently configured, huge SE bc there are no 0s in low and mid zones on the berm. MEaning there is a 100 percent probability of something, and that doesnt model well, hence the rediculous SE
 Anova(richness_percent_hurdle_mod) |> tidy() # all sig, height > treatment > site
 tidy(richness_percent_hurdle_mod)
 
