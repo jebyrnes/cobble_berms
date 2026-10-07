@@ -219,16 +219,6 @@ summary(shannon_percent_posthurdle_mod)
 summary(shannon_percent_posthurdle_mod)$r.squared
 summary(shannon_percent_posthurdle_mod)$adj.r.squared
 
-shannon_percent_mod <- lm(
-  sqrt(shannon) ~ treatment + height + site + treatment:height,
-  data = div_dat |> filter(measurement_type == "Percent")
-)
-check_model(shannon_percent_mod)
-# Height matters a lot: Low  plots have the highest Shannon diversity (0.768 and 0.535).Mid heights are intermediate (0.511 and 0.375). High height plots have the lowest diversity (0.070 and 0.049).
-# Treatment effect is small: Within each height category, Berm has slightly higher Shannon diversity than Control.
-# So these differences are statistically robust (all p values are << .001.)
-# Differences between heights are much larger than differences between treatments. Matches ANOVA: height is the main driver, treatment is minor.
-
 shannon_percent_posthurdle_em <- emmeans(shannon_percent_posthurdle_mod,
                                    ~treatment | height)
 
@@ -285,68 +275,38 @@ rich_dat |>
 
 
 # Models for those over 0
-richness_percent_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
-                                      data = div_dat |> filter(measurement_type == "Percent", richness > 0))
-
-richness_count_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
-                                    data = div_dat |> filter(measurement_type == "Count", richness > 0))
+richness_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
+                                      data = rich_dat)
 
 # Get model stats
-# check_model(richness_percent_hurdle_mod)
-# check_model(richness_count_hurdle_mod)
-# check_model(richness_percent_posthurdle_mod)
-# check_model(richness_count_posthurdle_mod) 
+# check_model(richness_hurdle_mod)
+# check_model(richness_posthurdle_mod)
 
-## So what does this tell us
-# Hurdle (0,1) for richness percent 
-# Models dont work as currently configured, huge SE bc there are no 0s in low and mid zones on the berm. MEaning there is a 100 percent probability of something, and that doesnt model well, hence the rediculous SE
-summary(richness_percent_hurdle_mod)
-richness_percent_hurdle_em <- emmeans(richness_percent_hurdle_mod,
+# Interpretation
+
+## Hurdle
+summary(richness_hurdle_mod)
+richness_hurdle_em <- emmeans(richness_hurdle_mod,
                                      ~treatment | height)
 
-richness_percent_hurdle_em_rg <- regrid(richness_percent_hurdle_em,
+richness_hurdle_em_rg <- regrid(richness_hurdle_em,
                                         transform = "response")
 
-pairs(richness_percent_hurdle_em_rg)
-summary(richness_percent_hurdle_em_rg)
+pairs(richness_hurdle_em_rg)
+summary(richness_hurdle_em_rg)
 
-# Hurdle (0,1) for richness count
-Anova(richness_count_hurdle_mod) |> tidy() # all sig, height > treatment > site
-tidy(richness_count_hurdle_mod) # effect of treatment and height evident
-
-richness_count_hurdle_em <- emmeans(richness_count_hurdle_mod,
-                                   ~treatment | height)
-
-contrast(richness_count_hurdle_em, method = "pairwise") #Significant effect of treatment in all (results identical?)
-
-# Post-hurdle (>0) for richness percent
-Anova(richness_percent_posthurdle_mod) |> tidy() # effect of height and site, not treatment 
-tidy(richness_percent_posthurdle_mod) |>  
+# Richness Post-hurdle
+Anova(richness_posthurdle_mod) |> tidy() # effect of height and site, not treatment 
+tidy(richness_posthurdle_mod) |>  
   mutate(estimate_original = sign(estimate) * estimate^2,
          std.error_original = 2 * abs(estimate) * std.error)|> 
   mutate(lower.CL = ((estimate_original - std.error_original)^2),
          upper.CL = ((estimate_original + std.error_original)^2))
 
-richness_percent_posthurdle_em <- emmeans(richness_percent_posthurdle_mod,
+richness_posthurdle_em <- emmeans(richness_posthurdle_mod,
                                          ~treatment | height)
 
-contrast(richness_percent_posthurdle_em, method = "pairwise") #no sig
-
-# Post-hurdle (>0) for richness count
-Anova(richness_count_posthurdle_mod) |> tidy() # height and site
-
-tidy(richness_count_posthurdle_mod) |>  # low zone and duxbury are particularlly impactful
-  mutate(estimate_original = sign(estimate) * estimate^2, # note that the negative estimates are lost after the back transformation, so i've multiplioed them by the sign to return the original sign
-         std.error_original = 2 * abs(estimate) * std.error) |> 
-  mutate(lower.CL = ((estimate_original - std.error_original)^2),
-         upper.CL = ((estimate_original + std.error_original)^2))
-
-
-richness_count_posthurdle_em <- emmeans(richness_count_posthurdle_mod,
-                                       ~treatment + height)
-
-contrast(richness_count_posthurdle_em, method = "pairwise") # no significance
-
+contrast(richness_posthurdle_em, method = "pairwise") #no sig
 
 
 
