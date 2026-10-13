@@ -274,10 +274,38 @@ rich_dat |>
 richness_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
                                       data = rich_dat |> 
                                 filter(richness > 0))
-
+# RESUME HERE ----------------------------------
 # Potentially worth considering:
-richness_posthurdle_em_rg
+richness_posthurdle_nb <- glmmTMB(
+  richness ~ treatment + height + site + treatment:height,
+  family = truncated_nbinom2(link = "log"),
+  data = rich_dat |> 
+    filter(richness > 0)
+)
 
+# summary(richness_posthurdle_nb)
+diagnose(richness_posthurdle_nb)
+richness_posthurdle_nb_em <- emmeans(
+  richness_posthurdle_nb,
+  ~ treatment | height,
+  type = "response"
+)
+
+summary(richness_posthurdle_nb_em)
+pairs(richness_posthurdle_nb_em)
+
+library(DHARMa)
+
+sim_nb <- simulateResiduals(
+  richness_posthurdle_nb,
+  n = 1000
+)
+
+plot(sim_nb)
+  
+  testDispersion(sim_nb)
+testZeroInflation(sim_nb)
+testUniformity(sim_nb)
 
 # Get model stats
 # check_model(richness_hurdle_mod)
