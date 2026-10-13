@@ -21,6 +21,7 @@ library(car)
 library(emmeans)
 library(brglm2)
 library(glmmTMB)
+library(DHARMa)
 
 # load data
 quad_s23_dat <- read_csv("data/quads_s23.csv")
@@ -133,27 +134,6 @@ div_plot_dat$height <- factor(div_plot_dat$height,
 
 
 ##
-# Visualize
-##
-
-
-# ggplot(div_plot_dat |> filter(measurement_type == "Count"),
-#        aes(x = treatment,
-#            y = value)) +
-#   geom_violin() +
-#   facet_grid(rows = vars(index), 
-#              cols = vars(height),
-#              scales = "free_y")
-# 
-# ggplot(div_plot_dat |> filter(measurement_type == "Percent"),
-#        aes(x = treatment,
-#            y = value)) +
-#   geom_violin() +
-#   facet_grid(rows = vars(index), 
-#              cols = vars(height),
-#              scales = "free_y")
-
-##
 #  Shannon analysis ----------------------------------
 ##
 
@@ -243,39 +223,54 @@ contrast(shannon_count_posthurdle_em, method = "pairwise") # no significance
 #  Richness analysis ----------------------------------
 ##
 
-# Just realized that this doesn't need to be done seperatly for count and percent. Redoing the analysis.
+
 rich_dat <- div_dat |> 
   group_by(season, site, treatment, height, quadrat) |> 
   summarise(richness = sum(richness))
 
-#Hurdle mod
+#Hurdle mod - Using brglmFit to overcome separation problem in the data - low zone always predicts
 richness_hurdle_mod <- glm(richness > 0 ~ treatment + height + site + treatment:height, 
                                    family = binomial,
                                    data = rich_dat,
                                    method = "brglmFit")
 
-# Check models predicted probabilities
-emmeans(richness_hurdle_mod,
-        ~ treatment | height,
-        type = "response")
+#Inspection
+summary(richness_hurdle_mod) #control is marginal in sig, High zone is sig, as is coughlin
 
-# And compare to the observed probabilities -- looks good!
-rich_dat |>
-  group_by(treatment, height) |>
-  summarise(
-    n = n(),
-    nonzero = sum(richness > 0),
-    prop_nonzero = mean(richness > 0),
-    .groups = "drop"
-  )
+# Estimated probabilities
+richness_hurdle_em <- emmeans(richness_hurdle_mod, ~ treatment | height) # Given on log-odds
+
+# Statistical test of treat differences with holm correction applied across all heights (i.e. dropping grouping())
+richness_hurdle_pairs <- pairs(richness_hurdle_em)
+
+summary(richness_hurdle_pairs, by = NULL, adjust = "holm")
+
+# Results on response/probability scale for manuscript (but use stat test for link scale above for pvalue etc)
+
+richness_hurdle_report_em <- emmeans(richness_hurdle_mod,
+                              ~ treatment | height,
+                              type = "response")
+
+richness_hurdle_report_em
+
+# # Compare estimated to the observed probabilities -- looks good!
+# rich_dat |>
+#   group_by(treatment, height) |>
+#   summarise(
+#     n = n(),
+#     nonzero = sum(richness > 0),
+#     prop_nonzero = mean(richness > 0),
+#     .groups = "drop")
 
 
-# Models for those over 0
-richness_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
-                                      data = rich_dat |> 
-                                filter(richness > 0))
-# RESUME HERE ----------------------------------
-# Potentially worth considering:
+## Post hurdle
+
+# Old model - made obsolute by the truncated neg binom 
+# richness_posthurdle_mod <- lm(sqrt(richness) ~ treatment + height + site + treatment:height,
+#                                       data = rich_dat |> 
+#                                 filter(richness > 0))
+
+# Neg binom model fits better
 richness_posthurdle_nb <- glmmTMB(
   richness ~ treatment + height + site + treatment:height,
   family = truncated_nbinom2(link = "log"),
@@ -283,65 +278,44 @@ richness_posthurdle_nb <- glmmTMB(
     filter(richness > 0)
 )
 
+# Checking model performance
+# check_model(richness_posthurdle_nb)
 # summary(richness_posthurdle_nb)
-diagnose(richness_posthurdle_nb)
+# diagnose(richness_posthurdle_nb)
+
+# sim_nb <- simulateResiduals(
+#   richness_posthurdle_nb,
+#   n = 1000)
+# 
+# plot(sim_nb)
+# testDispersion(sim_nb)
+# testZeroInflation(sim_nb)
+# testUniformity(sim_nb)
+
+
 richness_posthurdle_nb_em <- emmeans(
   richness_posthurdle_nb,
   ~ treatment | height,
-  type = "response"
-)
+  type = "response")
 
+summary(richness_posthurdle_nb)
 summary(richness_posthurdle_nb_em)
-pairs(richness_posthurdle_nb_em)
+pairs(richness_posthurdle_nb_em) |> # holm corrected
+  summary(by = NULL,
+    adjust = "holm"
+  )
 
-library(DHARMa)
-
-sim_nb <- simulateResiduals(
+#effect of tide height
+richness_posthurdle_nb_tide <- emmeans(
   richness_posthurdle_nb,
-  n = 1000
-)
-
-plot(sim_nb)
+  ~ height,
+  type = "response")
   
-  testDispersion(sim_nb)
-testZeroInflation(sim_nb)
-testUniformity(sim_nb)
+pairs(richness_posthurdle_nb_tide) |> # holm corrected
+  summary(by = NULL,
+          adjust = "holm"
+  )
 
-# Get model stats
-# check_model(richness_hurdle_mod)
-# check_model(richness_posthurdle_mod)
-
-# Interpretation
-
-## Hurdle
-summary(richness_hurdle_mod)
-richness_hurdle_em <- emmeans(richness_hurdle_mod,
-                                     ~treatment | height)
-
-richness_hurdle_em_rg <- regrid(richness_hurdle_em,
-                                        transform = "response")
-
-pairs(richness_hurdle_em_rg)
-summary(richness_hurdle_em_rg)
-
-# Richness Post-hurdle
-Anova(richness_posthurdle_mod) |> tidy() # effect of height and site, not treatment 
-tidy(richness_posthurdle_mod) |>  
-  mutate(estimate_original = sign(estimate) * estimate^2,
-         std.error_original = 2 * abs(estimate) * std.error)|> 
-  mutate(lower.CL = ((estimate_original - std.error_original)^2),
-         upper.CL = ((estimate_original + std.error_original)^2))
-
-summary(richness_posthurdle_mod)
-richness_posthurdle_em <- emmeans(richness_posthurdle_mod,
-                                         ~treatment | height)
-
-contrast(richness_posthurdle_em, method = "pairwise")
-
-richness_posthurdle_em_rg <- regrid(
-  richness_posthurdle_em,
-  transform = "response"
-)
 
 summary(richness_posthurdle_em_rg)
 
@@ -557,3 +531,27 @@ ggplot(plot_data, aes(x = height, y = mean_richness, fill = treatment)) +
     x = "Height",
     title = "Effect of Treatment on Species Richness for Count")
 
+
+
+
+
+##
+#  Scrap ----------------------------------
+##
+
+
+# ggplot(div_plot_dat |> filter(measurement_type == "Count"),
+#        aes(x = treatment,
+#            y = value)) +
+#   geom_violin() +
+#   facet_grid(rows = vars(index), 
+#              cols = vars(height),
+#              scales = "free_y")
+# 
+# ggplot(div_plot_dat |> filter(measurement_type == "Percent"),
+#        aes(x = treatment,
+#            y = value)) +
+#   geom_violin() +
+#   facet_grid(rows = vars(index), 
+#              cols = vars(height),
+#              scales = "free_y")
