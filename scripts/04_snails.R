@@ -105,7 +105,16 @@ snail_em <- emmeans(snail_mod,
 
 contrast(snail_em, method = "pairwise")
 
-
-
+# Where are snails?
+snail_dat |>
+  group_by(height, treatment, site) |>
+  summarise(
+    n = n(),
+    n_present = sum(are_there_snails == 1, na.rm = TRUE),
+    n_absent = sum(are_there_snails == 0, na.rm = TRUE),
+    presence_rate = mean(are_there_snails == 1, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(height, site, treatment)
 
 

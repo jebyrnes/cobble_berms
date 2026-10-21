@@ -14,6 +14,7 @@ source("scripts/helpers.R")
 #load libraries
 library(tidyverse)
 library(broom)
+library(emmeans)
 
 # load data
 trap_dat <- read_csv("data/traps.csv")
@@ -36,11 +37,17 @@ abundance_dat <- trap_dat |>
   pivot_wider(names_from = species_code, values_from = abundance, values_fill = 0) |> 
   select(-NOSP)
 
-# CAMA only
+# CAMA only for abundance analysis
 CAMA_dat <- abundance_dat |>
   select(1:5) |> 
   filter(trap_name == "Crab") |> 
   select(-trap_name)
+
+# CAMA size for size analysis
+CAMA_size <- trap_dat |> 
+  filter(trap_name == "Crab") |> 
+  filter(species_code == "CAMA")
+
 
 # All spp for table
 abundance_dat <- abundance_dat |>
@@ -61,8 +68,8 @@ trap_table <- abundance_dat |>
 # Visualize
 ##
 
-# CAMA abundance by site as a function of treatment
-CAMA_plot <- ggplot(CAMA_dat, 
+# CAMA abundance by site as a function of treatment, No apparent pattern, some traps were stacked though
+ggplot(CAMA_dat, 
 mapping = aes(x = treatment, 
               y = CAMA)) +
   geom_boxplot() +
@@ -71,6 +78,15 @@ mapping = aes(x = treatment,
   labs(title = "CAMA abundance in traps",
        x = "Treatment",
        y = "CAMA Abundance") +
+  facet_wrap(vars(site))
+
+# Crab size by site = No apparent pattern
+ggplot(trap_dat |> filter(species_code == "CAMA"), 
+                    mapping = aes(x = treatment, 
+                                  y = carapace_width_mm)) +
+  geom_boxplot() +
+  geom_point(position = "jitter",
+             alpha = .6) +
   facet_wrap(vars(site))
 
 ##
@@ -86,3 +102,13 @@ mapping = aes(x = treatment,
 #   
 # Conclusions: no difference in CAMA abundance in a trap given a treatment
 
+# CAMA size analysis
+  CAMA_size_lm <- lm(carapace_width_mm ~ treatment + site + treatment*site,
+                     data = CAMA_size)
+  # performance::check_model(CAMA_size_lm)
+  tidy(CAMA_size_lm)
+  
+  CAMA_size_em <- emmeans(
+    CAMA_size_lm,
+    ~ treatment | site,
+    type = "response")

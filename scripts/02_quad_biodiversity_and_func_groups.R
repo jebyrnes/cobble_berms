@@ -148,47 +148,48 @@ shannon_count_hurdle_mod <- glm(shannon > 0 ~ treatment + height + site + treatm
                                   data = div_dat |> filter(measurement_type == "Count"))
 
 # Models for those over 0
-shannon_percent_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + treatment:height, # note that shannon at richness of 1 is 0, no diversity, only 1 sp present which is the same as div of 0
+shannon_percent_posthurdle_mod <- lm(shannon ~ treatment + height + site + treatment:height, # note that shannon at richness of 1 is 0, no diversity, only 1 sp present which is the same as div of 0
                           data = div_dat |> filter(measurement_type == "Percent", shannon > 0))
 
-shannon_count_posthurdle_mod <- lm(sqrt(shannon) ~ treatment + height + site + treatment:height,
+shannon_count_posthurdle_mod <- lm(shannon ~ treatment + height + site + treatment:height,
                         data = div_dat |> filter(measurement_type == "Count", shannon > 0))
 
+check_model(shannon_count_posthurdle_mod)
 # Get model stats
-# check_model(shannon_percent_hurdle_mod) # Homogeneity of variance seems to be the only problem
-# check_model(shannon_count_hurdle_mod) # Homogeneity of variance, also high collinearity for interaction parameter
-# check_model(shannon_percent_posthurdle_mod) # PPC could be better, Homogeneity of variance not great
-# check_model(shannon_count_posthurdle_mod) # treatment and treatment:height has high colineaerity
+# check_model(shannon_percent_hurdle_mod)
+# check_model(shannon_count_hurdle_mod)
+# check_model(shannon_percent_posthurdle_mod) 
+# check_model(shannon_count_posthurdle_mod)
 
 ## So what does this tell us
 # Hurdle (0,1) for shannon percent
 Anova(shannon_percent_hurdle_mod) |> tidy() # height plys biggest roll, but site and treatment also play a roll
 tidy(shannon_percent_hurdle_mod)
 
-shannon_percent_hurdle_em <- emmeans(shannon_percent_hurdle_mod,
-                    ~treatment | height)
+# Estimated probabilities
+shannon_percent_hurdle_em <- emmeans(shannon_percent_hurdle_mod, ~ treatment | height) # Given on log-odds
 
-contrast(shannon_percent_hurdle_em, method = "pairwise") # Significant effect of treatment in the low and mid
+# Statistical test of treat differences with holm correction applied across all heights (i.e. dropping grouping())
+shannon_percent_hurdle_pairs <- pairs(shannon_percent_hurdle_em)
+
+summary(shannon_percent_hurdle_pairs, by = NULL, adjust = "holm")
+
 
 
 # Hurdle (0,1) for shannon count
-Anova(shannon_count_hurdle_mod) |> tidy() # all important, by again height the most so
-tidy(shannon_count_hurdle_mod) # need to back transform the estimate?
+Anova(shannon_count_hurdle_mod) |> tidy() 
+tidy(shannon_count_hurdle_mod)
 
 shannon_count_hurdle_em <- emmeans(shannon_count_hurdle_mod,
                                      ~treatment | height)
 
-contrast(shannon_count_hurdle_em, method = "pairwise") # Significant effect of treatment in the low and mid
+# Statistical test of treat differences with holm correction applied across all heights (i.e. dropping grouping())
+shannon_count_hurdle_pairs <- pairs(shannon_count_hurdle_em)
 
-emmeans(
-  shannon_count_hurdle_mod,
-  ~ treatment * height
-) |>
-  contrast(
-    interaction = "pairwise"
-  )
+summary(shannon_count_hurdle_pairs, by = NULL, adjust = "holm")
 
-# Post-hurdle (>0) for shannon percent
+
+## Post-hurdle (>0) for shannon percent
 Anova(shannon_percent_posthurdle_mod) |> tidy() # Percent Shannon  differs significantly across heights and sites, but is not strongly affected by treatment, and the interaction between treatment and height is also not significant.
 tidy(shannon_percent_posthurdle_mod) |>  
   mutate(estimate_original = sign(estimate) * estimate^2,
@@ -196,9 +197,9 @@ tidy(shannon_percent_posthurdle_mod) |>
   mutate(lower.CL = ((estimate_original - std.error_original)^2),
          upper.CL = ((estimate_original + std.error_original)^2))
 
-summary(shannon_percent_posthurdle_mod)
-summary(shannon_percent_posthurdle_mod)$r.squared
-summary(shannon_percent_posthurdle_mod)$adj.r.squared
+# summary(shannon_percent_posthurdle_mod)
+# summary(shannon_percent_posthurdle_mod)$r.squared
+# summary(shannon_percent_posthurdle_mod)$adj.r.squared
 
 shannon_percent_posthurdle_em <- emmeans(shannon_percent_posthurdle_mod,
                                    ~treatment | height)
