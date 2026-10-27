@@ -65,31 +65,6 @@ trap_table <- abundance_dat |>
   row_spec(0, bold = TRUE, background = "#D3D3D3")
 
 ##
-# Visualize
-##
-
-# CAMA abundance by site as a function of treatment, No apparent pattern, some traps were stacked though
-ggplot(CAMA_dat, 
-mapping = aes(x = treatment, 
-              y = CAMA)) +
-  geom_boxplot() +
-  geom_point(position = "jitter",
-             alpha = .6)+
-  labs(title = "CAMA abundance in traps",
-       x = "Treatment",
-       y = "CAMA Abundance") +
-  facet_wrap(vars(site))
-
-# Crab size by site = No apparent pattern
-ggplot(trap_dat |> filter(species_code == "CAMA"), 
-                    mapping = aes(x = treatment, 
-                                  y = carapace_width_mm)) +
-  geom_boxplot() +
-  geom_point(position = "jitter",
-             alpha = .6) +
-  facet_wrap(vars(site))
-
-##
 # Stats
 ##
 
@@ -103,12 +78,58 @@ ggplot(trap_dat |> filter(species_code == "CAMA"),
 # Conclusions: no difference in CAMA abundance in a trap given a treatment
 
 # CAMA size analysis
-  CAMA_size_lm <- lm(carapace_width_mm ~ treatment + site + treatment*site,
-                     data = CAMA_size)
-  # performance::check_model(CAMA_size_lm)
-  tidy(CAMA_size_lm)
+  # CAMA_size_int_lm <- lm(carapace_width_mm ~ treatment + site + treatment*site,
+  #                    data = CAMA_size)
+  
+  CAMA_size_bez_lm <- lm(carapace_width_mm ~ treatment + site,
+                         data = CAMA_size)
+  
+# Is interaction warranted
+  # anova(CAMA_size_int_lm,
+  #       CAMA_size_bez_lm) # Drop interaction
+
+  # performance::check_model(CAMA_size_bez_lm)
+  tidy(CAMA_size_bez_lm)
   
   CAMA_size_em <- emmeans(
-    CAMA_size_lm,
+    CAMA_size_bez_lm,
     ~ treatment | site,
     type = "response")
+
+  CAMA_size_bytreat <- emmeans(
+    CAMA_size_bez_lm,
+    ~ treatment
+  )
+  
+
+  pairs(CAMA_size_bytreat)
+
+  # No size difference  
+  
+  
+  
+  ##
+  # Visualize
+  ##
+  
+  # CAMA abundance by site as a function of treatment, No apparent pattern, some traps were stacked though
+  ggplot(CAMA_dat, 
+         mapping = aes(x = treatment, 
+                       y = CAMA)) +
+    geom_boxplot() +
+    geom_point(position = "jitter",
+               alpha = .6)+
+    labs(title = "CAMA abundance in traps",
+         x = "Treatment",
+         y = "CAMA Abundance") +
+    facet_wrap(vars(site))
+  
+  # Crab size by site = No apparent pattern
+  ggplot(trap_dat |> filter(species_code == "CAMA"), 
+         mapping = aes(x = treatment, 
+                       y = carapace_width_mm)) +
+    geom_boxplot() +
+    geom_point(position = "jitter",
+               alpha = .6) +
+    facet_wrap(vars(site))
+  

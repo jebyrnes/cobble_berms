@@ -154,6 +154,14 @@ shannon_percent_posthurdle_mod <- lm(shannon ~ treatment + height + site + treat
 shannon_count_posthurdle_mod <- lm(shannon ~ treatment + height + site + treatment:height,
                         data = div_dat |> filter(measurement_type == "Count", shannon > 0))
 
+# Test out these distributions
+shannon_percent <- glmmTMB(shannon ~ treatment * height + site, family = tweedie(link = "identity"), data = div_dat |> filter(measurement_type == "Percent"))
+check_model(shannon_percent)
+
+
+shannon_percent_zi <- glmmTMB(shannon ~ treatment * height + site, ziformula = ~ height, data = div_dat |> filter(measurement_type == "Percent"))
+check_model(shannon_percent_zi)
+
 check_model(shannon_count_posthurdle_mod)
 # Get model stats
 # check_model(shannon_percent_hurdle_mod)
