@@ -59,3 +59,5 @@ briv_dat |>
 
 # For usable videos, save for two instances where an unknown crab could not be identified, the first predator was always CAMA, across all sites and treatments.
 # Likewise, bait consumer was always CAMA.
+
+# Predation eaten/not eaten

@@ -14,6 +14,8 @@ library(glmmTMB)
 library(performance)
 library(car)
 library(broom.mixed)
+library(DHARMa)
+library(emmeans)
 
 # load data
 farm_dat <- read_csv("data/farms.csv")
@@ -52,105 +54,131 @@ farm_soak_dat <- farm_soak_dat |>
       -c(1:4),
       ~ round(.x / n_farms,2))) # standardize by count per farm
 
-  
-  
-# FPEN, CAMA, LILI, PHGU, PAHE are the codes that occur in abundance
-# LILI exclusively in the short/summer soak
+# Excluding coughlin due to not enough farms recovered
+bayside_dat <- farm_dat |>
+  filter(site == "Bayside",
+         !is.na(FPEN),
+         !is.na(PHGU),
+         !is.na(treatment),
+         !is.na(soak_class)) |>
+  mutate(treatment = factor(treatment),
+         soak_class = factor(soak_class))
+
+# Focusing on PHGU and FPEN
 # FPEN most abundant in the long soak, but still present in the short soak
-# PAHE only in winter/long soak. Seasonality or duration thing?
 # PHGU mostly in winter/long soak. Seasonality or duration thing?
 
-# For this analysis, I will focus only on those spp which occur at some abundance (FPEN, CAMA, LILI, PHGU, PAHE)
-# Also excluding coughlin due to not enough farms recovered
 
-# CAMA
-CAMA_mod <- glmmTMB(CAMA ~ treatment + soak_class, 
-                     data = farm_dat |> filter(site == "Bayside"), 
-                     family = poisson(link = "log"))
+##
+# FPEN -------------------------------------------
+##
 
-# check_model(CAMA_mod)
+# FPEN_mod <- lm(FPEN ~ treatment + soak_class,
+#                     data = farm_dat |> filter(site == "Bayside"))
+
+FPEN_nb <- glmmTMB(FPEN ~ treatment + soak_class + treatment *soak_class, 
+                    data = bayside_dat, 
+                    family = nbinom2(link = "log"))
+
+# FPEN_pois <- glmmTMB(FPEN ~ treatment + soak_class,
+#                      data = bayside_dat,
+#                      family = poisson(link = "log"))
+
+AIC(FPEN_mod, FPEN_pois, FPEN_nb) # FPEN_pois  3df,  218.2968aic; FPEN_nb    4 df, 129.9723aic
+# nb is best fit
+
+check_model(FPEN_nb)
+
+sim_nb <- simulateResiduals(
+  fittedModel = FPEN_nb,
+  n = 1000)
+
+plot(sim_nb) # Problems with residuals v predicted quantile deviations, fixed by adding interaction
 # 
-# summarizing tests
-Anova(CAMA_mod) |> tidy() # Soak class seems to explain more than the treatment
-tidy(CAMA_mod)
+# testDispersion(sim_nb)
+# testOutliers(sim_nb)
 
-CAMA_plot <- ggplot(farm_dat |> filter(site == "Bayside"), 
-                    mapping = aes(x = treatment, 
-                                  y = CAMA,
-                                  fill = treatment)) +
-  geom_boxplot() +
-  geom_jitter(aes(shape = soak_class),  
-              width = 0.2,
-              height = 0, 
-              alpha = 0.6, 
-              size = 2) +
-  labs(title = "CAMA abundance in farms",
-       x = "Treatment",
-       y = "CAMA Abundance") +
-  facet_wrap(vars(soak_class))
+summary(FPEN_nb)
+tidy(FPEN_nb)
+
+FPEN_emm <- emmeans(FPEN_nb, 
+        ~ treatment | soak_class,
+        type = "response")
+
+pairs(FPEN_emm, adjust = "holm")
+
+# Visualie Predicted shrimp abundance on bayside
+
+# Create all df with all treatment and soak class combinations
+pred_dat <- expand.grid(
+  treatment = levels(bayside_dat$treatment),
+  soak_class = levels(bayside_dat$soak_class))
+
+# Predict (on link/log scale)
+pred <- predict(FPEN_nb,
+  newdata = pred_dat,
+  type = "link",
+  se.fit = TRUE,
+  re.form = NA)
+
+# Convert predictions/CI to count
+pred_dat <- pred_dat |>
+  mutate(
+    predicted = exp(pred$fit),
+    lower = exp(pred$fit - 1.96 * pred$se.fit),
+    upper = exp(pred$fit + 1.96 * pred$se.fit))
+
+# Plot predicted counts
+ggplot(
+  pred_dat,
+  aes(
+    x = treatment,
+    y = predicted,
+    color = soak_class,
+    group = soak_class
+  )
+) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  geom_errorbar(
+    aes(ymin = lower, ymax = upper),
+    width = 0.1
+  ) +
+  labs(
+    x = "Treatment",
+    y = "Predicted shrimp abundance",
+    color = "Soak Duration")
 
 
+##
+# PHGU ------------------
+##
 
-# FPEN
-FPEN_mod <- glmmTMB(FPEN ~ treatment + soak_class, 
-                    data = farm_dat |> filter(site == "Bayside"), 
-                    family = poisson(link = "log"))
+# PHGU - Bayside only, long only (short has a count of 1 on the berm, all others 0)
+# PHGU_lm <- lm(PHGU ~ treatment, 
+#                     data = bayside_dat |> filter(soak_class == "long"))
 
-# check_model(FPEN_mod)
+# PHGU_nb <- glmmTMB(PHGU ~ treatment + soak_class, 
+#                    data = bayside_dat, 
+#                    family = nbinom2(link = "log"))
 # 
-# # summarizing tests
-# Anova(FPEN_mod) |> tidy() 
-# tidy(FPEN_mod)
-# Fewer shrimps in the control and in the short soak time. Excluded coughlin due to low soak time
-
-ggplot(farm_dat |> filter(site == "Bayside"), 
-       mapping = aes(x = treatment, 
-                     y = FPEN,
-                     fill = treatment)) +
-  geom_boxplot() +
-  geom_jitter(aes(shape = soak_class),  
-              width = 0.2,
-              height = 0, 
-              alpha = 0.6, 
-              size = 2) +
-  labs(title = "FPEN abundance in farms",
-       x = "Treatment",
-       y = "FPEN Abundance") +
-  facet_wrap(vars(soak_class))
-
-
-# LILI - Ignoring LILI here. they were measured in other ways, and I'm not sure that they were reliably counted in the winter time point
-# LILI_mod <- glmmTMB(LILI ~ treatment + site, 
-#                     data = farm_dat |> filter(soak_class == "short"), 
-#                     family = poisson(link = "log"))
+PHGU_pois <- glmmTMB(PHGU ~ treatment,
+                      data = bayside_dat |> filter(soak_class == "long"),
+                      family = poisson(link = "log"))
 # 
-# # check_model(LILI_mod)
-# # 
-# # # summarizing tests
-# Anova(LILI_mod) |> tidy()
-# tidy(LILI_mod)
-# 
-# # no LILI in the long/winter soak class. Coughlin seems to support more than Bayside, no effect of treatment
-# # I'm concerned we may not have counted LILI in the winter retrieval but i'm not sure
-# ggplot(farm_dat |> filter(soak_class == "short"), 
-#        mapping = aes(x = treatment, 
-#                      y = LILI,
-#                      fill = treatment)) +
-#   geom_boxplot() +
-#   geom_jitter(aes(shape = site),  
-#               width = 0.2,
-#               height = 0, 
-#               alpha = 0.6, 
-#               size = 2) +
-#   labs(title = "LILI abundance in farms after a short soak",
-#        x = "Treatment",
-#        y = "LILI Abundance") +
-#   facet_wrap(vars(site))
+# AIC(PHGU_lm, PHGU_pois)
 
-# PHGU - Bayside only
-PHGU_mod <- glmmTMB(PHGU ~ treatment + soak_class, 
-                    data = farm_dat |> filter(site == "Bayside"), 
-                    family = poisson(link = "log"))
+
+# sim_PHGU_lm <- simulateResiduals(
+#   fittedModel = PHGU_lm,
+#   n = 1000)
+
+# plot(sim_PHGU_lm)
+# testDispersion(sim_PHGU_lm)
+# testOutliers(sim_PHGU_lm)
+
+summary(PHGU_pois)
+tidy(PHGU_pois)
 
 
 
