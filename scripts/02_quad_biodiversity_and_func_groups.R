@@ -53,10 +53,10 @@ rm(quad_s24_dat)
 rm(quad_s25_dat)
 
 ## Verify correct amount of quads done
-quad_dat |>
-  group_by(site, treatment, season, height) |>
-  reframe(quad_count = n_distinct(quadrat)) |>
-  View()
+# quad_dat |>
+#   group_by(site, treatment, season, height) |>
+#   reframe(quad_count = n_distinct(quadrat)) |>
+#   View()
   
 # Problem data: 
 # Coughlin-Control-fall_23-High-2 quads only
@@ -104,7 +104,7 @@ quad_dat <- quad_dat |>
 quad_dat[is.na(quad_dat)] <- 0
 
 ##
-#  Richness and Shannon Biodiversity set up ----------------------------------
+#  Richness and Shannon Calculations ----------------------------------
 ##
 
 # Calculate Shannon, InvSimpson, richness, evenness, and rearrange
@@ -122,19 +122,10 @@ div_dat <- div_dat |>  # Going to ignore this in anlysis since they're similar a
   
 div_dat <- div_dat |> 
 select(richness, shannon, evenness, invsimpson, everything())
-  
-# Set up data for plotting
-div_plot_dat <- div_dat[,-c(11:88)] |> 
-  pivot_longer(cols = richness:invsimpson, 
-               values_to = "value", 
-               names_to = "index")
-
-div_plot_dat$height <- factor(div_plot_dat$height,
-                              levels = c("Low", "Mid", "High"))
 
 
 ##
-#  Shannon analysis ----------------------------------
+#  Shannon Hurdle Models ----------------------------------
 ##
 
 ## Shannon
@@ -154,23 +145,18 @@ shannon_percent_posthurdle_mod <- lm(shannon ~ treatment + height + site + treat
 shannon_count_posthurdle_mod <- lm(shannon ~ treatment + height + site + treatment:height,
                         data = div_dat |> filter(measurement_type == "Count", shannon > 0))
 
-# Test out these distributions
-shannon_percent <- glmmTMB(shannon ~ treatment * height + site, family = tweedie(link = "identity"), data = div_dat |> filter(measurement_type == "Percent"))
-check_model(shannon_percent)
 
-
-shannon_percent_zi <- glmmTMB(shannon ~ treatment * height + site, ziformula = ~ height, data = div_dat |> filter(measurement_type == "Percent"))
-check_model(shannon_percent_zi)
-
-check_model(shannon_count_posthurdle_mod)
-# Get model stats
 # check_model(shannon_percent_hurdle_mod)
 # check_model(shannon_count_hurdle_mod)
 # check_model(shannon_percent_posthurdle_mod) 
 # check_model(shannon_count_posthurdle_mod)
 
-## So what does this tell us
-# Hurdle (0,1) for shannon percent
+##
+#  Shannon Interpretation, Tables, Visualization  ----------------------------------
+##
+
+### Hurdle Shannon Percent Cover
+## Interp:
 Anova(shannon_percent_hurdle_mod) |> tidy() # height plys biggest roll, but site and treatment also play a roll
 tidy(shannon_percent_hurdle_mod)
 
@@ -184,19 +170,54 @@ summary(shannon_percent_hurdle_pairs, by = NULL, adjust = "holm")
 
 
 
-# Hurdle (0,1) for shannon count
-Anova(shannon_count_hurdle_mod) |> tidy() 
+### Hurdle Shannon Count
+## Interp:
+Anova(shannon_count_hurdle_mod) |> tidy() # all incl interaction significant
 tidy(shannon_count_hurdle_mod)
 
 shannon_count_hurdle_em <- emmeans(shannon_count_hurdle_mod,
-                                     ~treatment | height)
+                                    ~ treatment | height)
+
+# emmip(shannon_count_hurdle_mod, treatment ~ height)
+
+pairs(shannon_count_hurdle_em, adjust = "holm") # berm sig higher, mid and high no statistically sig effect
 
 # Statistical test of treat differences with holm correction applied across all heights (i.e. dropping grouping())
-shannon_count_hurdle_pairs <- pairs(shannon_count_hurdle_em)
+# shannon_count_hurdle_pairs <- pairs(shannon_count_hurdle_em)
+# 
+# summary(shannon_count_hurdle_pairs, by = NULL, adjust = "holm")
 
-summary(shannon_count_hurdle_pairs, by = NULL, adjust = "holm")
+## Tables
 
+## Visualization
+# Plot estimated probabilities on response scale
+emm_prob <- emmeans(shannon_count_hurdle_mod,
+                    ~ treatment | height,
+                    type = "response")
 
+emm_df <- as.data.frame(emm_prob)
+
+ggplot(emm_df,
+       aes(x = height, 
+           y = response,
+           color = treatment,
+           group = treatment)) + 
+  geom_point(position = position_dodge(width = 0.15),
+             size = 3) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                position = position_dodge(width = 0.15),
+                width = 0.1) +
+  geom_line(position = position_dodge(width = 0.15),
+            linewidth = 0.8) +
+  labs(
+    x = "Height",
+    y = "Probability of a nonzero observation",
+    color = "Treatment") +
+  scale_y_continuous(limits = c(0, 1))
+
+  
+### Post-hurdle Shannon Percent
+## Interp:
 ## Post-hurdle (>0) for shannon percent
 Anova(shannon_percent_posthurdle_mod) |> tidy() # Percent Shannon  differs significantly across heights and sites, but is not strongly affected by treatment, and the interaction between treatment and height is also not significant.
 tidy(shannon_percent_posthurdle_mod) |>  
@@ -214,7 +235,12 @@ shannon_percent_posthurdle_em <- emmeans(shannon_percent_posthurdle_mod,
 
 contrast(shannon_percent_posthurdle_em, method = "pairwise") # low and mid treatment has a significant effect
 
-# Post-hurdle (>0) for shannon count
+## Tables
+
+## Visualization
+
+### Post-hurdle Shannon Count
+## Interp:
 Anova(shannon_count_posthurdle_mod) |> tidy() # essentially the same as percent
 tidy(shannon_count_posthurdle_mod) |>  # height has largest effect, while there is some decrease between treatment
   mutate(estimate_original = sign(estimate) * estimate^2, # note that the negative estimates are lost after the back transformation, so i've multiplioed them by the sign to return the original sign
@@ -228,8 +254,13 @@ shannon_count_posthurdle_em <- emmeans(shannon_count_posthurdle_mod,
 
 contrast(shannon_count_posthurdle_em, method = "pairwise") # no significance
 
+## Tables
+
+## Visualization
+
+
 ##
-#  Richness analysis ----------------------------------
+#  Richness Hurdle Models ----------------------------------
 ##
 
 
@@ -548,6 +579,26 @@ ggplot(plot_data, aes(x = height, y = mean_richness, fill = treatment)) +
 #  Scrap ----------------------------------
 ##
 
+# Test out these distributions
+# shannon_percent_tweedieI <- glmmTMB(
+#   shannon ~ treatment * height + site, 
+#   family = tweedie(link = "identity"), 
+#   data = div_dat |> 
+#     filter(measurement_type == "Percent"))
+# # 
+# shannon_percent_tweedieL <- glmmTMB(
+#   shannon ~ treatment * height + site,
+#   family = tweedie(link = "log"),
+#   data = div_dat |>
+#     filter(measurement_type == "Percent"))
+# # 
+# AIC(shannon_percent_tweedieI, shannon_percent_tweedieL)
+# 
+# check_model(shannon_percent_tweedieL)
+# Cant get the PPC to improe, but log link did somewhat improve the HoV and collinearity
+
+# shannon_percent_zi <- glmmTMB(shannon ~ treatment * height + site, ziformula = ~ height, data = div_dat |> filter(measurement_type == "Percent"))
+# check_model(shannon_percent_zi)
 
 # ggplot(div_plot_dat |> filter(measurement_type == "Count"),
 #        aes(x = treatment,
